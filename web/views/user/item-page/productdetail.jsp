@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -101,14 +103,16 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-xl-6 col-lg-6 col-md-12 col-12">
                         <div class="product-summery">
                             <div class="single-product-inner">
-                                <h6><a href="#">Fashion, ${product.category.categoryName}</a></h6>
+                                <h6><a href="${pageContext.request.contextPath}/filterproductservlet?category=${sessionScope.product.category.categoryId}&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Fashion, ${sessionScope.product.category.categoryName}</a></h6>
                                 <h3><a href="#">${sessionScope.product.productName}</a></h3>
                                 <ul class="single-product-price d-flex">
-                                    <li><h3>${product.price - product.price*product.discount/100}&nbsp;VNĐ</h3></li>
-                                    <li><h4> ${product.price}&nbsp;VNĐ</h4></li>
+                                    <li><h3>${sessionScope.product.price}&nbsp;VND</h3></li>
+                                    <li><h4>${(sessionScope.product.price + (sessionScope.product.price*sessionScope.product.discount/100))}&nbsp;VND</h4></li>
                                 </ul>
                                 <div class="product-review d-flex justify-content-between">
                                     <ul class="d-flex">
@@ -192,16 +196,16 @@
                             <div class="product-discription">
                                 <ul class="single-product-features">
                                     <%
-                                    Product p = (Product) session.getAttribute("product");
-                                    String des = p.getDesciption();
-                                    if(des != null){
-                                        String[] listDes = des.split("\\*");
-                                    for (int i = 0; i < listDes.length; i++) {
+                                        Product p = (Product) session.getAttribute("product");
+                                        String des = p.getDesciption();
+                                        if (des != null) {
+                                            String[] listDes = des.split("\\*");
+                                            for (int i = 0; i < listDes.length; i++) {
                                     %>
-                                    <li><i class="fa-solid fa-angles-right"></i><span> <%= listDes[i] %> </span></li>
+                                    <li><i class="fa-solid fa-angles-right"></i><span> <%= listDes[i]%> </span></li>
                                             <%
+                                                    }
                                                 }
-                                        }
                                             %>
                                 </ul>
                             </div>
@@ -306,6 +310,75 @@
 
         <!-- `PRODUCT-SECTION START  -->
 
+        <%
+            List<Product> ans = (List<Product>) session.getAttribute("viewedProduct");
+            List<Product> ans2 = new ArrayList<>();
+            for (int i = ans.size() - 1; i >= 0; i--) {
+                ans2.add(ans.get(i));
+            }
+            request.setAttribute("viewedProduct", ans2);
+        %>
+
+        <section class="popular-product-section single-popular-product-section">
+            <div class="container">
+                <div class="heading-text">
+                    <h3>Viewed Items</h3>
+                </div>
+                <div class="swiper products single-product-slider">
+                    <div class="swiper-wrapper">
+                        <c:if test="${requestScope.viewedProduct.size() == 1}">
+                            <h4>You have not viewed any products</h4>
+                        </c:if>
+                        <c:forEach items="${requestScope.viewedProduct}" var="product">
+
+
+                            <c:if test="${param.pid != product.productId}">
+                                <div class="swiper-slide product single-slide">
+                                    <div class="product-img">
+                                        <a href="${pageContext.request.contextPath}/productdetail?pid=${product.productId}">
+                                            <img src="${pageContext.request.contextPath}/${product.thumbnails.get(0)}" alt="product">
+                                        </a>
+                                        <div class="product-labels d-flex justify-content-between">
+                                            <span class="ev-offer">${product.discount}%</span>
+                                            <span class="ev-hot">
+                                                <c:if test="${product.discount >= 50}">
+                                                    hot
+                                                </c:if>
+                                            </span>
+                                        </div>
+                                        <div class="p-option">
+                                            <ul class="d-flex align-items-center justify-content-end">
+                                                <li class="anim-hidden"><a href="#"><i class="fa-regular fa-eye"></i></a></li>
+                                                <li class="anim-hidden"><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                                                <li class="anim-hidden"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-text">
+                                        <ul class="product-stars d-flex">
+                                            <c:forEach begin="${1}" end="${product.rating}">
+                                                <li><i class="fa-sharp fa-solid fa-star"></i></li>
+                                                </c:forEach>
+                                                <c:forEach begin="${product.rating + 1}" end="${5}">
+                                                <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                                </c:forEach>
+                                        </ul>
+                                        <h2 class="product-title"><a href="${pageContext.request.contextPath}/productdetail?pid=${product.productId}">${product.productName}</a></h2>
+                                        <ul class="d-flex align-items-center">
+                                            <li><span>${product.price/1000}K&nbsp;VND</span></li>
+                                            <li> <del><span>${(product.price + (product.price*product.discount/100))/1000}K&nbsp;VND</span></del></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </c:if>
+
+                        </c:forEach>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
         <section class="popular-product-section single-popular-product-section">
             <div class="container">
                 <div class="heading-text">
@@ -346,8 +419,8 @@
                                     </ul>
                                     <h2 class="product-title"><a href="${pageContext.request.contextPath}/productdetail?pid=${product.productId}">${product.productName}</a></h2>
                                     <ul class="d-flex align-items-center">
-                                        <li><span>${(product.price - product.price*product.discount/100)/1000}K&nbsp;VNĐ</span></li>
-                                        <li><span>${product.price/1000}K &nbsp;VNĐ</span></li>
+                                        <li><span>${product.price/1000}K&nbsp;VND</span></li>
+                                        <li> <del><span>${(product.price + (product.price*product.discount/100))/1000}K&nbsp;VND</span></del></li>
                                     </ul>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@
     Author     : PC
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="categories-section">
@@ -27,7 +28,6 @@
                     </a>
                 </div>
             </c:forEach>
-
         </div>
         <a href="${pageContext.request.contextPath}/filterproductservlet?category=0&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0" class="view-all">View All</a>
     </div>

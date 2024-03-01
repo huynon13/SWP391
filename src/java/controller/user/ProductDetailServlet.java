@@ -16,7 +16,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import model.Color;
 import model.Comment;
 import model.Product;
@@ -64,11 +67,34 @@ public class ProductDetailServlet extends HttpServlet {
             List<Color> listColor = colorD.getColorAll();
             Product product = pd.getProductById(productId);
             List<Product> relatedProduct = pd.getRelatedProductByCategory(product.getProductId(), product.getCategory().getCategoryId());
-            for (Product x : relatedProduct) {
-                System.out.println(x);
+
+            List<Product> viewedProduct;
+            if ((List<Product>) session.getAttribute("viewedProduct") != null) {
+                viewedProduct = (List<Product>) session.getAttribute("viewedProduct");
+            } else {
+                viewedProduct = new ArrayList<>();
             }
+            
+            boolean checkedProduct = false;
+            Product temp = null;
+            for (Product p : viewedProduct) {
+                if (product.getProductId() == p.getProductId()) {
+                    checkedProduct = true;
+                    temp = p;
+                    break;
+                }
+            }
+            
+            if (checkedProduct) {
+                viewedProduct.remove(temp);
+            }
+
+            viewedProduct.add(product);
+
             session.setAttribute("product", product);
             session.setAttribute("relatedProduct", relatedProduct);
+            session.setAttribute("viewedProduct", viewedProduct);
+
             session.setAttribute("listComment", listCommentByProductId);
             session.setAttribute("listSize", listSize);
             session.setAttribute("listColor", listColor);
@@ -77,8 +103,6 @@ public class ProductDetailServlet extends HttpServlet {
             System.out.println(e);
             System.out.println("xxxx");
             System.err.println("loi chuyen doi so");
-
         }
     }
-
 }
