@@ -43,37 +43,37 @@
 
         <!-- HEADER-SECTION START  -->
 
-        <jsp:include page="../../common/user/header.jsp"></jsp:include>
+        <jsp:include page="../../common/user/home-page/header.jsp"></jsp:include>
 
             <!-- HEADER-SECTION END  -->
 
             <!-- BANNER-SECTION START  -->
 
-        <jsp:include page="../../common/user/banner.jsp"></jsp:include>
+        <jsp:include page="../../common/user/home-page/banner.jsp"></jsp:include>
 
             <!-- BANNER-SECTION END  -->
 
             <!-- INTR0-SECTION START  -->
 
-        <jsp:include page="../../common/user/section.jsp"></jsp:include>    
+        <jsp:include page="../../common/user/home-page/section.jsp"></jsp:include>    
 
             <!-- INTR0-SECTION END  -->
 
             <!-- CATAGORIES-SECTION START  -->
 
-        <jsp:include page="../../common/user/category.jsp"></jsp:include>  
+        <jsp:include page="../../common/user/home-page/category.jsp"></jsp:include>  
 
             <!-- CATAGORIES-SECTION END  -->
 
             <!-- COLLECTION-SECTION START  -->
 
-        <jsp:include page="../../common/user/collections.jsp"></jsp:include>  
+        <jsp:include page="../../common/user/home-page/collections.jsp"></jsp:include>  
 
             <!-- COLLECTION-SECTION END  -->
 
             <!-- `PRODUCT-SECTION START  -->
 
-        <jsp:include page="../../common/user/top6newproducts.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/top6newproducts.jsp"></jsp:include> 
 
             <!-- PRODUCT-SECTION END  -->
 
@@ -146,32 +146,32 @@
 
         <!--    POPULAR-PRODUCT-SECTION START  -->
 
-        <jsp:include page="../../common/user/top10products.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/top10products.jsp"></jsp:include> 
 
             <!--    POPULAR-PRODUCT-SECTION END  -->
 
             <!--    BRAND-SECTION START  -->
 
-        <jsp:include page="../../common/user/brand.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/brand.jsp"></jsp:include> 
 
             <!--    BRAND-SECTION END  -->
 
             <!--    TESTIMONIAL-SECTION START  -->
 
-        <jsp:include page="../../common/user/feedback.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/feedback.jsp"></jsp:include> 
 
             <!--    TESTIMONIAL-SECTION END  -->
 
             <!--    NEWS-SECTION START  -->
 
-        <jsp:include page="../../common/user/news.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/news.jsp"></jsp:include> 
 
             <!--    NEWS-SECTION END  -->
 
 
             <!--    FOOTER-SECTION START -->
 
-        <jsp:include page="../../common/user/footer.jsp"></jsp:include> 
+        <jsp:include page="../../common/user/home-page/footer.jsp"></jsp:include> 
 
             <!-- FOOTER-SECTION END  -->
 

@@ -48,21 +48,14 @@
     <body>
 
         <!-- HEADER-SECTION START  -->
-        <jsp:include page="../../common/user/header.jsp"></jsp:include>
+        <jsp:include page="../../common/user/home-page/header.jsp"></jsp:include>
 
 
-            <!-- HEADER-SECTION END  -->
+        <!-- HEADER-SECTION END  -->
 
-            <!-- BANNER-SECTION START  -->
+        <!-- BANNER-SECTION START  -->
 
-            <section class="hero-section ev-common-hero" style="background-image: url(${pageContext.request.contextPath}/images/common-banner/shape-1.png);"> 
-            <div class="container-fluid">
-                <div class="ev-hero-content">
-                    <h2>Product Detail</h2>
-                    <span><a href="${pageContext.request.contextPath}/home">Home</a> > <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp"> product ></a> Detail</span>
-                </div>
-            </div>
-        </section>
+        <jsp:include page="../../common/user/item-page/bannerproductdetail.jsp"></jsp:include>
 
         <!-- BANNER-SECTION END  -->
 
@@ -440,7 +433,7 @@
 
         <!--    FOOTER-SECTION START -->
 
-        <jsp:include page="../../common/user/footer.jsp"></jsp:include>
+        <jsp:include page="../../common/user/home-page/footer.jsp"></jsp:include>
 
             <!--    FOOTER-SECTION END  -->
 
