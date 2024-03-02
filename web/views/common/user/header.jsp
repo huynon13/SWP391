@@ -111,14 +111,9 @@
                                         </a>
                                     </li>
 
-                                    <li class="profile-dropdown-list-item">
-                                        <a href="#" style="margin-left: 20px;">
-                                            <i class="fa-solid fa-chart-line"></i>
-                                            Analytics
-                                        </a>
-                                    </li>
-                                    
-                                    <li class="profile-dropdown-list-item">
+
+
+                                    <li class="profile-dropdown-list-item" style="margin-left: 20px;">
                                         <a href="#">
                                             <i class="fa-solid fa-sliders"></i>
                                             Purchase order
@@ -131,6 +126,15 @@
                                             Settings
                                         </a>
                                     </li>
+
+                                    <c:if test="${sessionScope.account.role.name == 'Admin'}">
+                                        <li class="profile-dropdown-list-item">
+                                            <a href="${pageContext.request.contextPath}/views/admin/dashboard/dashboard.jsp" >
+                                                <i class="fa-solid fa-chart-line"></i>
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                    </c:if>
 
                                     <hr />
 
