@@ -306,6 +306,10 @@
                                             <c:set var="pageCurent" value="${soPage - 3}"/>
                                         </c:if>
 
+                                        <c:if test="${pageCurent + 3 > soPage}">
+                                            <c:set var="pageCurent" value="${soPage - 3}"/>
+                                        </c:if>
+
                                         <c:if test="${pageCurent < 1}">
                                             <c:set var="pageCurent" value="${1}"/>
                                         </c:if>
