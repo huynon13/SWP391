@@ -36,8 +36,12 @@
             </div>
         </div>
     </div>
+
+
     <div class="header-wrapper">
+
         <div class="header-middle">
+
             <div class="container d-flex align-items-center justify-content-between">
                 <div class="evani-brand">
                     <a href="${pageContext.request.contextPath}/home">
@@ -52,8 +56,11 @@
                         </button>
                     </form>
                 </div>
+
                 <div class="inner-wrapper">
+
                     <ul class="d-flex align-items-center">
+
                         <li class="search-popup">
                             <a class="header-popup d-flex align-items-center" id="header-popup" href="#"><span class="log-in-text"><i class="fa-solid fa-magnifying-glass"></i></span></a>
                             <div class="popup-wraper">
@@ -61,7 +68,7 @@
                                     <label class="close-btn fas fa-times popup-label"></label>
                                     <label class="la-search-pr">Search Product</label>
                                     <form class="search-product d-flex align-items-center justify-content-between" action="https://ethemestudio.com/search" method="GET">
-                                        <input type="text" name="query" placeholder="Type to search i.e “sunglass”...">
+                                        <input type="text" name="query" placeholder="Type to search i.e “áo”...">
                                         <button type="submit">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
@@ -69,67 +76,77 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <a class="log-in header-popup log-in-btn d-flex align-items-center" id="header-popup1" href="#"><span class="log-in-text">log in</span><i class="fa-solid fa-user"></i></a>
-                            <div class="popup-wraper1">
-                                <div class="view-popup">
-                                    <label class="close-btn fas fa-times popup-label"></label>
-                                    <h6>Login</h6>
-                                    <form>
-                                        <div class="d-block">
-                                            <label>Username:</label>
-                                            <input type="text" name="username" required>
-                                        </div>
-                                        <div class="d-block">
-                                            <label>Password:</label>
-                                            <input type="text" name="password" required>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="check-box d-flex align-items-center">
-                                                <input type="checkbox" name="remember">
-                                                <label>Remember me</label>
-                                            </div>
-                                            <a href="#">Forgot Password?</a>
-                                        </div>
-                                        <div class="popup-btn">
-                                            <button class="popup-link" type="submit">Login</button>
-                                        </div>
-                                    </form>    
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="sign-up header-popup d-flex align-items-center" id="header-popup2" href="#"><span class="log-in-text">sign up</span></a>
-                            <div class="popup-wraper2">
-                                <div class="view-popup">
-                                    <label class="close-btn fas fa-times popup-label"></label>
-                                    <h6>Sign Up</h6>
 
-                                    <form action="https://ethemestudio.com/demo/evani/login.php" method="POST">
-                                        <div class="d-block">
-                                            <label>Username:</label>
-                                            <input type="text" id="username" name="username" required>
-                                        </div>
-                                        <div class="d-block">
-                                            <label>Password:</label>
-                                            <input type="number" name="password" required>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="check-box d-flex align-items-center">
-                                                <input type="checkbox" name="remember">
-                                                <label>Remember me</label>
-                                            </div>
-                                            <a href="#">Forgot Password?</a>
-                                        </div>
-                                        <div class="popup-btn">
-                                            <button class="popup-link" type="submit">Register</button>
-                                        </div>
-                                    </form>    
+                        <c:if test="${sessionScope.account == null}">
+                            <li>
+                                <a class="log-in header-popup log-in-btn d-flex align-items-center" id="header-popup1" href="${pageContext.request.contextPath}/views/common/user/login.jsp"><span class="log-in-text">log in</span><i class="fa-solid fa-user"></i></a>
+                            </li>
+
+
+                            <li>
+                                <a class="sign-up header-popup d-flex align-items-center" id="header-popup2" href="${pageContext.request.contextPath}/views/common/user/register.jsp"><span class="log-in-text">sign up</span></a>
+                            </li>
+                        </c:if>
+
+                        <c:if test="${sessionScope.account != null}">
+
+                            <div class="profile-dropdown">
+                                <div onclick="toggle()" class="profile-dropdown-btn">
+                                    <div class="profile-img" style="    position: relative;
+                                         width: 3rem;
+                                         height: 3rem;
+                                         border-radius: 50%;
+                                         background: url(${pageContext.request.contextPath}/${sessionScope.account.image});
+                                         background-size: cover;">
+                                        <i class="fa-solid fa-circle"></i>
+                                    </div>
+                                    <span style="font-size: 13px;">${account.userName}</span>
                                 </div>
+
+                                <ul class="profile-dropdown-list">
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="#">
+                                            <i class="fa-regular fa-user"></i>
+                                            Edit Profile
+                                        </a>
+                                    </li>
+
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="#" style="margin-left: 20px;">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                            Analytics
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="#">
+                                            <i class="fa-solid fa-sliders"></i>
+                                            Purchase order
+                                        </a>
+                                    </li>
+
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="#">
+                                            <i class="fa-solid fa-sliders"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+
+                                    <hr />
+
+                                    <li class="profile-dropdown-list-item">
+                                        <a href="${pageContext.request.contextPath}/logout">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                            Log out
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </li>
+                        </c:if>
+
                         <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
                         <li class="product-cart">
+
                             <a href="#" class="cart-icon" id="toggleButton"><i class="fa-solid fa-cart-shopping"></i><span class="cart-number">0</span></a>
                             <div class="view-cart content" id="content">
                                 <div class="cart-title d-flex align-items-center justify-content-between">

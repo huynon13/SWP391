@@ -36,6 +36,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
+        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
 
         <title> Product Detail</title>
 
@@ -47,6 +49,7 @@
 
         <!-- HEADER-SECTION START  -->
         <jsp:include page="../../common/user/header.jsp"></jsp:include>
+
 
             <!-- HEADER-SECTION END  -->
 
@@ -379,6 +382,7 @@
             </div>
         </section>
 
+
         <section class="popular-product-section single-popular-product-section">
             <div class="container">
                 <div class="heading-text">
@@ -462,7 +466,7 @@
         <script src="${pageContext.request.contextPath}/js/leaflet.js"></script>
         <script src="${pageContext.request.contextPath}/js/script.js"></script>
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/profile.js"></script>
         <!-- JS-SCRIPT END  -->
 
 

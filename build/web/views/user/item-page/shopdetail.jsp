@@ -39,6 +39,7 @@
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
         <title> Shop Detail</title>
 
         <link rel="icon" href="${pageContext.request.contextPath}/images/head/logo/shape-1.png">
@@ -290,10 +291,10 @@
                             </div>
                             <div class="ev-pagination">
                                 <ul class="d-flex align-items-center">
-                                    
-                                    
+
+
                                     <c:set var="soPage" value="${((total / 9) % 1 != 0)? (total / 9) + 1 : (total / 9)}" />
-                                    
+
                                     <c:if test="${soPage >= 2}">
                                         <li><a href="#"><i class="fa-solid fa-arrow-left"></i></a></li>
 
@@ -301,7 +302,7 @@
                                             <li onclick="pagination(${i})" ><a href="javascript:void(0)">${i}</a></li>
                                             </c:forEach>
                                         <li><a href="#"><i class="fa-solid fa-arrow-right"></i></a></li>
-                                    </c:if>
+                                            </c:if>
 
                                 </ul>
                             </div>
@@ -343,6 +344,7 @@
         <script src="${pageContext.request.contextPath}/js/userclick.js"></script>
         <script src="${pageContext.request.contextPath}/js/optionfilterorsort.js"></script>
         <script src="${pageContext.request.contextPath}/js/pagination.js"></script>
+        <script src="${pageContext.request.contextPath}/js/profile.js"></script>
         <!-- JS-SCRIPT END  -->
 
     </body>

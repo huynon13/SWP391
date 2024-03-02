@@ -33,10 +33,11 @@
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
-        <title> Evani E-commerce Template</title>
+        <title> Home 360 Fashion men</title>
+
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
 
         <link rel="icon" href="${pageContext.request.contextPath}/images/head/logo/shape-1.png">
-
     </head>
     <body>
 
@@ -68,9 +69,9 @@
 
         <jsp:include page="../../common/user/collections.jsp"></jsp:include>  
 
-        <!-- COLLECTION-SECTION END  -->
+            <!-- COLLECTION-SECTION END  -->
 
-        <!-- `PRODUCT-SECTION START  -->
+            <!-- `PRODUCT-SECTION START  -->
 
         <jsp:include page="../../common/user/top6newproducts.jsp"></jsp:include> 
 
@@ -165,10 +166,10 @@
 
         <jsp:include page="../../common/user/news.jsp"></jsp:include> 
 
-        <!--    NEWS-SECTION END  -->
+            <!--    NEWS-SECTION END  -->
 
 
-        <!--    FOOTER-SECTION START -->
+            <!--    FOOTER-SECTION START -->
 
         <jsp:include page="../../common/user/footer.jsp"></jsp:include> 
 
@@ -193,7 +194,7 @@
         <script src="${pageContext.request.contextPath}/js/mmenu.js"></script>
         <script src="${pageContext.request.contextPath}/js/leaflet.js"></script>
         <script src="${pageContext.request.contextPath}/js/script.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/profile.js"></script>
     </body>
 
 
