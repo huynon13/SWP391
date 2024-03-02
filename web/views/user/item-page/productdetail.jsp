@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
-        
+
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
 
         <title> Product Detail</title>
@@ -51,11 +51,18 @@
         <jsp:include page="../../common/user/header.jsp"></jsp:include>
 
 
-        <!-- HEADER-SECTION END  -->
+            <!-- HEADER-SECTION END  -->
 
-        <!-- BANNER-SECTION START  -->
+            <!-- BANNER-SECTION START  -->
 
-        <jsp:include page="../../common/user/bannerproductdetail.jsp"></jsp:include>
+            <section class="hero-section ev-common-hero" style="background-image: url(${pageContext.request.contextPath}/images/common-banner/shape-1.png);"> 
+            <div class="container-fluid">
+                <div class="ev-hero-content">
+                    <h2>Product Detail</h2>
+                    <span><a href="${pageContext.request.contextPath}/home">Home</a> > <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp"> product ></a> Detail</span>
+                </div>
+            </div>
+        </section>
 
         <!-- BANNER-SECTION END  -->
 
