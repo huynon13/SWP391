@@ -48,14 +48,14 @@
     <body>
 
         <!-- HEADER-SECTION START  -->
-        <jsp:include page="../../common/user/home-page/header.jsp"></jsp:include>
+        <jsp:include page="../../common/user/header.jsp"></jsp:include>
 
 
         <!-- HEADER-SECTION END  -->
 
         <!-- BANNER-SECTION START  -->
 
-        <jsp:include page="../../common/user/item-page/bannerproductdetail.jsp"></jsp:include>
+        <jsp:include page="../../common/user/bannerproductdetail.jsp"></jsp:include>
 
         <!-- BANNER-SECTION END  -->
 
@@ -433,7 +433,7 @@
 
         <!--    FOOTER-SECTION START -->
 
-        <jsp:include page="../../common/user/home-page/footer.jsp"></jsp:include>
+        <jsp:include page="../../common/user/footer.jsp"></jsp:include>
 
             <!--    FOOTER-SECTION END  -->
 

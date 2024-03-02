@@ -50,7 +50,7 @@
         <!-- HEADER-SECTION START  -->
 
 
-        <jsp:include page="../../common/user/home-page/header.jsp"></jsp:include>
+        <jsp:include page="../../common/user/header.jsp"></jsp:include>
 
             <!-- HEADER-SECTION END  -->
 
@@ -317,7 +317,7 @@
 
         <!--    FOOTER-SECTION START -->
 
-        <jsp:include page="../../common/user/home-page/footer.jsp"></jsp:include>
+        <jsp:include page="../../common/user/footer.jsp"></jsp:include>
 
             <!-- FOOTER-SECTION END  -->
 
