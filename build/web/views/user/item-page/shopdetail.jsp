@@ -292,17 +292,56 @@
                             <div class="ev-pagination">
                                 <ul class="d-flex align-items-center">
 
-
-                                    <c:set var="soPage" value="${((total / 9) % 1 != 0)? (total / 9) + 1 : (total / 9)}" />
+                                    <c:set var="soPage" value="${(((total / 9) % 1 != 0)? ((total / 9).intValue()) + 1 : (total / 9)).intValue()}" />
 
                                     <c:if test="${soPage >= 2}">
-                                        <li><a href="#"><i class="fa-solid fa-arrow-left"></i></a></li>
+                                        <c:set var="pageCurent" value="${param.page != null ? param.page : 1}"/>
 
-                                        <c:forEach begin="${1}" end="${soPage}" var="i">
-                                            <li onclick="pagination(${i})" ><a href="javascript:void(0)">${i}</a></li>
-                                            </c:forEach>
-                                        <li><a href="#"><i class="fa-solid fa-arrow-right"></i></a></li>
+                                        <c:if test="${param.page != null && param.page > 2}">
+                                            <li onclick="pagination(${1})"><a href="javascript:void(0)">First</a></li>
                                             </c:if>
+
+
+                                        <c:if test="${pageCurent == soPage}">
+                                            <c:set var="pageCurent" value="${soPage - 3}"/>
+                                        </c:if>
+
+                                        <c:if test="${pageCurent < 1}">
+                                            <c:set var="pageCurent" value="${1}"/>
+                                        </c:if>
+
+                                        <c:if test="${pageCurent > 1}">
+                                            <li onclick="pagination(${pageCurent - 1})"><a href="javascript:void(0)"><i class="fa-solid fa-arrow-left"></i></a></li>
+                                                </c:if>
+
+                                        <li onclick="pagination(${pageCurent})" ><a href="javascript:void(0)">${pageCurent}</a></li>
+
+                                        <c:if test="${pageCurent + 1 <= soPage}">
+                                            <li onclick="pagination(${pageCurent + 1})" ><a href="javascript:void(0)">${pageCurent + 1}</a></li>
+                                            </c:if>
+
+
+                                        <c:if test="${pageCurent + 2 <= soPage}">
+                                            <li onclick="pagination(${pageCurent + 2})" ><a href="javascript:void(0)">${pageCurent + 2}</a></li>
+                                            </c:if>
+
+
+                                        <c:if test="${pageCurent + 3 <= soPage}">
+                                            <li onclick="pagination(${pageCurent + 3})" ><a href="javascript:void(0)">${pageCurent + 3}</a></li>
+
+                                        </c:if>
+
+
+                                        <c:if test="${pageCurent + 4 <= soPage}">
+                                            <li onclick="pagination(${pageCurent + 1})"><a href="javascript:void(0)"><i class="fa-solid fa-arrow-right"></i></a></li>
+                                                </c:if>
+
+                                        <c:if test="${pageCurent + 4 <= soPage}">
+                                            <li onclick="pagination(${soPage})" ><a href="javascript:void(0)">End</a></li>
+
+                                        </c:if>
+
+                                    </c:if>
 
                                 </ul>
                             </div>

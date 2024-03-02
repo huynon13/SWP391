@@ -119,10 +119,7 @@ public class FilterProductServlet extends HttpServlet {
         
         int totalFilter = pd.getTotalProductByFilter(categorysId, sizesId, colorsId, Double.parseDouble(minPrice_raw), Double.parseDouble(maxPrice_raw));
         
-        
-//        for(Product x : listProduct){
-//            System.out.println(x);
-//        }
+
         session.setAttribute("listProduct", listProduct);
         request.setAttribute("listCategoryChecked", listCategoryChecked);
         request.setAttribute("listSizeChecked", listSizeChecked);

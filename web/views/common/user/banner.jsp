@@ -21,7 +21,7 @@
                                     <h6>Top best selling products</h6>
                                     <h1>Buy <span style="color: #F2AD4A;">Anything</span> You Want in <span style="color: #E25748;">360 Fashion</span> Shop</h1>
                                     <div class="btn_box">
-                                        <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp">Explore Now</a>
+                                        <a href="${pageContext.request.contextPath}/filterproductservlet?minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                     <h6>Top best selling products</h6>
                                     <h1>Your Fashion Destination <span style="color: #F2AD4A;">Explore </span>  Shop <span style="color: #E25748;">Slay</span></h1>
                                     <div class="btn_box">
-                                        <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp"">Explore Now</a>
+                                        <a href="${pageContext.request.contextPath}/filterproductservlet?minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                     <h6>Top best selling products</h6>
                                     <h1>Elevate Your Style Where <span style="color: #F2AD4A;">Fashion </span> Meets <span style="color: #E25748;">Convenience</span></h1>
                                     <div class="btn_box">
-                                        <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp"">Explore Now</a>
+                                        <a href="${pageContext.request.contextPath}/filterproductservlet?minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                     <h6>Top best selling products</h6>
                                     <h1>Fashion at Your Fingertips <span style="color: #F2AD4A;">Trendsetting</span> Choices for <span style="color: #E25748;">Modern Men</span></h1>
                                     <div class="btn_box">
-                                        <a href="${pageContext.request.contextPath}/views/user/item-page/shopdetail.jsp"">Explore Now</a>
+                                        <a href="${pageContext.request.contextPath}/filterproductservlet?minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Explore Now</a>
                                     </div>
                                 </div>
                             </div>
