@@ -336,7 +336,7 @@
                                             <li onclick="pagination(${pageCurent + 1})"><a href="javascript:void(0)"><i class="fa-solid fa-arrow-right"></i></a></li>
                                                 </c:if>
 
-                                        <c:if test="${pageCurent + 4 <= soPage}">
+                                        <c:if test="${pageCurent + 4 < soPage}">
                                             <li onclick="pagination(${soPage})" ><a href="javascript:void(0)">End</a></li>
 
                                         </c:if>
