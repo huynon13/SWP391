@@ -21,6 +21,27 @@ import model.Category;
  */
 public class ProductDAO extends MyDAO {
 
+    public Map<Category, Integer> getTotalProductSoldByAllCategory() {
+        CategoryDAO cd = new CategoryDAO();
+        Map<Category, Integer> map = new LinkedHashMap<>();
+        String sql = "select c.category_id, SUM(p.quantity_sold) as total_product_sold from Category as c\n"
+                + "left join Product as p on c.category_id = p.category_id\n"
+                + "group by c.category_id";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int categoryId = rs.getInt("category_id");
+                int totalProductSold = rs.getInt("total_product_sold");
+                Category c = cd.getCategoryById(categoryId);
+                map.put(c, totalProductSold);
+            }
+            return map;
+        } catch (SQLException e) {
+        }
+        return map;
+    }
+
     public List<Product> getQueryProductPagination(String query, String orderBySearch, String page) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from Product as p\n"
@@ -409,6 +430,29 @@ public class ProductDAO extends MyDAO {
         return list;
     }
 
+    public List<Product> getTop3Product() {
+        CategoryDAO cd = new CategoryDAO();
+        List<Product> list = new ArrayList<>();
+
+        String sql = "select top 3 * from Product order by quantity_sold desc, product_id";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                Product p = getProductById(productId);
+                list.add(p);
+            }
+            ps.close();
+            rs.close();
+            return list;
+        } catch (SQLException e) {
+            System.err.println("Loi get top 5 product");
+        }
+        return list;
+    }
+
     public List<Product> top10Bestseller() {
         CategoryDAO cd = new CategoryDAO();
         List<Product> list = new ArrayList<>();
@@ -460,8 +504,8 @@ public class ProductDAO extends MyDAO {
         CategoryDAO cd = new CategoryDAO();
         String sql = "select * from Product";
         try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
@@ -612,7 +656,7 @@ public class ProductDAO extends MyDAO {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
-        for (Product p : pd.getQueryProductPagination("áo", "4", "1")) {
+        for (Product p : pd.getProductAll()) {
             System.out.println(p);
         }
     }

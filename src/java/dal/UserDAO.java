@@ -10,13 +10,39 @@ import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import model.Order;
 
 /**
  *
  * @author PC
  */
 public class UserDAO extends MyDAO {
+
+    public List<User> getUserAll() {
+        List<User> list = new ArrayList<>();
+        String sql = "select * from Users as u\n"
+                + "inner join Roles as r on u.role_id = r.role_id\n"
+                + "where r.name = 'user'";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                User user = getUserById(userId);
+                list.add(user);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.err.println("loi get all user: " + e);
+        }
+
+        return list;
+    }
 
     public User getUserById(int id) {
         String sql = "select * from Users\n"
@@ -106,6 +132,29 @@ public class UserDAO extends MyDAO {
             }
         }
         return false;
+    }
+
+    public Map<User, Float> getTopUserByTotalMoney() {
+        Map<User, Float> map = new LinkedHashMap<>();
+        List<User> list = new ArrayList<>();
+        OrderDAO od = new OrderDAO();
+        String sql = "select top 6 o.user_id, SUM(o.total_money) as total_money from Orders as o\n"
+                + "group by o.user_id\n"
+                + "order by SUM(o.total_money) desc";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                User user = getUserById(userId);
+                float total_money = rs.getFloat("total_money");
+                map.put(user, total_money);
+            }
+            return map;
+        } catch (SQLException e) {
+            System.out.println("loi get top user by total money: " + e);
+        }
+        return map;
     }
 
     public static void main(String[] args) {

@@ -22,6 +22,7 @@ import java.sql.ResultSet;
  */
 public class CategoryDAO extends MyDAO {
     
+    
     public Category getCategoryById(int id) {
         String sql = "select * from Category\n"
                 + "where category_id = ?";
@@ -67,7 +68,7 @@ public class CategoryDAO extends MyDAO {
         for (Category x : listCategory) {
             sql = "select top 3 * from Product\n"
                     + "where category_id = ?\n"
-                    + "order by quantity_sold, product_name";
+                    + "order by quantity_sold desc, product_name";
             try {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, x.getCategoryId());
@@ -123,7 +124,8 @@ public class CategoryDAO extends MyDAO {
     
     public static void main(String[] args) {
         CategoryDAO cd = new CategoryDAO();
-        Map<Category, Integer> map = cd.getNumberOfProductbyCategory();
-        System.out.println(cd.getCategoryById(1));
+        for(Map.Entry<Category, List<Product>> x : cd.getTop5ProductByCategory().entrySet()){
+            System.out.println(x);
+        }
     }
 }

@@ -129,7 +129,7 @@
 
                                     <c:if test="${sessionScope.account.role.name == 'Admin'}">
                                         <li class="profile-dropdown-list-item">
-                                            <a href="${pageContext.request.contextPath}/views/admin/dashboard/dashboard.jsp" >
+                                            <a href="${pageContext.request.contextPath}/dashboard" >
                                                 <i class="fa-solid fa-chart-line"></i>
                                                 Dashboard
                                             </a>
