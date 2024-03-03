@@ -34,6 +34,7 @@ public class User {
     private String image;
     private String phoneNumber;
     private String address;
+    private String email;
     private Date createdAt;
     private Date updatedAt;
     private int deleted;
@@ -56,6 +57,22 @@ public class User {
         this.deleted = deleted;
     }
 
+    public User(int userId, Role role, String userName, String passWord, String fullName, Date birthDay, String image, String phoneNumber, String address, String email, Date createdAt, Date updatedAt, int deleted) {
+        this.userId = userId;
+        this.role = role;
+        this.userName = userName;
+        this.passWord = passWord;
+        this.fullName = fullName;
+        this.birthDay = birthDay;
+        this.image = image;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deleted = deleted;
+    }
+
     public User(int userId, Role role, String userName, String passWord, Date createdAt, int deleted) {
         this.userId = userId;
         this.role = role;
@@ -64,7 +81,6 @@ public class User {
         this.createdAt = createdAt;
         this.deleted = deleted;
     }
-    
 
     public int getUserId() {
         return userId;
@@ -162,9 +178,17 @@ public class User {
         this.deleted = deleted;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" + "userId=" + userId + ", role=" + role + ", userName=" + userName + ", passWord=" + passWord + ", fullName=" + fullName + ", birthDay=" + birthDay + ", image=" + image + ", phoneNumber=" + phoneNumber + ", address=" + address + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", deleted=" + deleted + '}';
     }
-    
+
 }

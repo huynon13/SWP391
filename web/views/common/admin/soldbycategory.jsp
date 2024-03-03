@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="card card-default Sold-card-table">
     <div class="card-header justify-content-between">
-        <h2>Sold by Items</h2>
+        <h2>Sold by Category</h2>
         <div class="tools">
             <button class="text-black-50 mr-2 font-size-20">
                 <i class="mdi mdi-cached"></i>

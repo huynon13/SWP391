@@ -43,7 +43,9 @@ public class ProductDetailServlet extends HttpServlet {
             int sizeId = Integer.parseInt(sizeId_raw);
             int productId = Integer.parseInt(productId_raw);
             int quantityStockByColorAndSize = pd.getQuantityStockProductByColorAndSize(colorId, sizeId, productId);
+            System.out.println("quantitystock: " + quantityStockByColorAndSize);
             int quantitySoldByColorAndSize = pd.getQuantitySoldProductByColorAndSize(productId, colorId, sizeId);
+            System.out.println("quantitysold: " + quantitySoldByColorAndSize);
             request.setAttribute("quantityStockByColorAndSize", quantityStockByColorAndSize);
             request.setAttribute("quantitySoldByColorAndSize", quantitySoldByColorAndSize);
             request.getRequestDispatcher("views/user/item-page/productdetail.jsp").forward(request, response);

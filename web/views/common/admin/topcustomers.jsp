@@ -9,7 +9,7 @@
     class="card ec-cust-card card-table-border-none card-default"
     >
     <div class="card-header justify-content-between">
-        <h2>New Customers</h2>
+        <h2>Top Customers</h2>
         <div>
             <button class="text-black-50 mr-2 font-size-20">
                 <i class="mdi mdi-cached"></i>

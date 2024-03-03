@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-xl-4 col-12 p-b-15">
                                     <!-- Top Sell Table -->
-                                <jsp:include page="../../common/admin/soldbyitems.jsp"></jsp:include> 
+                                <jsp:include page="../../common/admin/soldbycategory.jsp"></jsp:include> 
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
                             <div class="row">
                                 <div class="col-xl-5">
                                     <!-- New Customers -->
-                                <jsp:include page="../../common/admin/newcustomers.jsp"></jsp:include> 
+                                <jsp:include page="../../common/admin/topcustomers.jsp"></jsp:include> 
                                 </div>
 
                                 <div class="col-xl-7">
