@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,11 +32,11 @@ import model.User;
  */
 @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
 public class DashboardServlet extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -56,13 +57,27 @@ public class DashboardServlet extends HttpServlet {
         Map<Category, Integer> getTotalProductSoldByCategory = pd.getTotalProductSoldByAllCategory();
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
-        
-        for(Product p : getProductAll){
+
+        // lay ve tong san pham da ban thanh cong
+        for (Product p : getProductAll) {
             totalProductSold += p.getQuantitySold();
         }
-        
-        for(Category c : getCategoryAll){
-            
+
+        // xu li lay ve tong so user da dang nhap vao trang web
+        int totalUserActivity = 0;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            Cookie userActivity = null;
+            for (Cookie c : cookies) {
+                if (c.getName().equalsIgnoreCase("userActivity")) {
+                    userActivity = c;
+                    break;
+                }
+            }
+            if (userActivity != null) {
+                String[] userIdActivity = userActivity.getValue().split("&");
+                totalUserActivity = userIdActivity.length;
+            }
         }
         
         session.setAttribute("topUserByTotalMoney", getTopUserByTotalMoney);
@@ -76,7 +91,9 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("supperlierAll", getSupperlierAll);
         session.setAttribute("categoryAll", getCategoryAll);
         session.setAttribute("totalProductSoldByCategory", getTotalProductSoldByCategory);
+        session.setAttribute("totalUserActivity", totalUserActivity);
+        
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
-
+    
 }

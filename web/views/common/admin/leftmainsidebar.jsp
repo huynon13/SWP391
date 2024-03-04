@@ -40,12 +40,6 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
                             <li class="">
-                                <a class="sidenav-item-link" href="vendor-card.html">
-                                    <span class="nav-text">Vendor Grid</span>
-                                </a>
-                            </li>
-
-                            <li class="">
                                 <a class="sidenav-item-link" href="vendor-list.html">
                                     <span class="nav-text">Vendor List</span>
                                 </a>
@@ -67,12 +61,6 @@
                     </a>
                     <div class="collapse">
                         <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
-                            <li>
-                                <a class="sidenav-item-link" href="user-card.html">
-                                    <span class="nav-text">User Grid</span>
-                                </a>
-                            </li>
-
                             <li class="">
                                 <a class="sidenav-item-link" href="user-list.html">
                                     <span class="nav-text">User List</span>
@@ -134,11 +122,6 @@
                             <li class="">
                                 <a class="sidenav-item-link" href="product-list.html">
                                     <span class="nav-text">List Product</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="product-grid.html">
-                                    <span class="nav-text">Grid Product</span>
                                 </a>
                             </li>
                             <li class="">

@@ -37,7 +37,4 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer d-flex flex-wrap bg-white">
-        <a href="#" class="text-uppercase py-3">View Report</a>
-    </div>
 </div>

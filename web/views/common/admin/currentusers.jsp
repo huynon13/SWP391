@@ -13,8 +13,5 @@
         <canvas id="currentUser" class="chartjs"></canvas>
     </div>
     <div class="card-footer d-flex flex-wrap bg-white border-top">
-        <a href="#" class="text-uppercase py-3"
-           >In-Detail Overview</a
-        >
     </div>
 </div>

@@ -35,8 +35,5 @@
         </div>
     </div>
     <div class="card-footer d-flex flex-wrap bg-white">
-        <a href="#" class="text-uppercase py-3"
-           >In-Detail Overview</a
-        >
     </div>
 </div>
