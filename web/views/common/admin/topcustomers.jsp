@@ -27,7 +27,7 @@
                                     <a href="profile.html"
                                        ><img
                                             class="profile-img rounded-circle w-45"
-                                            src="${customer.key.image}"
+                                            src="${pageContext.request.contextPath}/${customer.key.image}"
                                             alt="customer image"
                                             /></a>
                                 </div>

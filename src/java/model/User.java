@@ -4,6 +4,7 @@
  */
 package model;
 
+import dal.RoleDAO;
 import java.util.Date;
 
 /**
@@ -189,6 +190,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "userId=" + userId + ", role=" + role + ", userName=" + userName + ", passWord=" + passWord + ", fullName=" + fullName + ", birthDay=" + birthDay + ", image=" + image + ", phoneNumber=" + phoneNumber + ", address=" + address + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", deleted=" + deleted + '}';
+    }
+    
+    public static void main(String[] args) {
     }
 
 }

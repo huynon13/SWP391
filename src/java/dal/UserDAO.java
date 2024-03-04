@@ -23,11 +23,65 @@ import model.Order;
  */
 public class UserDAO extends MyDAO {
 
+    public void insertUser(int roleId, String userName, String password, String fullName, String birthDay, String image, String phoneNumber, String address, String email, String createAt, int deleted) {
+        String sql = "insert into Users(role_id, user_name, pass_word, full_name, birth_day, image, phone_number, address, email, created_at, deleted)\n"
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), 0)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, roleId);
+
+            ps.setString(2, userName);
+
+            ps.setString(3, password);
+
+            if (fullName.equals("")) {
+                ps.setString(4, null);
+            } else {
+                ps.setString(4, fullName);
+            }
+
+            if (birthDay.equals("")) {
+                ps.setDate(5, null);
+            } else {
+                java.sql.Date date = java.sql.Date.valueOf(birthDay);
+                ps.setDate(5, date);
+            }
+            if (image.equals("")) {
+                ps.setString(6, null);
+            } else {
+                image = "images/users/" + image;
+                ps.setString(6, image);
+            }
+
+            if (phoneNumber.equals("")) {
+                ps.setString(7, null);
+            } else {
+                ps.setString(7, phoneNumber);
+            }
+
+            if (address.equals("")) {
+                ps.setString(8, null);
+            } else {
+                ps.setString(8, address);
+            }
+
+            if (email.equals("")) {
+                ps.setString(9, null);
+            } else {
+                ps.setString(9, email);
+            }
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi insert user: " + e);
+        }
+    }
+
     public List<User> getUserAll() {
         List<User> list = new ArrayList<>();
         String sql = "select * from Users as u\n"
-                + "inner join Roles as r on u.role_id = r.role_id\n"
-                + "where r.name = 'user'";
+                + "inner join Roles as r on u.role_id = r.role_id\n";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -159,6 +213,6 @@ public class UserDAO extends MyDAO {
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
-        System.out.println(ud.login("Nghiemxuanloc", "123457"));
+        System.out.println(ud.getUserById(7));
     }
 }

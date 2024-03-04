@@ -62,7 +62,7 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
                             <li class="">
-                                <a class="sidenav-item-link" href="user-list.html">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/userlist.jsp">
                                     <span class="nav-text">User List</span>
                                 </a>
                             </li>

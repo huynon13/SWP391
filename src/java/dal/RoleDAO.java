@@ -35,6 +35,24 @@ public class RoleDAO extends MyDAO {
         return null;
     }
 
+    public Role getRoleByName(String name) {
+        String sql = "select * from Roles\n"
+                + "where name = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int rid =  rs.getInt("role_id");
+                String rname = rs.getString("name");
+                return new Role(rid, name);
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get role by name: " + e);
+        }
+        return null;
+    }
+
     public int getRoleIdByRoleName(String name) {
         String sql = "select * from Roles\n"
                 + "where name = ?";

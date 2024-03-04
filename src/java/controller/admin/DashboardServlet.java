@@ -57,6 +57,15 @@ public class DashboardServlet extends HttpServlet {
         Map<Category, Integer> getTotalProductSoldByCategory = pd.getTotalProductSoldByAllCategory();
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
+        int totalUser = 0;
+        
+        // lay ve tong user voi role la user
+        
+        for(User user : getUserAll){
+            if(user.getRole().getName().equalsIgnoreCase("user")){
+                totalUser++;
+            }
+        }
 
         // lay ve tong san pham da ban thanh cong
         for (Product p : getProductAll) {
@@ -86,6 +95,7 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("revenue", od.getRevennue());
         session.setAttribute("orderAll", getOrderAll);
         session.setAttribute("userAll", getUserAll);
+        session.setAttribute("totalUser", totalUser);
         session.setAttribute("productAll", getProductAll);
         session.setAttribute("totalProductSold", totalProductSold);
         session.setAttribute("supperlierAll", getSupperlierAll);

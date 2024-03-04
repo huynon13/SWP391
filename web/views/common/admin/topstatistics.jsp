@@ -10,7 +10,7 @@
     <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
         <div class="card card-mini dash-card card-2">
             <div class="card-body">
-                <h2 class="mb-1">${sessionScope.userAll.size()}</h2>
+                <h2 class="mb-1">${sessionScope.totalUser}</h2>
                 <p>Total Users</p>
                 <span class="mdi mdi-account-clock"></span>
             </div>
