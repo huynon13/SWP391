@@ -63,6 +63,9 @@ public class ShoppingCartServlet extends HttpServlet {
                 if (quantity > quantityStock) {
                     request.setAttribute("errorAddToCart", "Số lượng sản phẩm có sẵn không đủ, vui lòng chọn lại");
                     request.getRequestDispatcher("views/user/item-page/productdetail.jsp").forward(request, response);
+                } else if (quantity == 0) {
+                    request.setAttribute("errorAddToCart", "Số lượng sản phẩm phải > 0, vui lòng chọn lại");
+                    request.getRequestDispatcher("views/user/item-page/productdetail.jsp").forward(request, response);
                 } else {
                     Cookie[] cookies = request.getCookies();
                     Cookie cartId = null;

@@ -23,3 +23,10 @@ function deleteProduct() {
         form.submit();
     }
 }
+
+function clearAll() {
+    var form = document.getElementById("fclear");
+    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không!!!")) {
+        form.submit();
+    }
+}

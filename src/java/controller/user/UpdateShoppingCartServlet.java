@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 import model.Cart;
 import model.Color;
@@ -29,35 +30,37 @@ import model.User;
  */
 @WebServlet(name = "UpdateShoppingCartServlet", urlPatterns = {"/updateshoppingcart"})
 public class UpdateShoppingCartServlet extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        clearAll(request, response);
+        response.sendRedirect("views/user/item-page/shoppingcart.jsp");
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User account = (User) session.getAttribute("account");
-
+        
         ProductDAO pd = new ProductDAO();
         SizeDAO sd = new SizeDAO();
         ColorDAO cd = new ColorDAO();
-
+        
         String productId_raw = request.getParameter("pid");
         String colorId_raw = request.getParameter("cid");
         String sizeId_raw = request.getParameter("sid");
         String quantity_raw = request.getParameter("quantity");
         String action = request.getParameter("action");
         String record = request.getParameter("record");
-
+        
         try {
             int productId = Integer.parseInt(productId_raw);
             int colorId = Integer.parseInt(colorId_raw);
             int sizeId = Integer.parseInt(sizeId_raw);
             int quantity = Integer.parseInt(quantity_raw);
-
+            
             int quantityStock = pd.getQuantityStockProductByColorAndSize(colorId, sizeId, productId);
-
+            
             if (action != null) {
                 if (action.equalsIgnoreCase("tang")) {
                     if (quantity + 1 > quantityStock) {
@@ -80,20 +83,20 @@ public class UpdateShoppingCartServlet extends HttpServlet {
             }
             request.setAttribute("record", Integer.parseInt(record));
             request.getRequestDispatcher("views/user/item-page/shoppingcart.jsp").forward(request, response);
-
+            
         } catch (NumberFormatException e) {
             System.out.println("loi chuyen doi so trong class update shopping cart");
         }
-
+        
     }
-
+    
     private void updateProductInCart(int pid, int sid, int cid, int quantity, String action, HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Cookie[] cookies = request.getCookies();
         User account = (User) session.getAttribute("account");
-
+        
         Cookie cartId = null;
-
+        
         for (Cookie c : cookies) {
             if (c.getName().equalsIgnoreCase("cart" + account.getUserId())) {
                 cartId = c;
@@ -106,7 +109,7 @@ public class UpdateShoppingCartServlet extends HttpServlet {
         List<Size> listSize = cart.getSize();
         List<Color> listColor = cart.getColor();
         List<Integer> listQuantity = cart.getSoLuong();
-
+        
         if (cartId != null) {
             if (listProduct.size() != 0) {
                 boolean checkDelete = false;
@@ -156,14 +159,53 @@ public class UpdateShoppingCartServlet extends HttpServlet {
             cartId.setValue(cartValue);
             cartId.setMaxAge(60 * 60 * 24 * 60);
             response.addCookie(cartId);
-
+            
             cart.setTotalPriceAfterDiscount();
             cart.setTotalPriceAfterDiscount();
 
             // cap nhat lai cart trong session
             session.setAttribute("cart", cart);
-
+            
         }
     }
+    
+    private void clearAll(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Cookie[] cookies = request.getCookies();
+        User account = (User) session.getAttribute("account");
+        
+        Cookie cartId = null;
+        
+        for (Cookie c : cookies) {
+            if (c.getName().equalsIgnoreCase("cart" + account.getUserId())) {
+                cartId = c;
+                break;
+            }
+        }
+        Cart cart = (Cart) session.getAttribute("cart");
+        // lay ve cac tuy chon cua san pham
+        List<Product> listProduct = cart.getProduct();
+        List<Size> listSize = cart.getSize();
+        List<Color> listColor = cart.getColor();
+        List<Integer> listQuantity = cart.getSoLuong();
+        
+        listProduct.clear();
+        listSize.clear();
+        listColor.clear();
+        listQuantity.clear();
 
+        //update cart trong cookie
+        String cartValue = "";
+        
+        cartId.setValue(cartValue);
+        cartId.setMaxAge(60 * 60 * 24 * 60);
+        response.addCookie(cartId);
+        
+        cart.setTotalPriceAfterDiscount();
+        cart.setTotalPriceAfterDiscount();
+
+        // cap nhat lai cart trong session
+        session.setAttribute("cart", cart);
+        
+    }
 }

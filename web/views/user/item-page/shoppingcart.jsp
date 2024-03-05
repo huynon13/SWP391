@@ -180,14 +180,15 @@
                         <div class="shoping-cart-btn-left">
                             <div class="checkout-text">
                                 <div class="btn_box shoping-btn">
-                                    <a href="#">Continue Shopping</a>
+                                    <a href="${pageContext.request.contextPath}/home">Continue Shopping</a>
                                 </div>
                             </div>    
                         </div>
-                        <div class="shoping-cart-btn-right d-flex align-items-center">
-                            <a href="#" class="view-all-two shoping-btn-2">Update Cart</a>
-                            <a href="#" class="view-all-two shoping-btn-2">Clear All</a>
-                        </div>
+                                <form id="fclear" action="${pageContext.request.contextPath}/updateshoppingcart" method="post">
+                            <div class="shoping-cart-btn-right d-flex align-items-center">
+                                <a onclick="clearAll()" href="javascript:void(0)" class="view-all-two shoping-btn-2">Clear All</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
