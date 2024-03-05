@@ -58,24 +58,29 @@ public class UpdateShoppingCartServlet extends HttpServlet {
 
             int quantityStock = pd.getQuantityStockProductByColorAndSize(colorId, sizeId, productId);
 
-            if (action.equalsIgnoreCase("tang")) {
-                if (quantity + 1 > quantityStock) {
-                    request.setAttribute("errorUpdateCart", "Không đủ sản phẩm có sẵn(Stock: " + quantityStock + ")");
+            if (action != null) {
+                if (action.equalsIgnoreCase("tang")) {
+                    if (quantity + 1 > quantityStock) {
+                        request.setAttribute("errorUpdateCart", "Không đủ sản phẩm có sẵn(Stock: " + quantityStock + ")");
+                    } else {
+                        quantity += 1;
+                        updateProductInCart(productId, sizeId, colorId, quantity, "tang", request, response);
+                    }
                 } else {
-                    quantity += 1;
-                    updateProductInCart(productId, sizeId, colorId, quantity, "tang", request, response);
+                    quantity -= 1;
+                    if (quantity == 0) {
+                        System.out.println("delete product");
+                        updateProductInCart(productId, sizeId, colorId, quantity, "delete", request, response);
+                    } else {
+                        updateProductInCart(productId, sizeId, colorId, quantity, "giam", request, response);
+                    }
                 }
             } else {
-                quantity -= 1;
-                if (quantity == 0) {
-                    System.out.println("delete product");
-                    updateProductInCart(productId, sizeId, colorId, quantity, "delete", request, response);
-                } else {
-                    updateProductInCart(productId, sizeId, colorId, quantity, "giam", request, response);
-                }
+                updateProductInCart(productId, sizeId, colorId, quantity, "delete", request, response);
             }
             request.setAttribute("record", Integer.parseInt(record));
             request.getRequestDispatcher("views/user/item-page/shoppingcart.jsp").forward(request, response);
+
         } catch (NumberFormatException e) {
             System.out.println("loi chuyen doi so trong class update shopping cart");
         }

@@ -142,7 +142,7 @@
                                     <td style="color: black"><span><%= listColor.get(i).getColor()%></span></td>
                                     <td style="color: black"><span><%= listProduct.get(i).getPrice()%></span></td>
                                     <td>
-                                        <form action="${pageContext.request.contextPath}/updateshoppingcart" method="get">
+                                        <form id="f" action="${pageContext.request.contextPath}/updateshoppingcart" method="get">
                                             <input type="hidden" name="pid" value="<%= listProduct.get(i).getProductId()%>"/>
                                             <input type="hidden" name="sid" value="<%= listSize.get(i).getSizeId()%>"/>
                                             <input type="hidden" name="cid" value="<%= listColor.get(i).getColorId()%>"/>
@@ -159,12 +159,13 @@
                                             <%
                                                 }
                                             %>
+                                            <td><span class="cart-total"><%= listProduct.get(i).getPrice() * listQuantity.get(i)%>&nbsp;VNĐ</span></td>
+                                            <td>
+                                                <a onclick="deleteProduct()" href="javascript:void(0)" class="cart-btn"><i class="fa-solid fa-xmark"></i></a>
+                                            </td>
                                         </form>
                                     </td>
-                                    <td><span class="cart-total"><%= listProduct.get(i).getPrice() * listQuantity.get(i)%>&nbsp;VNĐ</span></td>
-                                    <td>
-                                        <a href="#" class="cart-btn"><i class="fa-solid fa-xmark"></i></a>
-                                    </td>
+
                                 </tr>
 
                                 <%
