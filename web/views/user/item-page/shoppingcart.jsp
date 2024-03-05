@@ -64,7 +64,7 @@
                 <div class="container-fluid">
                     <div class="ev-hero-content">
                         <h2>Shopping Cart</h2>
-                        <span><a href="${pageContext.request.contextPath}/home">Home</a> <a href="${pageContext.request.contextPath}/filterproductservlet?category=0&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Shop</a> > Cart</span>
+                        <span><a href="${pageContext.request.contextPath}/home">Home ></a> <a href="${pageContext.request.contextPath}/filterproductservlet?category=0&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Shop</a> > Cart</span>
                 </div>
             </div>
         </section>
@@ -219,7 +219,7 @@
                                     </ul>
                                     <div class="checkout-text">
                                         <div class="btn_box checkout-btn">
-                                            <a href="#">Proceed To Checkout</a>
+                                            <a href="${pageContext.request.contextPath}/views/user/item-page/checkout.jsp">Proceed To Checkout</a>
                                         </div>
                                         <span >Checkout with multiple address</span>
                                     </div>

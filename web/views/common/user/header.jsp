@@ -213,7 +213,7 @@
                                 </div>
 
                                 <div class="popup-btn">
-                                    <a href="#" class="popup-link">Checkout</a>
+                                    <a href="${pageContext.request.contextPath}/views/user/item-page/checkout.jsp" class="popup-link">Checkout</a>
                                 </div>
 
 
@@ -238,7 +238,7 @@
                             </div>
                             <ul class="menu-items">
                                 <li class="menu-item-has-children">
-                                    <a href="${pageContext.request.contextPath}/home" class="nav-link">Home <i class="fa"></i></a>
+                                    <a href="${pageContext.request.contextPath}/home" class="nav-link">Home<i class="fa"></i></a>
                                 </li>
 
                                 <li class="menu-item-has-children">
