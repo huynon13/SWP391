@@ -108,19 +108,21 @@ public class HomeServlet extends HttpServlet {
                 String[] word = cartId.getValue().split("#");
                 String cart = word[0];
 //                & dung de phan cach cac san pham voi nhau
-                String[] listProductByAccount = cart.split("&");
+                if (!cart.equals("")) {
+                    String[] listProductByAccount = cart.split("&");
 
-                for (String detail : listProductByAccount) {
+                    for (String detail : listProductByAccount) {
 //                    - dung de phan loai trong cung 1 san pham, vidu size color, so luong
-                    String[] IdsizeColorSoLuong = detail.split("-");
-                    String IdProduct = IdsizeColorSoLuong[0];
-                    String sizeP = IdsizeColorSoLuong[1];
-                    String colorP = IdsizeColorSoLuong[2];
-                    String soLuongP = IdsizeColorSoLuong[3];
-                    productInCart.add(pd.getProductById(Integer.parseInt(IdProduct)));
-                    sizeProduct.add(sd.getSizeById(Integer.parseInt(sizeP)));
-                    colorProduct.add(colorD.getColorById(Integer.parseInt(colorP)));
-                    soLuongProduct.add(Integer.parseInt(soLuongP));
+                        String[] IdsizeColorSoLuong = detail.split("-");
+                        String IdProduct = IdsizeColorSoLuong[0];
+                        String sizeP = IdsizeColorSoLuong[1];
+                        String colorP = IdsizeColorSoLuong[2];
+                        String soLuongP = IdsizeColorSoLuong[3];
+                        productInCart.add(pd.getProductById(Integer.parseInt(IdProduct)));
+                        sizeProduct.add(sd.getSizeById(Integer.parseInt(sizeP)));
+                        colorProduct.add(colorD.getColorById(Integer.parseInt(colorP)));
+                        soLuongProduct.add(Integer.parseInt(soLuongP));
+                    }
                 }
             }
         }
@@ -145,7 +147,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("listSize", listSize);
         session.setAttribute("listColor", listColor);
         session.setAttribute("cart", cartByUserId);
-        
+
         request.getRequestDispatcher("./views/user/home-page/homepage.jsp").forward(request, response);
     }
 
