@@ -4,6 +4,15 @@
     Author     : PC
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collections"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="dal.ProductDAO"%>
+<%@page import="model.Size"%>
+<%@page import="model.Color"%>
+<%@page import="model.Product"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Cart"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -34,7 +43,7 @@
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
-        <title> Evani E-commerce Template</title>
+        <title>Shopping Cart</title>
 
         <link rel="icon" href="${pageContext.request.contextPath}/images/head/logo/shape-1.png">
 
@@ -55,316 +64,224 @@
                 <div class="container-fluid">
                     <div class="ev-hero-content">
                         <h2>Shopping Cart</h2>
-                        <span><a href="index-2.html">Home</a> <a href="shop.html">Shop</a> > Single</span>
+                        <span><a href="${pageContext.request.contextPath}/home">Home</a> <a href="${pageContext.request.contextPath}/filterproductservlet?category=0&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0">Shop</a> > Cart</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER-SECTION END  -->
+
+
+        <!-- `SHOPPING-CART-SECTION START  -->
+
+        <%
+            Cart cart = (Cart) session.getAttribute("cart");
+            List<Product> listProduct = new ArrayList<>();
+            List<Size> listSize = new ArrayList<>();
+            List<Color> listColor = new ArrayList<>();
+            List<Integer> listQuantity = new ArrayList<>();
+            if (cart != null) {
+                for (int i = cart.getProduct().size() - 1; i >= 0; i--) {
+                    listProduct.add(cart.getProduct().get(i));
+                    listSize.add(cart.getSize().get(i));
+                    listColor.add(cart.getColor().get(i));
+                    listQuantity.add(cart.getSoLuong().get(i));
+                }
+            }
+
+            Collections.reverse(listProduct);
+            Collections.reverse(listSize);
+            Collections.reverse(listColor);
+            Collections.reverse(listQuantity);
+
+            ProductDAO pd = new ProductDAO();
+        %>
+
+
+        <section class="wishlist-section shopping-section">
+            <div class="container">
+                <div class="wishlist-item">
+                    <h5>Your Cart Items</h5>
+                    <div class="wishlist-table">
+
+
+
+
+
+                        <table class="table-wrapper">
+                            <thead class="t-head">
+                                <tr>
+                                    <th><span>Item Name</span></th>
+                                    <th><span>Size</span></th>
+                                    <th><span>Color</span></th>
+                                    <th><span>Price</span></th>
+                                    <th><span>Quantity</span></th>
+                                    <th><span>Total</span></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="t-body">
+                                <%
+                                    if (listProduct.size() != 0) {
+                                        for (int i = listProduct.size() - 1; i >= 0; i--) {
+                                            int quantityStock = pd.getQuantityStockProductByColorAndSize(listColor.get(i).getColorId(), listSize.get(i).getSizeId(), listProduct.get(i).getProductId());
+                                %>
+                                <tr class="wishlist-tr">
+                                    <td class="d-lg-flex d-lg-block align-items-center">
+                                        <a href="single-product.html">
+                                            <img style="border-radius: 5%" width="84px" height="96px" src="${pageContext.request.contextPath}/<%= listProduct.get(i).getThumbnails().get(0)%>" alt="shopping">
+                                        </a>
+                                        <h2>
+                                            <a href="single-product.html"><%= listProduct.get(i).getProductName()%></a>
+
+
+                                        </h2>
+
+                                    </td>
+                                    <td style="color: black"><span><%= listSize.get(i).getSizeOption()%></span></td>
+                                    <td style="color: black"><span><%= listColor.get(i).getColor()%></span></td>
+                                    <td style="color: black"><span><%= listProduct.get(i).getPrice()%></span></td>
+                                    <td>
+                                        <form action="${pageContext.request.contextPath}/updateshoppingcart" method="get">
+                                            <input type="hidden" name="pid" value="<%= listProduct.get(i).getProductId()%>"/>
+                                            <input type="hidden" name="sid" value="<%= listSize.get(i).getSizeId()%>"/>
+                                            <input type="hidden" name="cid" value="<%= listColor.get(i).getColorId()%>"/>
+                                            <input type="hidden" name="record" value="<%= i%>"/>
+                                            <div class="pro-counter d-flex align-items-center justify-content-between">
+                                                <button type="submit" name="action" value="giam">-</button>
+                                                <input type="number" name="quantity" value="<%= listQuantity.get(i)%>" min="0" readonly>
+                                                <button type="submit" name="action" value="tang">+</button>
+                                            </div>
+                                            <%
+                                                if (((String) request.getAttribute("errorUpdateCart") != null && (int) request.getAttribute("record") == i) || (listQuantity.get(i) > quantityStock)) {
+                                            %>
+                                            <span style="color: red"><%= (String) request.getAttribute("errorUpdateCart") != null ? (String) request.getAttribute("errorUpdateCart") : "Không đủ sản phẩm có sẵn(Stock: " + quantityStock + ")"%></span>
+                                            <%
+                                                }
+                                            %>
+                                        </form>
+                                    </td>
+                                    <td><span class="cart-total"><%= listProduct.get(i).getPrice() * listQuantity.get(i)%>&nbsp;VNĐ</span></td>
+                                    <td>
+                                        <a href="#" class="cart-btn"><i class="fa-solid fa-xmark"></i></a>
+                                    </td>
+                                </tr>
+
+                                <%
+                                        }
+                                    }
+                                %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="shoping-cart-btn d-md-flex d-md-block align-items-center justify-content-md-between justify-content-md-start">
+                        <div class="shoping-cart-btn-left">
+                            <div class="checkout-text">
+                                <div class="btn_box shoping-btn">
+                                    <a href="#">Continue Shopping</a>
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="shoping-cart-btn-right d-flex align-items-center">
+                            <a href="#" class="view-all-two shoping-btn-2">Update Cart</a>
+                            <a href="#" class="view-all-two shoping-btn-2">Clear All</a>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- BANNER-SECTION END  -->
-
-
-            <!-- `SHOPPING-CART-SECTION START  -->
+        <!-- `SHOPPING-CART-SECTION END  -->
 
 
-            <section class="wishlist-section shopping-section">
-                <div class="container">
-                    <div class="wishlist-item">
-                        <h5>Your Cart Items</h5>
-                        <div class="wishlist-table">
-                            <table class="table-wrapper">
-                                <thead class="t-head">
-                                    <tr>
-                                        <th><span>Item Name</span></th>
-                                        <th><span>Price</span></th>
-                                        <th><span>Quantity</span></th>
-                                        <th><span>Total</span></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="t-body">
-                                    <tr class="wishlist-tr">
-                                        <td class="d-lg-flex d-lg-block align-items-center">
-                                            <a href="single-product.html">
-                                                <img src="images/shopping-cart/shape-1.png" alt="shopping">
-                                            </a>
-                                            <h2><a href="single-product.html">Tritan steel water bottle</a></h2>
-                                        </td>
-                                        <td><span>$42.00</span></td>
-                                        <td>
-                                            <div class="pro-counter d-flex align-items-center justify-content-between">
-                                                <button onclick="decrement('quantity1')" class="counter-button">-</button>
-                                                <input type="number" class="counter-input" id="quantity1" value="0" min="0" readonly>
-                                                <button onclick="increment('quantity1')" class="counter-button">+</button>
-                                            </div>
-                                        </td>
-                                        <td><span class="cart-total">$42.00</span></td>
-                                        <td>
-                                            <a href="#" class="cart-btn"><i class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr class="wishlist-tr">
-                                        <td class="d-lg-flex d-lg-block align-items-center">
-                                            <a href="single-product.html">
-                                                <img src="images/shopping-cart/shape-2.png" alt="shopping">
-                                            </a>
-                                            <h2><a href="single-product.html">Ray Ban fashion sunglass</a></h2>
-                                        </td>
-                                        <td><span>$93.00</span></td>
-                                        <td>
-                                            <div class="pro-counter d-flex align-items-center justify-content-between">
-                                                <button onclick="decrement('quantity2')" class="counter-button">-</button>
-                                                <input type="number" class="counter-input" id="quantity2" value="0" min="0" readonly>
-                                                <button onclick="increment('quantity2')" class="counter-button">+</button>
-                                            </div>
-                                        </td>
-                                        <td><span class="cart-total">$93.00</span></td>
-                                        <td>
-                                            <ul class="product-cart d-flex align-items-center justify-content-between">
-                                                <li><a href="#" class="cart-btn"><i class="fa-solid fa-xmark"></i></a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr class="wishlist-tr">
-                                        <td class="d-lg-flex d-lg-block align-items-center">
-                                            <a href="single-product.html">
-                                                <img src="images/shopping-cart/shape-3.png" alt="shopping">
-                                            </a>
-                                            <h2><a href="single-product.html">Mens fashion running shoes</a></h2>
-                                        </td>
-                                        <td><span>$48.00</span></td>
-                                        <td>
-                                            <div class="pro-counter d-flex align-items-center justify-content-between">
-                                                <button onclick="decrement('quantity3')" class="counter-button">-</button>
-                                                <input type="number" class="counter-input" id="quantity3" value="0" min="0" readonly>
-                                                <button onclick="increment('quantity3')" class="counter-button">+</button>
-                                            </div>
-                                        </td>
-                                        <td><span class="cart-total">$48.00</span></td>
-                                        <td>
-                                            <a href="#" class="cart-btn"><i class="fa-solid fa-xmark"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="shoping-cart-btn d-md-flex d-md-block align-items-center justify-content-md-between justify-content-md-start">
-                            <div class="shoping-cart-btn-left">
-                                <div class="checkout-text">
-                                    <div class="btn_box shoping-btn">
-                                        <a href="#">Continue Shopping</a>
-                                    </div>
-                                </div>    
+        <section class="calculate-shipping">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+                        <div class="calculate-item">
+                            <h5>Calculate Shipping</h5>
+                            <div class="select-item d-flex align-items-center">
+                                <h6>Country:</h6>
+                                <div class="select-wrapper d-flex align-items-center justify-content-between">
+                                    <select class="select-option">
+                                        <option value="">Select your country </option>
+                                        <option value="USA">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                    </select>
+                                    <span><i class="fa-solid fa-angle-down"></i></span>
+                                </div>
                             </div>
-                            <div class="shoping-cart-btn-right d-flex align-items-center">
-                                <a href="#" class="view-all-two shoping-btn-2">Update Cart</a>
-                                <a href="#" class="view-all-two shoping-btn-2">Clear All</a>
+                            <div class="select-item d-flex align-items-center">
+                                <h6>State:</h6>
+                                <div class="select-wrapper d-flex align-items-center justify-content-between">
+                                    <select class="select-option">
+                                        <option value="">Select your State</option>
+                                        <option value="USA">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                    </select>
+                                    <span><i class="fa-solid fa-angle-down"></i></span>
+                                </div>
                             </div>
+                            <div class="select-item d-flex align-items-center">
+                                <h6>Zip Code:</h6>
+                                <div class="select-wrapper d-flex align-items-center justify-content-between">
+                                    <select class="select-option">
+                                        <option value="">Write your zip code</option>
+                                        <option value="USA">United States</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Australia">Australia</option>
+                                    </select>
+                                    <span><i class="fa-solid fa-angle-down"></i></span>
+                                </div>
+                            </div>
+                            <button class="view-all-two shoping-btn-2">Get A Quote</button>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- `SHOPPING-CART-SECTION END  -->
-
-
-            <section class="calculate-shipping">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-md-6 col-sm-12 col-12">
-                            <div class="calculate-item">
-                                <h5>Calculate Shipping</h5>
-                                <div class="select-item d-flex align-items-center">
-                                    <h6>Country:</h6>
-                                    <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                        <select class="select-option">
-                                            <option value="">Select your country </option>
-                                            <option value="USA">United States</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="Australia">Australia</option>
-                                        </select>
-                                        <span><i class="fa-solid fa-angle-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="select-item d-flex align-items-center">
-                                    <h6>State:</h6>
-                                    <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                        <select class="select-option">
-                                            <option value="">Select your State</option>
-                                            <option value="USA">United States</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="Australia">Australia</option>
-                                        </select>
-                                        <span><i class="fa-solid fa-angle-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="select-item d-flex align-items-center">
-                                    <h6>Zip Code:</h6>
-                                    <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                        <select class="select-option">
-                                            <option value="">Write your zip code</option>
-                                            <option value="USA">United States</option>
-                                            <option value="UK">United Kingdom</option>
-                                            <option value="Canada">Canada</option>
-                                            <option value="Australia">Australia</option>
-                                        </select>
-                                        <span><i class="fa-solid fa-angle-down"></i></span>
-                                    </div>
-                                </div>
-                                <button class="view-all-two shoping-btn-2">Get A Quote</button>
-                            </div>
+                    <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+                        <div class="calculate-item coupon-code-items">
+                            <h5>Have A Coupon Code ?</h5>
+                            <form>
+                                <input type="text" id="name" name="name" placeholder="Write your Coupon Code">
+                            </form>
+                            <button class="view-all-two shoping-btn-2">Apply Code</button>
                         </div>
-                        <div class="col-xl-4 col-md-6 col-sm-12 col-12">
-                            <div class="calculate-item coupon-code-items">
-                                <h5>Have A Coupon Code ?</h5>
-                                <form>
-                                    <input type="text" id="name" name="name" placeholder="Write your Coupon Code">
-                                </form>
-                                <button class="view-all-two shoping-btn-2">Apply Code</button>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 col-sm-12 col-12">
-                            <div class="calculate-item">
-                                <div class="select-item">
-                                    <div class="chectout-cart">
-                                        <ul class="sub-total">
-                                            <li class="d-flex align-items-center justify-content-between"><h6>Sub Total</h6> <span>$183.00</span></li>
-                                            <li class="d-flex align-items-center justify-content-between"><h6>Shipping </h6> <span>$10.00</span></li>
-                                        </ul>
-                                        <ul class="grand-total">
-                                            <li class="d-flex align-items-center justify-content-between"><h6>Grand Total</h6><span>$193.00</span></li>
-                                        </ul>
-                                        <div class="checkout-text">
-                                            <div class="btn_box checkout-btn">
-                                                <a href="#">Proceed To Checkout</a>
-                                            </div>
-                                            <span >Checkout with multiple address</span>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-sm-12 col-12">
+                        <div class="calculate-item">
+                            <div class="select-item">
+                                <div class="chectout-cart">
+                                    <ul class="sub-total">
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Sub Total</h6> <span>$183.00</span></li>
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Shipping </h6> <span>$10.00</span></li>
+                                    </ul>
+                                    <ul class="grand-total">
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Grand Total</h6><span>$193.00</span></li>
+                                    </ul>
+                                    <div class="checkout-text">
+                                        <div class="btn_box checkout-btn">
+                                            <a href="#">Proceed To Checkout</a>
                                         </div>
+                                        <span >Checkout with multiple address</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- PRODUCT-SECTION END  -->
+        <!-- PRODUCT-SECTION END  -->
 
-            <!--    FOOTER-SECTION START -->
+        <!--    FOOTER-SECTION START -->
 
-            <footer class="footer-section common-footer-section">   
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex justify-content-between">
-                            <div class="widgets-item">
-                                <div class="footer-logo">
-                                    <a href="index-2.html">
-                                        <img src="images/footer/logo/shape-1.png" alt="logo">
-                                    </a>
-                                </div>
-                                <div class="widgets-contacts">
-                                    <ul>
-                                        <li><a href="#" class="d-flex"><i class="fa-solid fa-location-dot"></i><span>22/1 Bardeshi, Amin Bazar Dhaka 1348</span></a></li>
-                                        <li><a href="#" class="d-flex"><i class="fa-solid fa-envelope"></i> hello@preo.com</a></li>
-                                        <li><a href="#" class="d-flex"><i class="fa-solid fa-phone"></i> +88 01234 567 890</a></li>
-                                    </ul>
-                                </div>
-                                <div class="widgets-social">
-                                    <ul class="d-flex align-items-center">
-                                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
-                                        <li><a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                        <li><a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex justify-content-between">
-                            <div class="widgets-item widgets-p-top d-sm-flex d-block justify-content-around ">
-                                <div class="widgets-link-items">
-                                    <h6>Links</h6>
-                                    <ul>
-                                        <li><a href="#">Customer</a></li>
-                                        <li><a href="#">Visitor</a></li>
-                                        <li><a href="#">Webmaster</a></li>
-                                        <li><a href="#">Service</a></li>
-                                        <li><a href="#">Career</a></li>
-                                    </ul>
-                                </div>
-                                <div class="widgets-link-items">
-                                    <h6>Help</h6>
-                                    <ul>
-                                        <li><a href="#">Support</a></li>
-                                        <li><a href="#">Doc File</a></li>
-                                        <li><a href="#">Forum</a></li>
-                                        <li><a href="#">FAQ</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex justify-content-between">
-                            <div class="widgets-item widgets-p-top">
-                                <h6>Recent Posts</h6>
-                                <div class="recent-posts d-flex align-items-center">
-                                    <div class="author-img">
-                                        <a href="single-blog.html">
-                                            <img src="images/footer/post/shape-1.png" alt="post">
-                                        </a>
-                                    </div>
-                                    <div class="author-info">
-                                        <span>April 15, 2021</span>
-                                        <br>
-                                        <a href="single-blog.html">Dalia enim ad minim veniam quis</a>
-                                    </div>
-                                </div>
-                                <div class="recent-posts d-flex align-items-center">
-                                    <div class="author-img">
-                                        <a href="single-blog.html">
-                                            <img src="images/footer/post/shape-2.png" alt="post">
-                                        </a>
-                                    </div>
-                                    <div class="author-info">
-                                        <span>April 15, 2021</span>
-                                        <br>
-                                        <a href="single-blog.html">Dalia enim ad minim veniam quis</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex">
-                            <div class="widgets-item widgets-p-top">
-                                <div class="news-letter">
-                                    <h6>Newsletter</h6>
-                                    <p>Ut enim ad minim veniam, quis nos trud exercitation ullamco laboris nisi ut aliquip modo</p>
-                                    <form class="widgets-form d-flex align-items-center justify-content-between" action="https://ethemestudio.com/submit" method="POST">
-                                        <input type="email" id="email" name="email" placeholder="Your email here" required>
-                                        <button type="submit"><i class="fa-regular fa-envelope"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-bottom">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-lg-start justify-content-center pb-3">
-                                <div class="footer-bottom-left">
-                                    <span>Designed with love ©<a href="#">Juwel Khan</a></span>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 d-flex align-items-center justify-content-lg-end justify-content-center">
-                                <div class="footer-bottom-right">
-                                    <ul class="d-flex">
-                                        <li><a href="#">Terms & Condition</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Legal</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+        <jsp:include page="../../common/user/footer.jsp"></jsp:include>
 
             <!--    FOOTER-SECTION END  -->
 
@@ -389,6 +306,7 @@
         <script src="${pageContext.request.contextPath}/js/leaflet.js"></script>
         <script src="${pageContext.request.contextPath}/js/script.js"></script>
         <script src="${pageContext.request.contextPath}/js/profile.js"></script>
+        <script src="${pageContext.request.contextPath}/js/shoppingcart.js"></script>
 
         <!-- JS-SCRIPT END  -->
 

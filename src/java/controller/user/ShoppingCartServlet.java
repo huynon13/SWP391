@@ -68,7 +68,6 @@ public class ShoppingCartServlet extends HttpServlet {
                     Cookie cartId = null;
                     for (Cookie c : cookies) {
                         if (c.getName().equalsIgnoreCase("cart" + account.getUserId())) {
-                            System.out.println("nghiem xuan loc");
                             cartId = c;
                             break;
                         }
@@ -131,6 +130,8 @@ public class ShoppingCartServlet extends HttpServlet {
                     response.addCookie(cartId);
 
                     // cap nhat lai cart trong session
+                    cart.setTotalPriceAfterDiscount();
+                    cart.setTotalPriceBeforeDiscount();
                     session.setAttribute("cart", cart);
                     request.setAttribute("addCartSucc", "Bạn đã thêm sản phẩm vào giỏ hàng thành công, chúc bạn có 1 ngày mua sắm vui vẻ!");
                     request.getRequestDispatcher("views/user/item-page/productdetail.jsp").forward(request, response);
