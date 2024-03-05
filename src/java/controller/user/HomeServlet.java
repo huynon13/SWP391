@@ -126,6 +126,30 @@ public class HomeServlet extends HttpServlet {
                 }
             }
         }
+        List<Product> wishList = new ArrayList<>();
+
+        // load wishlist theo user
+        if (account != null) {
+            if (cookies != null) {
+                Cookie wishListId = null;
+                for (Cookie c : cookies) {
+                    System.out.println(c.getName());
+                    if (c.getName().equalsIgnoreCase("wishList" + account.getUserId())) {
+                        wishListId = c;
+                        break;
+                    }
+                }
+                if (wishListId != null) {
+                    String[] wishListProductId = wishListId.getValue().split("&");
+                    for (String x : wishListProductId) {
+                        if (!x.equals("")) {
+                            Product p = pd.getProductById(Integer.parseInt(x));
+                            wishList.add(p);
+                        }
+                    }
+                }
+            }
+        }
 
         cartByUserId.setProduct(productInCart);
         cartByUserId.setSize(sizeProduct);
@@ -147,6 +171,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("listSize", listSize);
         session.setAttribute("listColor", listColor);
         session.setAttribute("cart", cartByUserId);
+        session.setAttribute("wishList", wishList);
 
         request.getRequestDispatcher("./views/user/home-page/homepage.jsp").forward(request, response);
     }

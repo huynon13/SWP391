@@ -174,7 +174,7 @@
                                             <a onclick="addToCart()" href="javascript:void(0)">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
                                         </li>
                                         <li class="btn_box heart-btn">
-                                            <a href="#"><i class="fa-solid fa-heart"></i></a>
+                                            <a href="${pageContext.request.contextPath}/wishlist?action=add&productid=${param.pid != null ? param.pid : param.productid}"><i class="fa-solid fa-heart"></i></a>
                                         </li>
                                         <li class="btn_box arrow-btn">
                                             <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
@@ -360,7 +360,7 @@
                                         <div class="p-option">
                                             <ul class="d-flex align-items-center justify-content-end">
                                                 <li class="anim-hidden"><a href="#"><i class="fa-regular fa-eye"></i></a></li>
-                                                <li class="anim-hidden"><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                                                <li class="anim-hidden"><a href="${pageContext.request.contextPath}/wishlist?action=add&productid=${product.productId}"><i class="fa-solid fa-heart"></i></a></li>
                                                 <li class="anim-hidden"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
                                             </ul>
                                         </div>
@@ -415,7 +415,7 @@
                                     <div class="p-option">
                                         <ul class="d-flex align-items-center justify-content-end">
                                             <li class="anim-hidden"><a href="#"><i class="fa-regular fa-eye"></i></a></li>
-                                            <li class="anim-hidden"><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                                            <li class="anim-hidden"><a href="${pageContext.request.contextPath}/wishlist?action=add&productid=${product.productId}"><i class="fa-solid fa-heart"></i></a></li>
                                             <li class="anim-hidden"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
                                         </ul>
                                     </div>

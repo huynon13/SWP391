@@ -38,7 +38,7 @@
                                 <div class="p-option">
                                     <ul class="d-flex align-items-center justify-content-end">
                                         <li class="anim-hidden"><a href="#"><i class="fa-regular fa-eye"></i></a></li>
-                                        <li class="anim-hidden"><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                                        <li class="anim-hidden"><a href="${pageContext.request.contextPath}/wishlist?action=add&productid=${p.productId}"><i class="fa-solid fa-heart"></i></a></li>
                                         <li class="anim-hidden"><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
                                     </ul>
                                 </div>

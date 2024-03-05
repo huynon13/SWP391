@@ -155,10 +155,11 @@
                             </div>
                         </c:if>
 
-                        <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
+                        <li><a href="${pageContext.request.contextPath}/views/user/item-page/wishlist.jsp"><i class="fa-solid fa-heart"></i></a></li>
+                        
                         <li class="product-cart">
 
-                            <a href="#" class="cart-icon" id="toggleButton"><i class="fa-solid fa-cart-shopping"></i><span class="cart-number">${sessionScope.cart.product.size()}</span></a>
+                            <a href="${pageContext.request.contextPath}/views/user/item-page/shoppingcart.jsp" class="cart-icon" id="toggleButton"><i class="fa-solid fa-cart-shopping"></i><span class="cart-number">${sessionScope.cart.product.size()}</span></a>
 
                             <div class="view-cart content" id="content">
 
