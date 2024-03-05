@@ -36,10 +36,25 @@ public class ColorDAO extends MyDAO {
         return list;
     }
 
+    public Color getColorById(int id) {
+        String sql = "select * from Colors\n"
+                + "where color_id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Color(rs.getInt("color_id"), rs.getString("color"));
+            }
+        } catch (SQLException e) {
+            System.err.println("loi get cart by id: " + e);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         ColorDAO cd = new ColorDAO();
-        for (Color x : cd.getColorAll()) {
-            System.out.println(x);
-        }
+        System.out.println(cd.getColorById(6));
     }
 }

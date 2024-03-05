@@ -23,6 +23,18 @@ import model.Order;
  */
 public class UserDAO extends MyDAO {
 
+    public void deleteUser(int userId) {
+        String sql = "delete from Users\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("loi delete user: " + e);
+        }
+    }
+
     public void insertUser(int roleId, String userName, String password, String fullName, String birthDay, String image, String phoneNumber, String address, String email, String createAt, int deleted) {
         String sql = "insert into Users(role_id, user_name, pass_word, full_name, birth_day, image, phone_number, address, email, created_at, deleted)\n"
                 + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), 0)";
@@ -71,7 +83,7 @@ public class UserDAO extends MyDAO {
             } else {
                 ps.setString(9, email);
             }
-            
+
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("loi insert user: " + e);

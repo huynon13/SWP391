@@ -304,7 +304,6 @@ public class ProductDAO extends MyDAO {
             ps.setInt(5, sid);
 
             ps.setInt(6, pid);
-            System.out.println(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt("quantity");

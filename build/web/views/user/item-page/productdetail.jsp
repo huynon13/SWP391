@@ -128,7 +128,7 @@
 
                                         <li><a href="#">${sessionScope.listComment.size()} Review</a></li>
                                     </ul>
-                                    <div class="product-available"><span> Available : </span> <span>
+                                    <div class="product-available" id="product-available"><span> Available : </span> <span>
                                             ${requestScope.quantityStockByColorAndSize != null ? requestScope.quantityStockByColorAndSize : sessionScope.product.quantityStock}
                                         </span></div>
                                     <div class="product-available"><span> Sold : </span> <span>
@@ -136,7 +136,7 @@
                                         </span></div>
                                 </div>
 
-                                <form id="f" action="productdetail" method="post">
+                                <form id="f" action="${pageContext.request.contextPath}/productdetail" method="post">
 
                                     <ul class="product-size d-flex align-items-center">
                                         <li><span>Color</span></li>
@@ -155,33 +155,40 @@
                                     </ul>
 
                                 </form>
+                                <span style="font-size: 16px;color: red">${requestScope.errorAddToCart}</span>
+                                <span style="font-size: 16px;color: green">${requestScope.addCartSucc}</span>
+                                <form action="${pageContext.request.contextPath}/shoppingcart" method="get" id="formAddToCart">
+                                    <input type="hidden" name="pid" value="${param.productid}"/>
+                                    <input type="hidden" name="cid" value="${param.colorid}"/>
+                                    <input type="hidden" name="sid" value="${param.sizeid}"/>
 
-                                <ul class="product-add-cart d-flex align-items-center">
-                                    <li>
-                                        <div class="pro-counter d-flex align-items-center justify-content-between">
-                                            <button data-decrease class="counter-button">-</button>
-                                            <input  data-value type="text" class="counter-input" id="quantity" value="0" min="0" readonly>
-                                            <button data-increase class="counter-button">+</button>
-                                        </div>
-                                    </li>
-                                    <li class="btn_box add-cart-btn">
-                                        <a href="#">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
-                                    </li>
-                                    <li class="btn_box heart-btn">
-                                        <a href="#"><i class="fa-solid fa-heart"></i></a>
-                                    </li>
-                                    <li class="btn_box arrow-btn">
-                                        <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
-                                    </li>
-                                </ul>
+                                    <ul class="product-add-cart d-flex align-items-center">
+                                        <li>
+                                            <div class="pro-counter d-flex align-items-center justify-content-between">
+                                                <button type="button" onclick="selectQuantityTru()">-</button>
+                                                <input name="quantity"  data-value type="number" id="quantity" value="${param.quantity != null ? param.quantity : 0}" min="${0}" readonly>
+                                                <button type="button" onclick="selectQuantityCong()">+</button>
+                                            </div>
+                                        </li>
+                                        <li class="btn_box add-cart-btn">
+                                            <a onclick="addToCart()" href="javascript:void(0)">Add to Cart <i class="fa-solid fa-cart-shopping"></i></a>
+                                        </li>
+                                        <li class="btn_box heart-btn">
+                                            <a href="#"><i class="fa-solid fa-heart"></i></a>
+                                        </li>
+                                        <li class="btn_box arrow-btn">
+                                            <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                                        </li>
+                                    </ul>
 
-                                <ul class="product-social d-flex align-items-center">
-                                    <li><h6>Share</h6></li>
-                                    <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
-                                    <li><a href="https://www.google.com/"><i class="fa-brands fa-google-plus-g"></i></a></li>
-                                    <li><a href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
+                                    <ul class="product-social d-flex align-items-center">
+                                        <li><h6>Share</h6></li>
+                                        <li><a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                        <li><a href="https://twitter.com/"><i class="fa-brands fa-twitter"></i></a></li>
+                                        <li><a href="https://www.google.com/"><i class="fa-brands fa-google-plus-g"></i></a></li>
+                                        <li><a href="https://linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                    </ul>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -466,6 +473,7 @@
         <script src="${pageContext.request.contextPath}/js/leaflet.js"></script>
         <script src="${pageContext.request.contextPath}/js/script.js"></script>
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/addtocart.js"></script>
         <script src="${pageContext.request.contextPath}/js/profile.js"></script>
         <!-- JS-SCRIPT END  -->
 

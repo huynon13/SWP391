@@ -151,43 +151,29 @@
                         <li><a href="#"><i class="fa-solid fa-heart"></i></a></li>
                         <li class="product-cart">
 
-                            <a href="#" class="cart-icon" id="toggleButton"><i class="fa-solid fa-cart-shopping"></i><span class="cart-number">0</span></a>
+                            <a href="#" class="cart-icon" id="toggleButton"><i class="fa-solid fa-cart-shopping"></i><span class="cart-number">${sessionScope.cart.product.size()}</span></a>
+
                             <div class="view-cart content" id="content">
+
                                 <div class="cart-title d-flex align-items-center justify-content-between">
-                                    <span class="product-item">1 ITEM</span>
-                                    <a href="shopping-cart.html">View cart</a>
+                                    <span class="product-item">${sessionScope.cart.product.size()} ITEM</span>
+                                    <a href="${pageContext.request.contextPath}/views/user/item-page/shoppingcart.jsp">View cart</a>
                                 </div>
-                                <div class="product-item d-flex justify-content-between">
-                                    <div class="product-inner">
-                                        <a href="#" class="d-block">Brown Bag</a>
-                                        <span>1*199.00</span>
-                                    </div>
-                                    <div class="product-img">
-                                        <img src="${pageContext.request.contextPath}/images/header/cart/shape-1.png" alt="header">
-                                        <a href="#">
-                                            <span><i class="fa-solid fa-x"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-item d-flex justify-content-between">
-                                    <div class="product-inner">
-                                        <a href="#" class="d-block">Brown Bag</a>
-                                        <span>1*199.00</span>
-                                    </div>
-                                    <div class="product-img">
-                                        <img src="${pageContext.request.contextPath}/images/header/cart/shape-2.png" alt="header">
-                                        <a href="#">
-                                            <span><i class="fa-solid fa-x"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
+
+                                <!--hien thi san pham--> 
+
+
+
                                 <div class="sub-total d-flex align-items-center justify-content-between">
                                     <span>Subtotal:</span>
-                                    <span>$199.00</span>
+                                    <span>${sessionScope.cart.totalPriceAfterDiscount}&nbsp;VNĐ</span>
                                 </div>
+
                                 <div class="popup-btn">
                                     <a href="#" class="popup-link">Checkout</a>
                                 </div>
+
+
                             </div>
                         </li>
                     </ul>

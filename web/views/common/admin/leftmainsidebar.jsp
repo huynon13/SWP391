@@ -24,7 +24,7 @@
                 
                 <!-- Dashboard -->
                 <li class="active">
-                    <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/dashboard/dashboard.jsp">
+                    <a class="sidenav-item-link" href="${pageContext.request.contextPath}/dashboard">
                         <i class="mdi mdi-view-dashboard-outline"></i>
                         <span class="nav-text">Dashboard</span>
                     </a>

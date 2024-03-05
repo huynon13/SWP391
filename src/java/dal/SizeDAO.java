@@ -23,7 +23,7 @@ public class SizeDAO extends MyDAO {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Size size = new Size(rs.getInt("size_id"), rs.getString("size_option"));
                 list.add(size);
             }
@@ -34,10 +34,25 @@ public class SizeDAO extends MyDAO {
         }
         return list;
     }
+
+    public Size getSizeById(int id) {
+        String sql = "select * from Size\n"
+                + "where size_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Size(rs.getInt("size_id"), rs.getString("size_option"));
+            }
+        } catch (SQLException e) {
+            System.err.println("loi get cart by id: " + e);
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         SizeDAO sd = new SizeDAO();
-        for(Size x : sd.getSizeAll()){
-            System.out.println(x);
-        }
+        System.out.println(sd.getSizeById(1));
     }
 }
