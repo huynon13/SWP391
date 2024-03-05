@@ -128,11 +128,11 @@
                                 %>
                                 <tr class="wishlist-tr">
                                     <td class="d-lg-flex d-lg-block align-items-center">
-                                        <a href="single-product.html">
+                                        <a href="<%= request.getContextPath() %>/productdetail?pid=<%= listProduct.get(i).getProductId() %>">
                                             <img style="border-radius: 5%" width="84px" height="96px" src="${pageContext.request.contextPath}/<%= listProduct.get(i).getThumbnails().get(0)%>" alt="shopping">
                                         </a>
                                         <h2>
-                                            <a href="single-product.html"><%= listProduct.get(i).getProductName()%></a>
+                                            <a href="<%= request.getContextPath() %>/productdetail?pid=<%= listProduct.get(i).getProductId() %>"><%= listProduct.get(i).getProductName()%></a>
 
 
                                         </h2>
@@ -201,57 +201,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-md-6 col-sm-12 col-12">
-                        <div class="calculate-item">
-                            <h5>Calculate Shipping</h5>
-                            <div class="select-item d-flex align-items-center">
-                                <h6>Country:</h6>
-                                <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                    <select class="select-option">
-                                        <option value="">Select your country </option>
-                                        <option value="USA">United States</option>
-                                        <option value="UK">United Kingdom</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Australia">Australia</option>
-                                    </select>
-                                    <span><i class="fa-solid fa-angle-down"></i></span>
-                                </div>
-                            </div>
-                            <div class="select-item d-flex align-items-center">
-                                <h6>State:</h6>
-                                <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                    <select class="select-option">
-                                        <option value="">Select your State</option>
-                                        <option value="USA">United States</option>
-                                        <option value="UK">United Kingdom</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Australia">Australia</option>
-                                    </select>
-                                    <span><i class="fa-solid fa-angle-down"></i></span>
-                                </div>
-                            </div>
-                            <div class="select-item d-flex align-items-center">
-                                <h6>Zip Code:</h6>
-                                <div class="select-wrapper d-flex align-items-center justify-content-between">
-                                    <select class="select-option">
-                                        <option value="">Write your zip code</option>
-                                        <option value="USA">United States</option>
-                                        <option value="UK">United Kingdom</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Australia">Australia</option>
-                                    </select>
-                                    <span><i class="fa-solid fa-angle-down"></i></span>
-                                </div>
-                            </div>
-                            <button class="view-all-two shoping-btn-2">Get A Quote</button>
-                        </div>
                     </div>
                     <div class="col-xl-4 col-md-6 col-sm-12 col-12">
                         <div class="calculate-item coupon-code-items">
-                            <h5>Have A Coupon Code ?</h5>
-                            <form>
-                                <input type="text" id="name" name="name" placeholder="Write your Coupon Code">
-                            </form>
-                            <button class="view-all-two shoping-btn-2">Apply Code</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-md-6 col-sm-12 col-12">
@@ -259,11 +211,11 @@
                             <div class="select-item">
                                 <div class="chectout-cart">
                                     <ul class="sub-total">
-                                        <li class="d-flex align-items-center justify-content-between"><h6>Sub Total</h6> <span>$183.00</span></li>
-                                        <li class="d-flex align-items-center justify-content-between"><h6>Shipping </h6> <span>$10.00</span></li>
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Sub Total</h6> <span>${sessionScope.cart.totalPriceBeforeDiscount}&nbsp;VNĐ</span></li>
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Discount </h6> <span>${sessionScope.cart.totalPriceBeforeDiscount - sessionScope.cart.totalPriceAfterDiscount}&nbsp;VNĐ</span></li>
                                     </ul>
                                     <ul class="grand-total">
-                                        <li class="d-flex align-items-center justify-content-between"><h6>Grand Total</h6><span>$193.00</span></li>
+                                        <li class="d-flex align-items-center justify-content-between"><h6>Grand Total</h6><span>${sessionScope.cart.totalPriceAfterDiscount}&nbsp;VNĐ</span></li>
                                     </ul>
                                     <div class="checkout-text">
                                         <div class="btn_box checkout-btn">

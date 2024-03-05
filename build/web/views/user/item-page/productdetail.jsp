@@ -193,6 +193,7 @@
                         </div>
                     </div>
                 </div>
+                                                
                 <div class="product-tabs">
                     <div class="menu-fulter">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">

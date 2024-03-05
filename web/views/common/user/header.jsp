@@ -4,6 +4,13 @@
     Author     : PC
 --%>
 
+<%@page import="model.Cart"%>
+<%@page import="model.Product"%>
+<%@page import="model.Color"%>
+<%@page import="model.Size"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Collections"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -161,8 +168,44 @@
                                 </div>
 
                                 <!--hien thi san pham--> 
+                                <!--top 3 san pham duoc them vao sau cung-->
 
 
+                                <%
+                                    Cart cart = (Cart) session.getAttribute("cart");
+                                    List<Product> listProduct = new ArrayList<>();
+                                    List<Size> listSize = new ArrayList<>();
+                                    List<Color> listColor = new ArrayList<>();
+                                    List<Integer> listQuantity = new ArrayList<>();
+                                    if (cart != null) {
+                                        for (int i = cart.getProduct().size() - 1; i >= 0; i--) {
+                                            listProduct.add(cart.getProduct().get(i));
+                                            listSize.add(cart.getSize().get(i));
+                                            listColor.add(cart.getColor().get(i));
+                                            listQuantity.add(cart.getSoLuong().get(i));
+                                        }
+                                    }
+                                    int cnt = 0;
+                                    if (listProduct.size() != 0) {
+                                        for (int i = 0; i < listProduct.size() && i < 3; i++) {
+                                %>
+                                <div class="product-item d-flex justify-content-between">
+                                    <div class="product-inner">
+                                        <a href="#" class="d-block"><%= listProduct.get(i).getProductName() %></a>
+                                        <span><%= listQuantity.get(i) %> * <%= listProduct.get(i).getPrice() %></span>
+                                    </div>
+                                    <div class="product-img">
+                                        <img src="${pageContext.request.contextPath}/<%= listProduct.get(i).getThumbnails().get(0) %>" alt="header">
+                                        <a href="#">
+                                            <span><i class="fa-solid fa-x"></i></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <%
+                                        }
+                                    }
+                                %>
 
                                 <div class="sub-total d-flex align-items-center justify-content-between">
                                     <span>Subtotal:</span>
