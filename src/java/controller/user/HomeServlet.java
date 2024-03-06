@@ -143,7 +143,6 @@ public class HomeServlet extends HttpServlet {
             if (cookies != null) {
                 Cookie wishListId = null;
                 for (Cookie c : cookies) {
-                    System.out.println(c.getName());
                     if (c.getName().equalsIgnoreCase("wishList" + account.getUserId())) {
                         wishListId = c;
                         break;

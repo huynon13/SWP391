@@ -335,18 +335,16 @@
                                             <div class="tab-pane fade" id="settings" role="tabpanel"
                                                  aria-labelledby="settings-tab">
                                                 <div class="tab-pane-content mt-5">
-                                                    <form>
+                                                    <form action="${pageContext.request.contextPath}/updateuser" method="post">
                                                         <div class="form-group row mb-6">
                                                             <label for="coverImage"
                                                                    class="col-sm-4 col-lg-2 col-form-label">User Image</label>
                                                             <div class="col-sm-8 col-lg-10">
                                                                 <div class="custom-file mb-1">
-                                                                    <input type="file" class="custom-file-input"
-                                                                           id="coverImage" required>
+                                                                    <input name="image" type="file" class="custom-file-input"
+                                                                           id="coverImage" value="${param.image}">
                                                                     <label class="custom-file-label" for="coverImage">Choose
                                                                         file...</label>
-                                                                    <div class="invalid-feedback">Example invalid custom
-                                                                        file feedback</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -354,54 +352,66 @@
                                                         <div class="row mb-2">
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
-                                                                    <label for="firstName">First name</label>
-                                                                    <input type="text" class="form-control" id="firstName"
-                                                                           value="First name">
+                                                                    <label for="firstName">Full Name</label>
+                                                                    <input type="text" name="fullName" class="form-control" id="firstName"
+                                                                           value="${param.fullName != null ? param.fullName : sessionScope.account.fullName}">
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-lg-6">
-                                                                <div class="form-group">
-                                                                    <label for="lastName">Last name</label>
-                                                                    <input type="text" class="form-control" id="lastName"
-                                                                           value="Last name">
-                                                                </div>
-                                                            </div>
                                                         </div>
+
 
                                                         <div class="form-group mb-4">
                                                             <label for="userName">User name</label>
                                                             <input type="text" class="form-control" id="userName"
-                                                                   value="User name">
-                                                            <span class="d-block mt-1">Accusamus nobis at omnis consequuntur
-                                                                culpa tempore saepe animi.</span>
+                                                                   value="${sessionScope.account.userName}" readonly>
+                                                        </div>
+                                                        <span style="color: red">${requestScope.errorPassword}</span>
+                                                        <div class="form-group mb-4">
+                                                            <label for="oldPassword">Old password</label>
+                                                            <input value="${param.oldPassword}" name="oldPassword" type="password" class="form-control" id="oldPassword">
+                                                        </div>
+                                                        <span style="color: red">${requestScope.errorOldPass}</span>
+
+
+                                                        <div class="form-group mb-4">
+                                                            <label for="newPassword">New password</label>
+                                                            <input value="${param.newPassword}" type="password" name="newPassword" class="form-control" id="newPassword">
+                                                        </div>
+                                                        <span style="color: red">${requestScope.errorNewPass}</span>
+
+                                                        <div class="form-group mb-4">
+                                                            <label for="conPassword">Confirm password</label>
+                                                            <input value="${param.confirmPassword}" onchange="xacNhanPassword()" type="password" name="confirmPassword" class="form-control" id="conPassword">
                                                         </div>
 
                                                         <div class="form-group mb-4">
                                                             <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email"
-                                                                   value="ekka.example@gmail.com">
+                                                            <input type="email" class="form-control" id="email" name="email"
+                                                                   value="${param.email != null ? param.email : sessionScope.account.email}">
                                                         </div>
 
                                                         <div class="form-group mb-4">
-                                                            <label for="oldPassword">Old password</label>
-                                                            <input type="password" class="form-control" id="oldPassword">
+                                                            <label for="birthday">BirthDay</label>
+                                                            <input type="date" class="form-control" id="birthday" name="birthDay"
+                                                                   value="${param.birthDay != null ? param.birthDay : sessionScope.account.birthDay}">
+                                                        </div>
+
+
+                                                        <div class="form-group mb-4">
+                                                            <label for="address">Address</label>
+                                                            <input type="text" class="form-control" id="address" name="address"
+                                                                   value="${param.address != null ? param.address : sessionScope.account.address}">
                                                         </div>
 
                                                         <div class="form-group mb-4">
-                                                            <label for="newPassword">New password</label>
-                                                            <input type="password" class="form-control" id="newPassword">
+                                                            <label for="phoneNumber">Phone Number</label>
+                                                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                                                                   value="${param.phoneNumber != null ? param.phoneNumber : sessionScope.account.phoneNumber}">
                                                         </div>
-
-                                                        <div class="form-group mb-4">
-                                                            <label for="conPassword">Confirm password</label>
-                                                            <input type="password" class="form-control" id="conPassword">
-                                                        </div>
-
                                                         <div class="d-flex justify-content-end mt-5">
                                                             <button type="submit"
-                                                                    class="btn btn-primary mb-2 btn-pill">Update
-                                                                Profile</button>
+                                                                    class="btn btn-primary mb-2 btn-pill">Update Profile</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -437,7 +447,7 @@
         <script src="${pageContext.request.contextPath}/js/simplebar.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/changepassword.js"></script>
         <!-- Option Switcher -->
         <script src="assets/plugins/options-sidebar/optionswitcher.js"></script>
 

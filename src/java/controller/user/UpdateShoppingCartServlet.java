@@ -72,7 +72,6 @@ public class UpdateShoppingCartServlet extends HttpServlet {
                 } else {
                     quantity -= 1;
                     if (quantity == 0) {
-                        System.out.println("delete product");
                         updateProductInCart(productId, sizeId, colorId, quantity, "delete", request, response);
                     } else {
                         updateProductInCart(productId, sizeId, colorId, quantity, "giam", request, response);

@@ -90,6 +90,39 @@ public class UserDAO extends MyDAO {
         }
     }
 
+    public void updateUser(String password, String fullName, String birthDay, String image, String phoneNumber, String address, String email, int userId) {
+        String sql = "update Users\n"
+                + "set\n"
+                + "pass_word = ?,\n"
+                + "full_name = ?,\n"
+                + "birth_day = ?,\n"
+                + "image = ?,\n"
+                + "phone_number = ?,\n"
+                + "address = ?,\n"
+                + "email = ?,\n"
+                + "updated_at = GETDATE()\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, fullName);
+            if (birthDay.equals("")) {
+                ps.setDate(3, null);
+            } else {
+                java.sql.Date date = java.sql.Date.valueOf(birthDay);
+                ps.setDate(3, date);
+            }
+            ps.setString(4, image);
+            ps.setString(5, phoneNumber);
+            ps.setString(6, address);
+            ps.setString(7, email);
+            ps.setInt(8, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update user: " + e);
+        }
+    }
+
     public List<User> getUserAll() {
         List<User> list = new ArrayList<>();
         String sql = "select * from Users as u\n"
@@ -119,7 +152,7 @@ public class UserDAO extends MyDAO {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int userId = rs.getInt("user_id");
                 int totalBuy = rs.getInt("total_buy");
                 User user = getUserById(userId);
