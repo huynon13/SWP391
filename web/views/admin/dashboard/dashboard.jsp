@@ -158,13 +158,13 @@
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 
-        <!-- Chart -->
-<!--        <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/chart.js"></script>-->
+         <!--Chart--> 
+        <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/chart.js"></script>
 
-        <!-- Google map chart -->
-<!--        <script src="${pageContext.request.contextPath}/js/google-map-loader.js"></script>
-        <script src="${pageContext.request.contextPath}/js/google-map.js"></script>-->
+         <!--Google map chart--> 
+        <script src="${pageContext.request.contextPath}/js/google-map-loader.js"></script>
+        <script src="${pageContext.request.contextPath}/js/google-map.js"></script>
 
         <!-- Date Range Picker -->
         <script src="${pageContext.request.contextPath}/js/moment.min.js"></script>

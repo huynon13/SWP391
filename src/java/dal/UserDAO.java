@@ -109,6 +109,7 @@ public class UserDAO extends MyDAO {
 
         return list;
     }
+    
 
     public User getUserById(int id) {
         String sql = "select * from Users\n"
