@@ -104,18 +104,46 @@ public class UserDAO extends MyDAO {
                 + "where user_id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+
             ps.setString(1, password);
-            ps.setString(2, fullName);
+
+            if (fullName.equals("")) {
+                ps.setString(2, null);
+            } else {
+                ps.setString(2, fullName);
+            }
+
             if (birthDay.equals("")) {
                 ps.setDate(3, null);
             } else {
                 java.sql.Date date = java.sql.Date.valueOf(birthDay);
                 ps.setDate(3, date);
             }
-            ps.setString(4, image);
-            ps.setString(5, phoneNumber);
-            ps.setString(6, address);
-            ps.setString(7, email);
+
+            if (image.equals("")) {
+                ps.setString(4, null);
+            } else {
+                ps.setString(4, image);
+            }
+
+            if (phoneNumber.equals("")) {
+                ps.setString(5, null);
+            } else {
+                ps.setString(5, phoneNumber);
+            }
+
+            if (address.equals("")) {
+                ps.setString(6, null);
+            } else {
+                ps.setString(6, address);
+            }
+
+            if (email.equals("")) {
+                ps.setString(7, null);
+            } else {
+                ps.setString(7, email);
+            }
+
             ps.setInt(8, userId);
             ps.executeUpdate();
         } catch (SQLException e) {

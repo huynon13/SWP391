@@ -160,21 +160,23 @@
 
                                 <div class="col-lg-8 col-xl-9">
                                     <div class="profile-content-right profile-right-spacing py-5">
-                                        <ul class="nav nav-tabs px-3 px-xl-5 nav-style-border" id="myProfileTab" role="tablist">
+                                        <ul style="margin-bottom: 15px;" class="nav nav-tabs px-3 px-xl-5 nav-style-border" id="myProfileTab" role="tablist">
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
-                                                        data-bs-target="#profile" type="button" role="tab"
-                                                        aria-controls="profile" aria-selected="true">Profile</button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="settings-tab" data-bs-toggle="tab"
+                                                <button class="nav-link active" id="settings-tab" data-bs-toggle="tab"
                                                         data-bs-target="#settings" type="button" role="tab"
                                                         aria-controls="settings" aria-selected="false">Settings</button>
                                             </li>
+
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#profile" type="button" role="tab"
+                                                        aria-controls="profile" aria-selected="true">Profile</button>
+                                            </li>
+
                                         </ul>
                                         <div class="tab-content px-3 px-xl-5" id="myTabContent">
-
-                                            <div class="tab-pane fade show active" id="profile" role="tabpanel"
+                                            <span style="color: green">${requestScope.updateSucc}</span>
+                                            <div class="tab-pane fade show" id="profile" role="tabpanel"
                                                  aria-labelledby="profile-tab">
                                                 <div class="tab-widget mt-5">
                                                     <div class="row">
@@ -332,7 +334,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane fade" id="settings" role="tabpanel"
+                                            <div class="tab-pane fade show active" id="settings" role="tabpanel"
                                                  aria-labelledby="settings-tab">
                                                 <div class="tab-pane-content mt-5">
                                                     <form action="${pageContext.request.contextPath}/updateuser" method="post">

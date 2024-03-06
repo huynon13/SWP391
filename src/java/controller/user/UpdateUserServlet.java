@@ -94,6 +94,7 @@ public class UpdateUserServlet extends HttpServlet {
         ud.updateUser(newPassword, fullName, birthDay_raw, image, phoneNumber, address, email, user.getUserId());
         user = ud.getUserById(user.getUserId());
         session.setAttribute("account", user);
+        request.setAttribute("updateSucc", "Updated profile successfully");
         request.getRequestDispatcher("views/user/item-page/userprofile.jsp").forward(request, response);
     }
 
