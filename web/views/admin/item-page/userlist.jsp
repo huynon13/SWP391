@@ -360,27 +360,14 @@
                 <!-- End Content Wrapper -->
 
                 <!-- Footer -->
-                <footer class="footer mt-auto">
-                    <div class="copyright bg-white">
-                        <p>
-                            Copyright &copy; <span id="ec-year"></span
-                            ><a
-                                class="text-primary"
-                                href="https://themeforest.net/user/ashishmaraviya"
-                                target="_blank"
-                                >
-                                Ekka Admin Dashboard</a
-                            >. All Rights Reserved.
-                        </p>
-                    </div>
-                </footer>
+                <jsp:include page="../../common/admin/footer.jsp"></jsp:include>
+                </div>
+                <!-- End Page Wrapper -->
             </div>
-            <!-- End Page Wrapper -->
-        </div>
-        <!-- End Wrapper -->
+            <!-- End Wrapper -->
 
-        <!-- Common Javascript -->
-        <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+            <!-- Common Javascript -->
+            <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/simplebar.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>

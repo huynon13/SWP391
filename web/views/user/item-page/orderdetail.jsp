@@ -82,8 +82,13 @@
                     <div class="content">
                         <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
                             <h1>Order Detail</h1>
-                            <p class="breadcrumbs"><span><a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">User Profile</a></span>
-                                <span><i class="mdi mdi-chevron-right"></i></span>Order Detail
+                            <p class="breadcrumbs">
+                                <c:if test="${sessionScope.account.role.name == 'Admin'}">
+                                    <span><span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
+                                        <span><i class="mdi mdi-chevron-right"></i></span>
+                                        </c:if>
+                                    <span><a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">User Profile</a></span>
+                                    <span><i class="mdi mdi-chevron-right"></i></span>Order Detail
                             </p>
                         </div>
                         <div class="row">

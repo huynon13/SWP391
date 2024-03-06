@@ -89,13 +89,8 @@
                             data-parent="#sidebar-menu"
                             >
                             <li class="">
-                                <a class="sidenav-item-link" href="main-category.html">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/maincategory.jsp">
                                     <span class="nav-text">Main Category</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="sub-category.html">
-                                    <span class="nav-text">Sub Category</span>
                                 </a>
                             </li>
                         </ul>

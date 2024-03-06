@@ -53,7 +53,7 @@
                                 <span class="badge badge-danger">Cancelled</span>
                             </c:if>
                         </td>
-                        
+
                         <td class="text-right">
                             <div
                                 class="dropdown show d-inline-block widget-dropdown"
@@ -70,10 +70,14 @@
                                     ></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-item">
-                                        <a href="#">View</a>
+                                        <a href="${pageContext.request.contextPath}/views/user/item-page/orderdetail.jsp?orderid=${order.key.orderId}">View</a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a href="#">Remove</a>
+                                        <c:if test="${order.key.status == 0}">
+                                        <li class="dropdown-item">
+                                            <a href="#">cancel order</a>
+                                        </li>
+                                    </c:if>
                                     </li>
                                 </ul>
                             </div>

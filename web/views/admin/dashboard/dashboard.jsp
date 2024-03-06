@@ -131,20 +131,7 @@
                     <!-- End Content Wrapper -->
 
                     <!-- Footer -->
-                    <footer class="footer mt-auto">
-                        <div class="copyright bg-white">
-                            <p>
-                                Copyright &copy; <span id="ec-year"></span
-                                ><a
-                                    class="text-primary"
-                                    href="https://themeforest.net/user/ashishmaraviya"
-                                    target="_blank"
-                                    >
-                                    Ekka Admin Dashboard</a
-                                >. All Rights Reserved.
-                            </p>
-                        </div>
-                    </footer>
+                <jsp:include page="../../common/admin/footer.jsp"></jsp:include>
                 </div>
                 <!-- End Page Wrapper -->
             </div>
@@ -158,11 +145,11 @@
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
 
-         <!--Chart--> 
+        <!--Chart--> 
         <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/chart.js"></script>
 
-         <!--Google map chart--> 
+        <!--Google map chart--> 
         <script src="${pageContext.request.contextPath}/js/google-map-loader.js"></script>
         <script src="${pageContext.request.contextPath}/js/google-map.js"></script>
 

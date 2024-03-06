@@ -21,8 +21,7 @@ import java.sql.ResultSet;
  * @author PC
  */
 public class CategoryDAO extends MyDAO {
-    
-    
+
     public Category getCategoryById(int id) {
         String sql = "select * from Category\n"
                 + "where category_id = ?";
@@ -42,11 +41,11 @@ public class CategoryDAO extends MyDAO {
         }
         return null;
     }
-    
+
     public List<Category> getCategoryAll() {
         List<Category> list = new ArrayList<>();
         sql = "select * from Category";
-        
+
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -61,7 +60,7 @@ public class CategoryDAO extends MyDAO {
         }
         return list;
     }
-    
+
     public Map<Category, List<Product>> getTop5ProductByCategory() {
         Map<Category, List<Product>> map = new LinkedHashMap<>();
         List<Category> listCategory = getCategoryAll();
@@ -95,16 +94,16 @@ public class CategoryDAO extends MyDAO {
                 System.err.println("Loi get top 5 product by category All");
             }
         }
-        
+
         return map;
     }
-    
+
     public Map<Category, Integer> getNumberOfProductbyCategory() {
         Map<Category, Integer> map = new LinkedHashMap<>();
         sql = "select c.category_id, c.category_name, c.Desciption , COUNT(p.product_id) as NumberOfProduct from Category as c\n"
                 + "inner join Product as p on c.category_id = p.category_id\n"
                 + "group by c.category_id, c.category_name, c.Desciption";
-        
+
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -121,11 +120,59 @@ public class CategoryDAO extends MyDAO {
         }
         return map;
     }
-    
+
+    public Map<Category, List<Integer>> getNumberOfProductAndNumberOfProductSoldByCategory() {
+        Map<Category, List<Integer>> map = new LinkedHashMap<>();
+        String sql = "with tbl1 as\n"
+                + "(\n"
+                + "select c.category_id, c.category_name, COUNT(distinct p.product_id) as total_product from Category as c\n"
+                + "left join Product as p on c.category_id = p.category_id\n"
+                + "group by c.category_id, c.category_name\n"
+                + "), tbl2 as\n"
+                + "(\n"
+                + "select c.category_id, c.category_name, COUNT(p.product_id) as total_product_sold from Orders as o\n"
+                + "inner join Order_Details as od on o.Order_id = od.order_id\n"
+                + "inner join Product as p on od.product_id = p.product_id\n"
+                + "inner join Category as c on p.category_id = c.category_id\n"
+                + "where o.status = 1\n"
+                + "group by c.category_id, c.category_name\n"
+                + ")\n"
+                + "\n"
+                + "select t1.category_id, t1.total_product,\n"
+                + "case when t2.total_product_sold is null then 0\n"
+                + "else t2.total_product_sold\n"
+                + "end\n"
+                + "as total_product_sold\n"
+                + "from tbl1 as t1\n"
+                + "left join tbl2 as t2 on t1.category_id = t2.category_id";
+
+        try {
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int categoryId = rs.getInt("category_id");
+                Category cate = getCategoryById(categoryId);
+                int numberOfProduct = rs.getInt("total_product");
+                int numberOfProductSold = rs.getInt("total_product_sold");
+                List<Integer> list = new ArrayList<>();
+                list.add(numberOfProduct);
+                list.add(numberOfProductSold);
+                map.put(cate, list);
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get total product and product sold by category");
+        }
+        return map;
+    }
+
     public static void main(String[] args) {
         CategoryDAO cd = new CategoryDAO();
-        for(Map.Entry<Category, List<Product>> x : cd.getTop5ProductByCategory().entrySet()){
-            System.out.println(x);
+        for (Map.Entry<Category, List<Integer>> x : cd.getNumberOfProductAndNumberOfProductSoldByCategory().entrySet()) {
+            System.out.println(x.getKey());
+            for(int y : x.getValue()){
+                System.out.println(y);
+            }
         }
     }
 }

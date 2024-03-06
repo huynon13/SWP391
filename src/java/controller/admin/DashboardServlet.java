@@ -56,6 +56,11 @@ public class DashboardServlet extends HttpServlet {
         List<Category> getCategoryAll = cd.getCategoryAll();
         Map<Category, Integer> getTotalProductSoldByCategory = pd.getTotalProductSoldByAllCategory();
         Map<User, Integer> getTotalBuyByUser = ud.getUserAllAndTotalBuy();
+        Map<Category, Integer> getTotalProductByCategory = cd.getNumberOfProductbyCategory();
+        
+        // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
+        Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
+        
         
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
@@ -105,6 +110,8 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("totalProductSoldByCategory", getTotalProductSoldByCategory);
         session.setAttribute("totalUserActivity", totalUserActivity);
         session.setAttribute("totalBuyByUser", getTotalBuyByUser);
+        session.setAttribute("totalProductByCategory", getTotalProductByCategory);
+        session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
         
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
