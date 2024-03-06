@@ -299,7 +299,7 @@
                                                                                             <ul class="dropdown-menu dropdown-menu-right"
                                                                                                 aria-labelledby="dropdown-recent-order1">
                                                                                                 <li class="dropdown-item">
-                                                                                                    <a href="#">View</a>
+                                                                                                    <a href="${pageContext.request.contextPath}/views/user/item-page/orderdetail.jsp?orderid=${i.key.orderId}">View</a>
                                                                                                 </li>
 
                                                                                                 <li class="dropdown-item">
