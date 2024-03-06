@@ -83,11 +83,11 @@
                                 <c:forEach items="${sessionScope.wishList}" var="product">
                                     <tr class="wishlist-tr">
                                         <td class="d-lg-flex d-lg-block align-items-center">
-                                            <a href="single-product.html">
+                                            <a href="${pageContext.request.contextPath}/productdetail?pid=${product.productId}">
                                                 <img width="84px" height="96px" style="border-radius: 5px" src="${pageContext.request.contextPath}/${product.thumbnails.get(0)}" alt="wishlist" />
                                             </a>
                                             <h2>
-                                                <a href="single-product.html">${product.productName}</a>
+                                                <a href="${pageContext.request.contextPath}/productdetail?pid=${product.productId}">${product.productName}</a>
                                             </h2>
                                         </td>
                                         <td><span>${product.price}&nbsp;VNĐ</span></td>

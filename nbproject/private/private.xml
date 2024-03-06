@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Assginment_PRJ301">
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/ShoppingCartServlet.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Cart.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/ProductDetailServlet.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/WishListServlet.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/item-page/shoppingcart.jsp</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/HomeServlet.java</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Product.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/item-page/wishlist.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/top10products.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/home-page/homepage.jsp</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/item-page/productdetail.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/header.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Size.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Category.java</file>
         </group>
     </open-files>
 </project-private>
