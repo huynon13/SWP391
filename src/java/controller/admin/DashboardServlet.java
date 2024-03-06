@@ -55,6 +55,8 @@ public class DashboardServlet extends HttpServlet {
         List<Supperlier> getSupperlierAll = sd.getSupperlierAll();
         List<Category> getCategoryAll = cd.getCategoryAll();
         Map<Category, Integer> getTotalProductSoldByCategory = pd.getTotalProductSoldByAllCategory();
+        Map<User, Integer> getTotalBuyByUser = ud.getUserAllAndTotalBuy();
+        
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
         int totalUser = 0;
@@ -102,6 +104,7 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("categoryAll", getCategoryAll);
         session.setAttribute("totalProductSoldByCategory", getTotalProductSoldByCategory);
         session.setAttribute("totalUserActivity", totalUserActivity);
+        session.setAttribute("totalBuyByUser", getTotalBuyByUser);
         
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }

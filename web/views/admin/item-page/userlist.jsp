@@ -110,21 +110,21 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <c:forEach items="${sessionScope.userAll}" var="user">
+                                                    <c:forEach items="${sessionScope.totalBuyByUser}" var="user">
                                                         <tr>
                                                             <td>
                                                                 <img
                                                                     class="vendor-thumb"
-                                                                    src="${pageContext.request.contextPath}/${user.image}"
+                                                                    src="${pageContext.request.contextPath}/${user.key.image}"
                                                                     alt="user profile"
                                                                     />
                                                             </td>
-                                                            <td>${user.userName}</td>
-                                                            <td>${user.email != null ? user.email : 'empty'}</td>
-                                                            <td>${user.phoneNumber != null ? user.phoneNumber : 'empty'}</td>
-                                                            <td>2161</td>
-                                                            <td>${user.role.name}</td>
-                                                            <td>${user.createdAt}</td>
+                                                            <td>${user.key.userName}</td>
+                                                            <td>${user.key.email != null ? user.key.email : 'empty'}</td>
+                                                            <td>${user.key.phoneNumber != null ? user.key.phoneNumber : 'empty'}</td>
+                                                            <td>${user.value}</td>
+                                                            <td>${user.key.role.name}</td>
+                                                            <td>${user.key.createdAt}</td>
                                                             <td>
                                                                 <div class="btn-group mb-1">
                                                                     <button
@@ -146,7 +146,7 @@
 
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="#">Edit</a>
-                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/deleteuser?userId=${user.userId}">Delete</a>
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/deleteuser?userId=${user.key.userId}">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>

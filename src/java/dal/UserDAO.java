@@ -109,7 +109,29 @@ public class UserDAO extends MyDAO {
 
         return list;
     }
-    
+
+    public Map<User, Integer> getUserAllAndTotalBuy() {
+        Map<User, Integer> map = new LinkedHashMap<>();
+        String sql = "select u.user_id, COUNT(od.product_id) as total_buy from Users as u\n"
+                + "left join Orders as o on u.user_id = o.user_id\n"
+                + "left join Order_Details as od on o.Order_id = od.order_id\n"
+                + "group by u.user_id";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int userId = rs.getInt("user_id");
+                int totalBuy = rs.getInt("total_buy");
+                User user = getUserById(userId);
+                map.put(user, totalBuy);
+            }
+            return map;
+        } catch (SQLException e) {
+            System.out.println("loi get user all and total buy: " + e);
+        }
+
+        return map;
+    }
 
     public User getUserById(int id) {
         String sql = "select * from Users\n"
@@ -226,6 +248,10 @@ public class UserDAO extends MyDAO {
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
-        System.out.println(ud.getUserById(7));
+        for(Map.Entry<User, Integer> x : ud.getUserAllAndTotalBuy().entrySet()){
+            System.out.println(x.getKey());
+            System.out.println(x.getValue());
+            System.out.println("----------");
+        }
     }
 }
