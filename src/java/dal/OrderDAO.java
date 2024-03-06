@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import model.OrderDetail;
 import model.User;
 
 /**
@@ -56,7 +57,12 @@ public class OrderDAO extends MyDAO {
                 int status = rs.getInt("status");
                 float totalMoney = rs.getFloat("total_money");
 
-                return new Order(orderId, user, orderDate, note, status, totalMoney);
+                Order order = new Order(orderId, user, orderDate, note, status, totalMoney);
+                order.setFullName(rs.getString("full_name"));
+                order.setPhoneNumber(rs.getString("phone_number"));
+                order.setEmail(rs.getString("email"));
+                order.setAddress(rs.getString("address"));
+                return order;
             }
         } catch (SQLException e) {
             System.out.println("loi get order by id(OrderDA0): " + e);
@@ -102,9 +108,35 @@ public class OrderDAO extends MyDAO {
         }
         return 0;
     }
+//
+//    public Map<Order, List<OrderDetail>> getOrderByUser(int userId) {
+//        Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
+//        
+//        List<Order> list = new ArrayList<>();
+//        String sql = "select * from Orders\n"
+//                + "where user_id = ?";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, userId);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                int orderId = rs.getInt("order_id");
+//                Order order = getOrderById(orderId);
+//                list.add(order);
+//            }
+//            return list;
+//        } catch (SQLException e) {
+//            System.err.println("loi get order by user: " + e);
+//        }
+//        return list;
+//    }
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-        System.out.println(od.getRevennue());
+//        for(Order x : od.getOrderByUser(7)){
+//            System.out.println(x);
+//        }
+
+        System.out.println(od.getOrderById(1));
     }
 }

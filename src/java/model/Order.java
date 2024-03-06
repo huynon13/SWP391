@@ -17,9 +17,13 @@ public class Order {
 //	[note] [nvarchar](100) NULL,
 //	[status] [int] NOT NULL,
 //	[total_money] [decimal](10, 2) NULL,
-    
+
     private int orderId;
     private User user;
+    private String fullName;
+    private String phoneNumber;
+    private String email;
+    private String address;
     private Date orderDate;
     private String note;
     private int status;
@@ -28,9 +32,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, User user, Date orderDate, String note, int status, float totalMoney) {
+    public Order(int orderId, User user, String fullName, String phoneNumber, String email, String address, Date orderDate, String note, int status, float totalMoney) {
         this.orderId = orderId;
         this.user = user;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
         this.orderDate = orderDate;
         this.note = note;
         this.status = status;
@@ -45,12 +53,55 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public Order(int orderId, User user, Date orderDate, String note, int status, float totalMoney) {
+        this.orderId = orderId;
+        this.user = user;
+        this.orderDate = orderDate;
+        this.note = note;
+        this.status = status;
+        this.totalMoney = totalMoney;
+    }
+    
+    
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getOrderDate() {
@@ -87,7 +138,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Orders{" + "orderId=" + orderId + ", user=" + user + ", orderDate=" + orderDate + ", note=" + note + ", status=" + status + ", totalMoney=" + totalMoney + '}';
+        return "Order{" + "orderId=" + orderId + ", user=" + user + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", orderDate=" + orderDate + ", note=" + note + ", status=" + status + ", totalMoney=" + totalMoney + '}';
     }
-    
+
 }

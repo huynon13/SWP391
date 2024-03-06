@@ -149,6 +149,12 @@ public class UserDAO extends MyDAO {
                         rs.getDate("created_at"),
                         rs.getInt("deleted"));
                 user.setImage(rs.getString("image"));
+                user.setFullName(rs.getString("full_name"));
+                user.setEmail(rs.getString("email"));
+                user.setPhoneNumber(rs.getString("phone_number"));
+                user.setBirthDay(rs.getDate("birth_day"));
+                user.setAddress(rs.getString("address"));
+                user.setUpdatedAt(rs.getDate("updated_at"));
                 return user;
             } else {
                 return null;
@@ -248,10 +254,12 @@ public class UserDAO extends MyDAO {
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
-        for(Map.Entry<User, Integer> x : ud.getUserAllAndTotalBuy().entrySet()){
-            System.out.println(x.getKey());
-            System.out.println(x.getValue());
-            System.out.println("----------");
-        }
+//        for(Map.Entry<User, Integer> x : ud.getUserAllAndTotalBuy().entrySet()){
+//            System.out.println(x.getKey());
+//            System.out.println(x.getValue());
+//            System.out.println("----------");
+//        }
+
+        System.out.println(ud.getUserById(12));
     }
 }

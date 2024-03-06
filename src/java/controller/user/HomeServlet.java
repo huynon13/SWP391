@@ -7,6 +7,7 @@ package controller.user;
 import dal.CategoryDAO;
 import dal.ColorDAO;
 import dal.FeedBackDAO;
+import dal.OrderDAO;
 import dal.ProductDAO;
 import dal.SizeDAO;
 import dal.UserDAO;
@@ -26,6 +27,7 @@ import model.Cart;
 import model.Category;
 import model.Color;
 import model.FeedBack;
+import model.Order;
 import model.Product;
 import model.Size;
 import model.User;
@@ -44,12 +46,15 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        User account = (User) session.getAttribute("account");
+
         CategoryDAO cd = new CategoryDAO();
         ProductDAO pd = new ProductDAO();
         FeedBackDAO fd = new FeedBackDAO();
         SizeDAO sd = new SizeDAO();
         ColorDAO colorD = new ColorDAO();
         UserDAO ud = new UserDAO();
+        OrderDAO od = new OrderDAO();
 
         Map<Category, List<Product>> top5ProductByCategor = cd.getTop5ProductByCategory();
         Map<Category, Integer> numberOfProduct = cd.getNumberOfProductbyCategory();
@@ -61,6 +66,10 @@ public class HomeServlet extends HttpServlet {
         Map<Category, List<Product>> top6NewProductByCategory = pd.getTop6NewProduct();
         List<Size> listSize = sd.getSizeAll();
         List<Color> listColor = colorD.getColorAll();
+        List<Order> listOrderByUser = new ArrayList<>();
+        if (account != null) {
+//            listOrderByUser = od.getOrderByUser(account.getUserId());
+        }
 
         double minPrice = Double.MAX_VALUE, maxPrice = Double.MIN_VALUE;
         for (Product p : listProduct) {
@@ -93,7 +102,6 @@ public class HomeServlet extends HttpServlet {
         List<Color> colorProduct = new ArrayList<>();
         List<Integer> soLuongProduct = new ArrayList<>();
 
-        User account = (User) session.getAttribute("account");
         if (account != null) {
             Cookie cartId = null;
             if (cookies != null) {
@@ -172,6 +180,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("listColor", listColor);
         session.setAttribute("cart", cartByUserId);
         session.setAttribute("wishList", wishList);
+        session.setAttribute("orderByUser", listOrderByUser);
 
         request.getRequestDispatcher("./views/user/home-page/homepage.jsp").forward(request, response);
     }

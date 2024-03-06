@@ -112,7 +112,7 @@
 
                                 <ul class="profile-dropdown-list">
                                     <li class="profile-dropdown-list-item">
-                                        <a href="#">
+                                        <a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">
                                             <i class="fa-regular fa-user"></i>
                                             Edit Profile
                                         </a>
