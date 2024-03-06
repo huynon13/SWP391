@@ -143,7 +143,7 @@
                                             <c:forEach items="${sessionScope.listColor}" var="i">
                                             <li class="color${i.colorId} colors" onclick="userOptionColor(this, ${i.colorId}, ${sessionScope.product.productId})">
                                                 <a class="click-color" href="javascript:void(0)"><span>${i.color}</span></a>
-                                            </li>
+                                            </li>javas
                                         </c:forEach>
                                     </ul>
 

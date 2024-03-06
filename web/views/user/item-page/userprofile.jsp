@@ -4,6 +4,12 @@
     Author     : PC
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="model.OrderDetail"%>
+<%@page import="model.Order"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -64,6 +70,31 @@
                                 <a href="user-list.html" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
+
+
+                        <%
+                                                Set<Integer> set = new HashSet<>();
+                                                int soLuongItemDaMua = 0;
+                                                int soDonHangThanhCong = 0;
+                                                int soDonHangDangChoXuLi = 0;
+                                                int soDonHangThaiBat = 0;
+                                                double tongSoTienMuaHangThanhCong = 0;
+                                                Map<Order, List<OrderDetail>> map = (Map<Order, List<OrderDetail>>) session.getAttribute("orderAndOrderDetailByUser");
+                                                for (Map.Entry<Order, List<OrderDetail>> x : map.entrySet()) {
+                                                    if (x.getKey().getStatus() == 0) {
+                                                        soDonHangDangChoXuLi += 1;
+                                                    } else if (x.getKey().getStatus() == 1) {
+                                                        tongSoTienMuaHangThanhCong += x.getKey().getTotalMoney();
+                                                        soDonHangThanhCong += 1;
+                                                        for (OrderDetail y : x.getValue()) {
+                                                            soLuongItemDaMua += y.getQuantity();
+                                                        }
+                                                    } else if (x.getKey().getStatus() == 2) {
+                                                        soDonHangThaiBat += 1;
+                                                    }
+
+                                                }
+                        %>
                         <div class="card bg-white profile-content">
                             <div class="row">
                                 <div class="col-lg-4 col-xl-3">
@@ -75,24 +106,23 @@
                                             <div class="card-body">
                                                 <h4 class="py-2 text-dark">${sessionScope.account.fullName}</h4>
                                                 <p>User Name: ${sessionScope.account.userName}</p>
-                                                <a class="btn btn-primary my-3" href="#">Follow</a>
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-between ">
                                             <div class="text-center pb-4">
-                                                <h6 class="text-dark pb-2">546</h6>
-                                                <p>Bought</p>
+                                                <h6 class="text-dark pb-2"></h6>
+                                                <p></p>
                                             </div>
 
                                             <div class="text-center pb-4">
-                                                <h6 class="text-dark pb-2">32</h6>
-                                                <p>Wish List</p>
+                                                <h6 style="margin-top: 10px;" class="text-dark pb-2"><%= soLuongItemDaMua%></h6>
+                                                <p>Items success</p>
                                             </div>
 
                                             <div class="text-center pb-4">
-                                                <h6 class="text-dark pb-2">1150</h6>
-                                                <p>Following</p>
+                                                <h6 class="text-dark pb-2"></h6>
+                                                <p></p>
                                             </div>
                                         </div>
 
@@ -137,6 +167,10 @@
                                                  aria-labelledby="profile-tab">
                                                 <div class="tab-widget mt-5">
                                                     <div class="row">
+
+
+
+
                                                         <div class="col-xl-3">
                                                             <div class="media widget-media p-3 bg-white border">
                                                                 <div class="icon rounded-circle mr-3 bg-primary">
@@ -144,26 +178,16 @@
                                                                 </div>
 
                                                                 <div class="media-body align-self-center">
-                                                                    <h4 class="text-primary mb-2">${sessionScope.orderByUser.size()}</h4>
-                                                                    <p>Orders</p>
+                                                                    <h4 class="text-primary mb-2"><%= soDonHangThanhCong%></h4>
+                                                                    <p>Orders success</p>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <c:set var="daMua" value="${0}"/>
-
-                                                        <div class="col-xl-3">
-                                                            <div class="media widget-media p-3 bg-white border">
-                                                                <div class="icon rounded-circle mr-3 bg-success">
-                                                                    <i class="mdi mdi-checkbox-marked-outline text-white"></i>
-                                                                </div>
-
-                                                                <div class="media-body align-self-center">
-                                                                    <h4 class="text-primary mb-2">02</h4>
-                                                                    <p>Items</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <c:forEach items="${sessionScope.orderAndOrderDetailByUser}" var="i">
+                                                            <c:set var="daMua" value="${daMua + i.value.size()}"/>
+                                                        </c:forEach>
 
                                                         <div class="col-xl-3">
                                                             <div class="media widget-media p-3 bg-white border">
@@ -172,16 +196,28 @@
                                                                 </div>
 
                                                                 <div class="media-body align-self-center">
-                                                                    <h4 class="text-primary mb-2">${sessionScope.wishList.size()}</h4>
-                                                                    <p>Wish List</p>
+                                                                    <h4 class="text-primary mb-2"><%= soDonHangDangChoXuLi%></h4>
+                                                                    <p>Orders pending</p>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <c:set var="totalAmount" value="${0}"/>
-                                                        <c:forEach items="${sessionScope.sessionScope.orderByUser}" var="i">
-                                                            <c:set var="totalAmount" value="${totalAmount + i.totalMoney}"/>
-                                                        </c:forEach>
+
+                                                        <div class="col-xl-3">
+                                                            <div class="media widget-media p-3 bg-white border">
+                                                                <div class="icon rounded-circle bg-warning mr-3">
+                                                                    <i class="mdi mdi-cart-outline text-white "></i>
+                                                                </div>
+
+                                                                <div class="media-body align-self-center">
+                                                                    <h4 class="text-primary mb-2"><%= soDonHangThaiBat%></h4>
+                                                                    <p>Orders failed</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
 
                                                         <div class="col-xl-3">
                                                             <div class="media widget-media p-3 bg-white border">
@@ -190,7 +226,7 @@
                                                                 </div>
 
                                                                 <div class="media-body align-self-center">
-                                                                    <h4 class="text-primary mb-2">${totalAmount}</h4>
+                                                                    <h4 class="text-primary mb-2"><%= tongSoTienMuaHangThanhCong / 1000000%>Tr&nbsp;VNĐ</h4>
                                                                     <p>Total amount</p>
                                                                 </div>
                                                             </div>
@@ -198,166 +234,6 @@
 
                                                     </div>
 
-                                                    <div class="row mb-24px">
-                                                        <div class="col-xl-12">
-
-                                                            <!-- Notification Table -->
-                                                            <div class="card card-default">
-                                                                <div class="card-header justify-content-between mb-1">
-                                                                    <h2>Latest Notifications</h2>
-                                                                    <div>
-                                                                        <button class="text-black-50 mr-2 font-size-20"><i
-                                                                                class="mdi mdi-cached"></i></button>
-                                                                        <div
-                                                                            class="dropdown show d-inline-block widget-dropdown">
-                                                                            <a class="dropdown-toggle icon-burger-mini"
-                                                                               href="#" role="button"
-                                                                               id="dropdown-notification"
-                                                                               data-bs-toggle="dropdown"
-                                                                               aria-haspopup="true" aria-expanded="false"
-                                                                               data-display="static"></a>
-                                                                            <ul class="dropdown-menu dropdown-menu-right"
-                                                                                aria-labelledby="dropdown-notification">
-                                                                                <li class="dropdown-item"><a
-                                                                                        href="#">Action</a></li>
-                                                                                <li class="dropdown-item"><a
-                                                                                        href="#">Another action</a></li>
-                                                                                <li class="dropdown-item"><a
-                                                                                        href="#">Something else here</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="card-body compact-notifications" data-simplebar
-                                                                     style="height: 434px;">
-                                                                    <div
-                                                                        class="media pb-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
-                                                                            <i
-                                                                                class="mdi mdi-cart-outline font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3 ">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">New Order</a>
-                                                                            <p>Selena has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 10
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-success text-white">
-                                                                            <i
-                                                                                class="mdi mdi-email-outline font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">New Enquiry</a>
-                                                                            <p>Phileine has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 9
-                                                                            AM</span>
-                                                                    </div>
-
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                                                            <i
-                                                                                class="mdi mdi-stack-exchange font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">Support Ticket</a>
-                                                                            <p>Emma has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 10
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
-                                                                            <i
-                                                                                class="mdi mdi-cart-outline font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">New order</a>
-                                                                            <p>Ryan has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 10
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-info text-white">
-                                                                            <i
-                                                                                class="mdi mdi-calendar-blank font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">Comapny Meetup</a>
-                                                                            <p>Phileine has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 10
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                                                            <i
-                                                                                class="mdi mdi-stack-exchange font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">Support Ticket</a>
-                                                                            <p>Emma has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 10
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="media py-3 align-items-center justify-content-between">
-                                                                        <div
-                                                                            class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-success text-white">
-                                                                            <i
-                                                                                class="mdi mdi-email-outline font-size-20"></i>
-                                                                        </div>
-                                                                        <div class="media-body pr-3">
-                                                                            <a class="mt-0 mb-1 font-size-15 text-dark"
-                                                                               href="#">New Enquiry</a>
-                                                                            <p>Phileine has placed an new order</p>
-                                                                        </div>
-                                                                        <span class=" font-size-12 d-inline-block"><i
-                                                                                class="mdi mdi-clock-outline"></i> 9
-                                                                            AM</span>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="mt-3"></div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
 
                                                     <div class="row">
                                                         <div class="col-12">
@@ -377,8 +253,8 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Order_ID</th>
-                                                                                <th>Product_Name</th>
-                                                                                <th>Units</th>
+                                                                                <th>Full Name</th>
+                                                                                <th>Units Product</th>
                                                                                 <th>Order_Date</th>
                                                                                 <th>Order_Cost</th>
                                                                                 <th>Status</th>
@@ -387,194 +263,53 @@
                                                                         </thead>
 
                                                                         <tbody>
-                                                                            <tr>
-                                                                                <td>24541</td>
-                                                                                <td>
-                                                                                    <a class="text-dark" href="#"> Coach
-                                                                                        Swagger</a>
-                                                                                </td>
-                                                                                <td>1 Unit</td>
-                                                                                <td>Oct 20, 2018</td>
-                                                                                <td>$230</td>
-                                                                                <td>
-                                                                                    <span
-                                                                                        class="badge badge-success">Completed</span>
-                                                                                </td>
-                                                                                <td class="text-right">
-                                                                                    <div
-                                                                                        class="dropdown show d-inline-block widget-dropdown">
-                                                                                        <a class="dropdown-toggle icon-burger-mini"
-                                                                                           href="#" role="button"
-                                                                                           id="dropdown-recent-order1"
-                                                                                           data-bs-toggle="dropdown"
-                                                                                           aria-haspopup="true"
-                                                                                           aria-expanded="false"
-                                                                                           data-display="static"></a>
+                                                                            <c:forEach items="${sessionScope.orderAndOrderDetailByUser}" var="i">
+                                                                                <tr>
+                                                                                    <td>${i.key.orderId}</td>
+                                                                                    <td>
+                                                                                        <a class="text-dark" href="javascript:void(0)"> ${i.key.fullName}</a>
+                                                                                    </td>
+                                                                                    <td>${i.value.size()} Unit</td>
+                                                                                    <td>${i.key.orderDate}</td>
+                                                                                    <td>${i.key.totalMoney/1000000}Tr&nbsp;VNĐ</td>
+                                                                                    <td>
+                                                                                        <c:if test="${i.key.status == 0}">
+                                                                                            <span class="badge badge-warning">Pending</span>
+                                                                                        </c:if>
+                                                                                            
+                                                                                        <c:if test="${i.key.status == 1}">
+                                                                                            <span class="badge badge-success">Completed</span>
+                                                                                        </c:if>
 
-                                                                                        <ul class="dropdown-menu dropdown-menu-right"
-                                                                                            aria-labelledby="dropdown-recent-order1">
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">View</a>
-                                                                                            </li>
+                                                                                        <c:if test="${i.key.status == 2}">
+                                                                                            <span class="badge badge-danger">Cancelled</span>
+                                                                                        </c:if>
+                                                                                    </td>
+                                                                                    <td class="text-right">
+                                                                                        <div
+                                                                                            class="dropdown show d-inline-block widget-dropdown">
+                                                                                            <a class="dropdown-toggle icon-burger-mini"
+                                                                                               href="#" role="button"
+                                                                                               id="dropdown-recent-order1"
+                                                                                               data-bs-toggle="dropdown"
+                                                                                               aria-haspopup="true"
+                                                                                               aria-expanded="false"
+                                                                                               data-display="static"></a>
 
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">Remove</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                                            <ul class="dropdown-menu dropdown-menu-right"
+                                                                                                aria-labelledby="dropdown-recent-order1">
+                                                                                                <li class="dropdown-item">
+                                                                                                    <a href="#">View</a>
+                                                                                                </li>
 
-                                                                            <tr>
-                                                                                <td>24541</td>
-                                                                                <td>
-                                                                                    <a class="text-dark" href="#"> Toddler
-                                                                                        Shoes, Gucci Watch</a>
-                                                                                </td>
-                                                                                <td>2 Units</td>
-                                                                                <td>Nov 15, 2018</td>
-                                                                                <td>$550</td>
-                                                                                <td>
-                                                                                    <span
-                                                                                        class="badge badge-warning">Delayed</span>
-                                                                                </td>
-                                                                                <td class="text-right">
-                                                                                    <div
-                                                                                        class="dropdown show d-inline-block widget-dropdown">
-                                                                                        <a class="dropdown-toggle icon-burger-mini"
-                                                                                           href="#" role="button"
-                                                                                           id="dropdown-recent-order2"
-                                                                                           data-bs-toggle="dropdown"
-                                                                                           aria-haspopup="true"
-                                                                                           aria-expanded="false"
-                                                                                           data-display="static"></a>
-
-                                                                                        <ul class="dropdown-menu dropdown-menu-right"
-                                                                                            aria-labelledby="dropdown-recent-order2">
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">View</a>
-                                                                                            </li>
-
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">Remove</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <tr>
-                                                                                <td>24541</td>
-                                                                                <td>
-                                                                                    <a class="text-dark" href="#"> Hat Black
-                                                                                        Suits</a>
-                                                                                </td>
-                                                                                <td>1 Unit</td>
-                                                                                <td>Nov 18, 2018</td>
-                                                                                <td>$325</td>
-                                                                                <td>
-                                                                                    <span class="badge badge-warning">On
-                                                                                        Hold</span>
-                                                                                </td>
-                                                                                <td class="text-right">
-                                                                                    <div
-                                                                                        class="dropdown show d-inline-block widget-dropdown">
-                                                                                        <a class="dropdown-toggle icon-burger-mini"
-                                                                                           href="#" role="button"
-                                                                                           id="dropdown-recent-order3"
-                                                                                           data-bs-toggle="dropdown"
-                                                                                           aria-haspopup="true"
-                                                                                           aria-expanded="false"
-                                                                                           data-display="static"></a>
-
-                                                                                        <ul class="dropdown-menu dropdown-menu-right"
-                                                                                            aria-labelledby="dropdown-recent-order3">
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">View</a>
-                                                                                            </li>
-
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">Remove</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <tr>
-                                                                                <td>24541</td>
-                                                                                <td>
-                                                                                    <a class="text-dark" href="#"> Backpack
-                                                                                        Gents, Swimming Cap Slin</a>
-                                                                                </td>
-                                                                                <td>5 Units</td>
-                                                                                <td>Dec 13, 2018</td>
-                                                                                <td>$200</td>
-                                                                                <td>
-                                                                                    <span
-                                                                                        class="badge badge-success">Completed</span>
-                                                                                </td>
-                                                                                <td class="text-right">
-                                                                                    <div
-                                                                                        class="dropdown show d-inline-block widget-dropdown">
-                                                                                        <a class="dropdown-toggle icon-burger-mini"
-                                                                                           href="#" role="button"
-                                                                                           id="dropdown-recent-order4"
-                                                                                           data-bs-toggle="dropdown"
-                                                                                           aria-haspopup="true"
-                                                                                           aria-expanded="false"
-                                                                                           data-display="static"></a>
-
-                                                                                        <ul class="dropdown-menu dropdown-menu-right"
-                                                                                            aria-labelledby="dropdown-recent-order4">
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">View</a>
-                                                                                            </li>
-
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">Remove</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <tr>
-                                                                                <td>24541</td>
-                                                                                <td>
-                                                                                    <a class="text-dark" href="#"> Speed 500
-                                                                                        Ignite</a>
-                                                                                </td>
-                                                                                <td>1 Unit</td>
-                                                                                <td>Dec 23, 2018</td>
-                                                                                <td>$150</td>
-                                                                                <td>
-                                                                                    <span
-                                                                                        class="badge badge-danger">Cancelled</span>
-                                                                                </td>
-                                                                                <td class="text-right">
-                                                                                    <div
-                                                                                        class="dropdown show d-inline-block widget-dropdown">
-                                                                                        <a class="dropdown-toggle icon-burger-mini"
-                                                                                           href="#" role="button"
-                                                                                           id="dropdown-recent-order5"
-                                                                                           data-bs-toggle="dropdown"
-                                                                                           aria-haspopup="true"
-                                                                                           aria-expanded="false"
-                                                                                           data-display="static"></a>
-                                                                                        <ul class="dropdown-menu dropdown-menu-right"
-                                                                                            aria-labelledby="dropdown-recent-order5">
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">View</a>
-                                                                                            </li>
-
-                                                                                            <li class="dropdown-item">
-                                                                                                <a href="#">Remove</a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
+                                                                                                <li class="dropdown-item">
+                                                                                                    <a href="#">cancel order</a>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </c:forEach>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>

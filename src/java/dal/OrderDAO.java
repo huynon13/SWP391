@@ -108,35 +108,33 @@ public class OrderDAO extends MyDAO {
         }
         return 0;
     }
-//
-//    public Map<Order, List<OrderDetail>> getOrderByUser(int userId) {
-//        Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
-//        
-//        List<Order> list = new ArrayList<>();
-//        String sql = "select * from Orders\n"
-//                + "where user_id = ?";
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, userId);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                int orderId = rs.getInt("order_id");
-//                Order order = getOrderById(orderId);
-//                list.add(order);
-//            }
-//            return list;
-//        } catch (SQLException e) {
-//            System.err.println("loi get order by user: " + e);
-//        }
-//        return list;
-//    }
+
+    public List<Order> getOrderByUser(int userId) {
+        
+        List<Order> list = new ArrayList<>();
+        String sql = "select * from Orders\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int orderId = rs.getInt("order_id");
+                Order order = getOrderById(orderId);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.err.println("loi get order by user: " + e);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-//        for(Order x : od.getOrderByUser(7)){
-//            System.out.println(x);
-//        }
+        for(Order x : od.getOrderByUser(7)){
+            System.out.println(x);
+        }
 
-        System.out.println(od.getOrderById(1));
     }
 }

@@ -8,6 +8,7 @@ import dal.CategoryDAO;
 import dal.ColorDAO;
 import dal.FeedBackDAO;
 import dal.OrderDAO;
+import dal.OrderDetailDAO;
 import dal.ProductDAO;
 import dal.SizeDAO;
 import dal.UserDAO;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import model.Cart;
@@ -28,6 +30,7 @@ import model.Category;
 import model.Color;
 import model.FeedBack;
 import model.Order;
+import model.OrderDetail;
 import model.Product;
 import model.Size;
 import model.User;
@@ -55,6 +58,7 @@ public class HomeServlet extends HttpServlet {
         ColorDAO colorD = new ColorDAO();
         UserDAO ud = new UserDAO();
         OrderDAO od = new OrderDAO();
+        OrderDetailDAO odd = new OrderDetailDAO();
 
         Map<Category, List<Product>> top5ProductByCategor = cd.getTop5ProductByCategory();
         Map<Category, Integer> numberOfProduct = cd.getNumberOfProductbyCategory();
@@ -66,9 +70,11 @@ public class HomeServlet extends HttpServlet {
         Map<Category, List<Product>> top6NewProductByCategory = pd.getTop6NewProduct();
         List<Size> listSize = sd.getSizeAll();
         List<Color> listColor = colorD.getColorAll();
-        List<Order> listOrderByUser = new ArrayList<>();
+        Map<Order, List<OrderDetail>> listOrderAndOrderDetailByUser = new LinkedHashMap<>();
         if (account != null) {
-//            listOrderByUser = od.getOrderByUser(account.getUserId());
+            System.out.println("nghiem xuan loc map: ");
+            listOrderAndOrderDetailByUser = odd.getOrderAndOrderDetailByUser(account.getUserId());
+            System.out.println(listOrderAndOrderDetailByUser.size());
         }
 
         double minPrice = Double.MAX_VALUE, maxPrice = Double.MIN_VALUE;
@@ -180,7 +186,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("listColor", listColor);
         session.setAttribute("cart", cartByUserId);
         session.setAttribute("wishList", wishList);
-        session.setAttribute("orderByUser", listOrderByUser);
+        session.setAttribute("orderAndOrderDetailByUser", listOrderAndOrderDetailByUser);
 
         request.getRequestDispatcher("./views/user/home-page/homepage.jsp").forward(request, response);
     }

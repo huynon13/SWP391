@@ -3,13 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Assginment_PRJ301">
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/admin/header.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Order.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/home-page/homepage.jsp</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/User.java</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/userlist.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/admin/header.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/OrderDAO.java</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/admin/AddUserServlet.java</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/item-page/userprofile.jsp</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/admin/leftmainsidebar.jsp</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/UserDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/HomeServlet.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/OrderDetailDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/header.jsp</file>
         </group>
     </open-files>
 </project-private>
