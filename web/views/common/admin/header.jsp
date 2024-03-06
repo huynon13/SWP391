@@ -63,24 +63,17 @@
                                 />
                             <div class="d-inline-block">
                                 ${account.userName}
-                                <small class="pt-1">john.example@gmail.com</small>
+                                <small class="pt-1">${sessionScope.account.email}</small>
                             </div>
                         </li>
                         <li>
-                            <a href="user-profile.html">
+                            <a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">
                                 <i class="mdi mdi-account"></i> My Profile
                             </a>
                         </li>
-                        <li>
-                            <a href="#"> <i class="mdi mdi-email"></i> Message </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="mdi mdi-diamond-stone"></i> Projects
-                            </a>
-                        </li>
+                        
                         <li class="dropdown-footer">
-                            <a href="index.html">
+                            <a href="${pageContext.request.contextPath}/logout">
                                 <i class="mdi mdi-logout"></i> Log Out
                             </a>
                         </li>

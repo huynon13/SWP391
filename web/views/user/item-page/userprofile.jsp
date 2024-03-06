@@ -64,8 +64,12 @@
                         <div class="breadcrumb-wrapper breadcrumb-contacts">
                             <div>
                                 <h1>User Profile</h1>
-                                <p class="breadcrumbs"><span><a href="${pageContext.request.contextPath}/home">Home</a></span>
-                                    <span><i class="mdi mdi-chevron-right"></i></span>Profile
+                                <p class="breadcrumbs"><span><a href="${pageContext.request.contextPath}/home">Home <i class="mdi mdi-chevron-right"></i></span> </a></span>
+                                        <c:if test="${sessionScope.account.role.name == 'Admin'}">
+                                            <span><span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
+                                            <span><i class="mdi mdi-chevron-right"></i></span>
+                                        </c:if>
+                                        Profile
                                 </p>
                             </div>
                             <div>

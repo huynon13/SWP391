@@ -114,28 +114,12 @@
                                     <li class="profile-dropdown-list-item">
                                         <a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">
                                             <i class="fa-regular fa-user"></i>
-                                            Edit Profile
-                                        </a>
-                                    </li>
-
-
-
-                                    <li class="profile-dropdown-list-item" style="margin-left: 20px;">
-                                        <a href="#">
-                                            <i class="fa-solid fa-sliders"></i>
-                                            Purchase order
-                                        </a>
-                                    </li>
-
-                                    <li class="profile-dropdown-list-item">
-                                        <a href="#">
-                                            <i class="fa-solid fa-sliders"></i>
-                                            Settings
+                                            Profile
                                         </a>
                                     </li>
 
                                     <c:if test="${sessionScope.account.role.name == 'Admin'}">
-                                        <li class="profile-dropdown-list-item">
+                                        <li class="profile-dropdown-list-item" style="margin-left: 20px;">
                                             <a href="${pageContext.request.contextPath}/dashboard" >
                                                 <i class="fa-solid fa-chart-line"></i>
                                                 Dashboard

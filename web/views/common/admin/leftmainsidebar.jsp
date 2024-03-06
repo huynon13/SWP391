@@ -68,7 +68,7 @@
                             </li>
                             <li class="">
                                 <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">
-                                    <span class="nav-text">Users Profile</span>
+                                    <span class="nav-text">Your Profile</span>
                                 </a>
                             </li>
                         </ul>
