@@ -122,8 +122,7 @@
                                                 <address class="info-grid">
                                                     <div class="info-title"><strong>Payment Method:</strong></div><br>
                                                     <div class="info-content">
-                                                        Visa ending **** 1234<br>
-                                                        h.elaine@gmail.com<br>
+                                                        ${order.payment.paymentName}<br>
                                                     </div>
                                                 </address>
                                             </div>

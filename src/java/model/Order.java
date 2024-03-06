@@ -25,6 +25,7 @@ public class Order {
     private String email;
     private String address;
     private Date orderDate;
+    private Payment payment;
     private String note;
     private int status;
     private float totalMoney;
@@ -45,6 +46,28 @@ public class Order {
         this.totalMoney = totalMoney;
     }
 
+    public Order(int orderId, User user, String fullName, String phoneNumber, String email, String address, Date orderDate, Payment payment, String note, int status, float totalMoney) {
+        this.orderId = orderId;
+        this.user = user;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.orderDate = orderDate;
+        this.payment = payment;
+        this.note = note;
+        this.status = status;
+        this.totalMoney = totalMoney;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public int getOrderId() {
         return orderId;
     }
@@ -61,8 +84,6 @@ public class Order {
         this.status = status;
         this.totalMoney = totalMoney;
     }
-    
-    
 
     public User getUser() {
         return user;
@@ -138,7 +159,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "orderId=" + orderId + ", user=" + user + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", orderDate=" + orderDate + ", note=" + note + ", status=" + status + ", totalMoney=" + totalMoney + '}';
+        return "Order{" + "orderId=" + orderId + ", user=" + user + ", fullName=" + fullName + ", phoneNumber=" + phoneNumber + ", email=" + email + ", address=" + address + ", orderDate=" + orderDate + ", payment=" + payment + ", note=" + note + ", status=" + status + ", totalMoney=" + totalMoney + '}';
     }
 
 }

@@ -313,9 +313,11 @@
                                                                                                     <a href="${pageContext.request.contextPath}/views/user/item-page/orderdetail.jsp?orderid=${i.key.orderId}">View</a>
                                                                                                 </li>
 
-                                                                                                <li class="dropdown-item">
-                                                                                                    <a href="#">cancel order</a>
-                                                                                                </li>
+                                                                                                <c:if test="${i.key.status == 0}">
+                                                                                                    <li class="dropdown-item">
+                                                                                                        <a href="#">cancel order</a>
+                                                                                                    </li>
+                                                                                                </c:if>
                                                                                             </ul>
                                                                                         </div>
                                                                                     </td>

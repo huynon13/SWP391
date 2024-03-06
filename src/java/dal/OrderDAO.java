@@ -43,6 +43,7 @@ public class OrderDAO extends MyDAO {
 
     public Order getOrderById(int id) {
         UserDAO ud = new UserDAO();
+        PaymentDAO payDao = new PaymentDAO();
         String sql = "select * from Orders\n"
                 + "where Order_id = ?";
         try {
@@ -62,6 +63,7 @@ public class OrderDAO extends MyDAO {
                 order.setPhoneNumber(rs.getString("phone_number"));
                 order.setEmail(rs.getString("email"));
                 order.setAddress(rs.getString("address"));
+                order.setPayment(payDao.getPaymentById(rs.getInt("payment_id")));
                 return order;
             }
         } catch (SQLException e) {
@@ -132,9 +134,7 @@ public class OrderDAO extends MyDAO {
 
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-        for(Order x : od.getOrderByUser(7)){
-            System.out.println(x);
-        }
+        System.out.println(od.getOrderById(1));
 
     }
 }
