@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="model.User"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.OrderDetail"%>
 <%@page import="model.Order"%>
@@ -55,18 +57,22 @@
                 <!-- Header -->
 
                 <%
-                    Map<Order, List<OrderDetail>> map = (Map<Order, List<OrderDetail>>) session.getAttribute("orderAndOrderDetailByUser");
-                    Order order = new Order();
-                    List<OrderDetail> listOrderDetail = new ArrayList<>();
+                    Map<Order, List<OrderDetail>> mapAll = (Map<Order, List<OrderDetail>>) session.getAttribute("ListAllOrderAndOrderDetail");
+                    
                     String orderId_raw = (String) request.getParameter("orderid");
                     int orderId = Integer.parseInt(orderId_raw);
-                    for (Map.Entry<Order, List<OrderDetail>> x : map.entrySet()) {
+                    
+                    Order order = new Order();
+                    List<OrderDetail> listOrderDetail = new ArrayList<>();
+                    
+                    for (Map.Entry<Order, List<OrderDetail>> x : mapAll.entrySet()) {
                         if (x.getKey().getOrderId() == orderId) {
                             order = x.getKey();
                             listOrderDetail = x.getValue();
                             break;
                         }
                     }
+
                     request.setAttribute("order", order);
                     request.setAttribute("listOrderDetail", listOrderDetail);
                 %>

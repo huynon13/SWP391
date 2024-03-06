@@ -70,12 +70,8 @@ public class HomeServlet extends HttpServlet {
         Map<Category, List<Product>> top6NewProductByCategory = pd.getTop6NewProduct();
         List<Size> listSize = sd.getSizeAll();
         List<Color> listColor = colorD.getColorAll();
-        Map<Order, List<OrderDetail>> listOrderAndOrderDetailByUser = new LinkedHashMap<>();
-        if (account != null) {
-            System.out.println("nghiem xuan loc map: ");
-            listOrderAndOrderDetailByUser = odd.getOrderAndOrderDetailByUser(account.getUserId());
-            System.out.println(listOrderAndOrderDetailByUser.size());
-        }
+        Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = new LinkedHashMap<>();
+        ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
 
         double minPrice = Double.MAX_VALUE, maxPrice = Double.MIN_VALUE;
         for (Product p : listProduct) {
@@ -186,7 +182,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("listColor", listColor);
         session.setAttribute("cart", cartByUserId);
         session.setAttribute("wishList", wishList);
-        session.setAttribute("orderAndOrderDetailByUser", listOrderAndOrderDetailByUser);
+        session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
 
         request.getRequestDispatcher("./views/user/home-page/homepage.jsp").forward(request, response);
     }

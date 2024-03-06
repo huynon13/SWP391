@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="model.User"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@page import="model.OrderDetail"%>
@@ -73,27 +75,36 @@
 
 
                         <%
-                                                Set<Integer> set = new HashSet<>();
-                                                int soLuongItemDaMua = 0;
-                                                int soDonHangThanhCong = 0;
-                                                int soDonHangDangChoXuLi = 0;
-                                                int soDonHangThaiBat = 0;
-                                                double tongSoTienMuaHangThanhCong = 0;
-                                                Map<Order, List<OrderDetail>> map = (Map<Order, List<OrderDetail>>) session.getAttribute("orderAndOrderDetailByUser");
-                                                for (Map.Entry<Order, List<OrderDetail>> x : map.entrySet()) {
-                                                    if (x.getKey().getStatus() == 0) {
-                                                        soDonHangDangChoXuLi += 1;
-                                                    } else if (x.getKey().getStatus() == 1) {
-                                                        tongSoTienMuaHangThanhCong += x.getKey().getTotalMoney();
-                                                        soDonHangThanhCong += 1;
-                                                        for (OrderDetail y : x.getValue()) {
-                                                            soLuongItemDaMua += y.getQuantity();
-                                                        }
-                                                    } else if (x.getKey().getStatus() == 2) {
-                                                        soDonHangThaiBat += 1;
-                                                    }
-
-                                                }
+                            Set<Integer> set = new HashSet<>();
+                            User account = (User) session.getAttribute("account");
+                            Map<Order, List<OrderDetail>> mapAll = (Map<Order, List<OrderDetail>>) session.getAttribute("ListAllOrderAndOrderDetail");
+                            Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
+                            for (Map.Entry<Order, List<OrderDetail>> x : mapAll.entrySet()) {
+                                if (x.getKey().getUser().getUserId() == account.getUserId()) {
+                                    map.put(x.getKey(), x.getValue());
+                                }
+                            }
+                            
+                            request.setAttribute("orderAndOrderDetailByUser", map);
+                            int soLuongItemDaMua = 0;
+                            int soDonHangThanhCong = 0;
+                            int soDonHangDangChoXuLi = 0;
+                            int soDonHangThaiBat = 0;
+                            double tongSoTienMuaHangThanhCong = 0;
+                            
+                            for (Map.Entry<Order, List<OrderDetail>> x : map.entrySet()) {
+                                if (x.getKey().getStatus() == 0) {
+                                    soDonHangDangChoXuLi += 1;
+                                } else if (x.getKey().getStatus() == 1) {
+                                    tongSoTienMuaHangThanhCong += x.getKey().getTotalMoney();
+                                    soDonHangThanhCong += 1;
+                                    for (OrderDetail y : x.getValue()) {
+                                        soLuongItemDaMua += y.getQuantity();
+                                    }
+                                } else if (x.getKey().getStatus() == 2) {
+                                    soDonHangThaiBat += 1;
+                                }
+                            }
                         %>
                         <div class="card bg-white profile-content">
                             <div class="row">
@@ -185,7 +196,7 @@
                                                         </div>
 
                                                         <c:set var="daMua" value="${0}"/>
-                                                        <c:forEach items="${sessionScope.orderAndOrderDetailByUser}" var="i">
+                                                        <c:forEach items="${requestScope.orderAndOrderDetailByUser}" var="i">
                                                             <c:set var="daMua" value="${daMua + i.value.size()}"/>
                                                         </c:forEach>
 
@@ -263,7 +274,7 @@
                                                                         </thead>
 
                                                                         <tbody>
-                                                                            <c:forEach items="${sessionScope.orderAndOrderDetailByUser}" var="i">
+                                                                            <c:forEach items="${requestScope.orderAndOrderDetailByUser}" var="i">
                                                                                 <tr>
                                                                                     <td>${i.key.orderId}</td>
                                                                                     <td>
@@ -276,7 +287,7 @@
                                                                                         <c:if test="${i.key.status == 0}">
                                                                                             <span class="badge badge-warning">Pending</span>
                                                                                         </c:if>
-                                                                                            
+
                                                                                         <c:if test="${i.key.status == 1}">
                                                                                             <span class="badge badge-success">Completed</span>
                                                                                         </c:if>

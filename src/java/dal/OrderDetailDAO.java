@@ -23,14 +23,14 @@ import model.Size;
  */
 public class OrderDetailDAO extends MyDAO {
 
-    public Map<Order, List<OrderDetail>> getOrderAndOrderDetailByUser(int userId) {
+    public Map<Order, List<OrderDetail>> getAllOrderAndOrderDetail() {
         Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
         OrderDAO od = new OrderDAO();
         ProductDAO pd = new ProductDAO();
         ColorDAO cd = new ColorDAO();
         SizeDAO sd = new SizeDAO();
 
-        List<Order> listOrder = od.getOrderByUser(userId);
+        List<Order> listOrder = od.getOrderAll();
         for (int i = 0; i < listOrder.size(); i++) {
             String sql = "select * from Order_Details\n"
                     + "where order_id = ?";
@@ -61,16 +61,16 @@ public class OrderDetailDAO extends MyDAO {
 
     public static void main(String[] args) {
         OrderDetailDAO odd = new OrderDetailDAO();
-//        for (Map.Entry<Order, List<OrderDetail>> x : odd.getOrderAndOrderDetailByUser(12).entrySet()) {
-//            System.out.println(x.getKey());
-//            System.out.println("---------");
-//            for (OrderDetail y : x.getValue()) {
-//                System.out.println(y);
-//            }
-//            System.out.println("-----------");
-//            System.out.println("");
-//        }
+        for (Map.Entry<Order, List<OrderDetail>> x : odd.getAllOrderAndOrderDetail().entrySet()) {
+            System.out.println(x.getKey());
+            System.out.println("---------");
+            for (OrderDetail y : x.getValue()) {
+                System.out.println(y);
+            }
+            System.out.println("-----------");
+            System.out.println("");
+        }
 
-        System.out.println(odd.getOrderAndOrderDetailByUser(12).size());
+//        System.out.println(odd.getAllOrderAndOrderDetail().size());
     }
 }
