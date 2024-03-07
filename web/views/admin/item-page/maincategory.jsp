@@ -11,14 +11,13 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/main-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:34 GMT -->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Ekka - Admin Dashboard HTML Template." />
 
-        <title>Ekka - Admin Dashboard HTML Template.</title>
+        <title>Main Category</title>
 
         <!-- GOOGLE FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -76,18 +75,21 @@
                                 <h1>Main Category</h1>
                                 <p class="breadcrumbs">
                                     <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
-                                    <span><i class="mdi mdi-chevron-right"></i></span>Main Category
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-4 col-lg-12">
+                                <span><i class="mdi mdi-chevron-right"></i></span>Main Category
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-12">
+                                <c:if test="${requestScope.beforeEditCategory == null && requestScope.afterEditCategory == null}">
                                     <div class="ec-cat-list card card-default mb-24px">
 
                                         <div class="card-body">
                                             <div class="ec-cat-form">
                                                 <h4>Add New Category</h4>
+                                                <span style="color: red">${requestScope.errorAddCategory}</span>
+                                                <span style="color: green">${requestScope.addCategorySucess}</span>
 
-                                                <form action="" method="get">
+                                                <form action="${pageContext.request.contextPath}/addcategory" method="get">
                                                     <div class="form-group row">
                                                         <label for="text" class="col-12 col-form-label"
                                                                >Name</label
@@ -95,9 +97,10 @@
                                                         <div class="col-12">
                                                             <input
                                                                 id="text"
-                                                                name="text"
+                                                                name="nameCategory"
                                                                 class="form-control here slug-title"
                                                                 type="text"
+                                                                value="${param.nameCategory}"
                                                                 />
                                                         </div>
                                                     </div>
@@ -109,11 +112,11 @@
                                                         <div class="col-12">
                                                             <textarea
                                                                 id="sortdescription"
-                                                                name="sortdescription"
+                                                                name="sortDescription"
                                                                 cols="40"
                                                                 rows="2"
                                                                 class="form-control"
-                                                                ></textarea>
+                                                                >${param.sortDescription}</textarea>
                                                         </div>
                                                     </div>
 
@@ -132,14 +135,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                </c:if>
 
+                                <c:if test="${requestScope.beforeEditCategory != null || requestScope.afterEditCategory != null}">
 
                                     <div class="ec-cat-list card card-default mb-24px">
                                         <div class="card-body">
                                             <div class="ec-cat-form">
                                                 <h4>Edit Category</h4>
-
-                                                <form action="" method="get">
+                                                <span style="color: red">${requestScope.errorUpdateCategory}</span>
+                                                <span style="color: green">${requestScope.updateCategorySucess}</span>
+                                                <form action="${pageContext.request.contextPath}/updatecategory" method="post">
+                                                    <input type="hidden" name="categoryId" value="${param.categoryId}"/>
                                                     <div class="form-group row">
                                                         <label for="text" class="col-12 col-form-label"
                                                                >Name</label
@@ -147,9 +154,10 @@
                                                         <div class="col-12">
                                                             <input
                                                                 id="text"
-                                                                name="text"
+                                                                name="updateNameCategory"
                                                                 class="form-control here slug-title"
                                                                 type="text"
+                                                                value="${requestScope.beforeEditCategory.categoryName != null ? requestScope.beforeEditCategory.categoryName : param.updateNameCategory}"
                                                                 />
                                                         </div>
                                                     </div>
@@ -161,11 +169,11 @@
                                                         <div class="col-12">
                                                             <textarea
                                                                 id="sortdescription"
-                                                                name="sortdescription"
+                                                                name="updateSortDescription"
                                                                 cols="40"
                                                                 rows="2"
                                                                 class="form-control"
-                                                                ></textarea>
+                                                                >${requestScope.beforeEditCategory.desciption != null ? requestScope.beforeEditCategory.desciption : param.updateSortDescription}</textarea>
                                                         </div>
                                                     </div>
 
@@ -184,24 +192,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </c:if>
+                            </div>
+                            <div class="col-xl-8 col-lg-12">
+                                <span style="color: green">${requestScope.deleteCategorySucc}</span>
+                                <div class="ec-cat-list card card-default">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table id="responsive-data-table" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Product</th>
+                                                        <th>Total Sell</th>
+                                                        <th>Description</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
 
-                                <div class="col-xl-8 col-lg-12">
-                                    <div class="ec-cat-list card card-default">
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table id="responsive-data-table" class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>Product</th>
-                                                            <th>Total Sell</th>
-                                                            <th>Description</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
+                                                <tbody>
                                                     <c:forEach items="${sessionScope.mainCategory}" var="category">
                                                         <tr>
                                                             <td>${category.key.categoryName}</td>
@@ -228,8 +237,8 @@
                                                                     </button>
 
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                                        <a class="dropdown-item" href="#">Delete</a>
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/updatecategory?action=edit&categoryId=${category.key.categoryId}">Edit</a>
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/updatecategory?action=delete&categoryId=${category.key.categoryId}">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -263,6 +272,7 @@
         <script src="${pageContext.request.contextPath}/js/simplebar.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
 
         <!-- Data Tables -->
         <script src="${pageContext.request.contextPath}/js/jquery.datatables.min.js"></script>
@@ -276,6 +286,5 @@
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
     </body>
 
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/main-category.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:35 GMT -->
 </html>
 

@@ -166,11 +166,88 @@ public class CategoryDAO extends MyDAO {
         return map;
     }
 
+    public Category checkCategoryNameInsert(String name) {
+        String sql = "select * from Category\n"
+                + "where category_name like ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Category c = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getString("desciption"));
+                return c;
+            }
+        } catch (SQLException e) {
+            System.out.println("loi check category name: " + e);
+        }
+        return null;
+    }
+
+    public Category checkCategoryNameUpdate(String name, int id) {
+        String sql = "select * from Category\n"
+                + "where category_name = ? and category_id != ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setInt(2, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Category c = new Category(rs.getInt("category_id"), rs.getString("category_name"), rs.getString("desciption"));
+                return c;
+            }
+        } catch (SQLException e) {
+            System.out.println("loi check category name: " + e);
+        }
+        return null;
+    }
+
+    public void deleteCategory(int categoryId) {
+        String sql = "delete from Category\n"
+                + "where category_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete category: " + e);
+        }
+    }
+
+    public void insertCategory(String name, String description) {
+        String sql = "insert Category(category_name, Desciption) values(?, ?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, description);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("loi insert category: " + e);
+        }
+    }
+
+    public void updateCategory(int categoryId, String categoryName, String description) {
+        String sql = "update Category\n"
+                + "set\n"
+                + "category_name = ?,\n"
+                + "Desciption = ?\n"
+                + "where category_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, categoryName);
+            ps.setString(2, description);
+            ps.setInt(3, categoryId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update category: " + e);
+        }
+    }
+
     public static void main(String[] args) {
         CategoryDAO cd = new CategoryDAO();
         for (Map.Entry<Category, List<Integer>> x : cd.getNumberOfProductAndNumberOfProductSoldByCategory().entrySet()) {
             System.out.println(x.getKey());
-            for(int y : x.getValue()){
+            for (int y : x.getValue()) {
                 System.out.println(y);
             }
         }
