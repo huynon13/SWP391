@@ -4,7 +4,10 @@
  */
 
 
-function deleteCategory(x) {
-    console.log(x);
+function deleteCategory(address, name) {
+    if(confirm('Are you sure you want to delete Category: ' + name + '?')){
+        console.log(window.location.host + address);
+        window.location.href = address;
+    }
 }
 

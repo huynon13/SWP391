@@ -238,7 +238,7 @@
 
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/updatecategory?action=edit&categoryId=${category.key.categoryId}">Edit</a>
-                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/updatecategory?action=delete&categoryId=${category.key.categoryId}">Delete</a>
+                                                                        <a onclick="deleteCategory('${pageContext.request.contextPath}/updatecategory?action=delete&categoryId=${category.key.categoryId}', '${category.key.categoryName}')" class="dropdown-item" href="javascript:void(0)">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
