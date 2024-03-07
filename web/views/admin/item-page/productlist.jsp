@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Ekka - Admin Dashboard HTML Template." />
 
-        <title>Ekka - Admin Dashboard HTML Template.</title>
+        <title>Dashboard Product List</title>
 
         <!-- GOOGLE FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -79,7 +79,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="product-list.html" class="btn btn-primary">
+                                    <a href="${pageContext.request.contextPath}/views/admin/item-page/addproduct.jsp" class="btn btn-primary">
                                         Add Porduct</a
                                     >
                                 </div>

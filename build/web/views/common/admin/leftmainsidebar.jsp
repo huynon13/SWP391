@@ -21,7 +21,7 @@
 
             <!-- sidebar menu -->
             <ul class="nav sidebar-inner" id="sidebar-menu">
-                
+
                 <!-- Dashboard -->
                 <li class="active">
                     <a class="sidenav-item-link" href="${pageContext.request.contextPath}/dashboard">
@@ -110,7 +110,7 @@
                             data-parent="#sidebar-menu"
                             >
                             <li class="">
-                                <a class="sidenav-item-link" href="product-add.html">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/addproduct.jsp">
                                     <span class="nav-text">Add Product</span>
                                 </a>
                             </li>
@@ -120,7 +120,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a class="sidenav-item-link" href="product-detail.html">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp">
                                     <span class="nav-text">Product Detail</span>
                                 </a>
                             </li>
