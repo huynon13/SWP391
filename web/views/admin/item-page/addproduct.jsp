@@ -5,9 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/product-add.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:35 GMT -->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -63,15 +63,17 @@
                                     <h1>Add Product</h1>
                                     <p class="breadcrumbs">
                                         <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span>Product
-                                    </p>
-                                </div>
-                                <div>
-                                    <a href="product-list.html" class="btn btn-primary">
-                                        View All
-                                    </a>
-                                </div>
+                                    <span><i class="mdi mdi-chevron-right"></i></span>Product
+                                </p>
                             </div>
+                            <div>
+                                <a href="product-list.html" class="btn btn-primary">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                        <form action="${pageContext.request.contextPath}/addproduct" method="get" class="row g-3">
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card card-default">
@@ -79,15 +81,20 @@
                                             <h2>Add Product</h2>
                                         </div>
 
+
+
+
                                         <div class="card-body">
                                             <div class="row ec-vendor-uploads">
                                                 <div class="col-lg-4">
                                                     <div class="ec-vendor-img-upload">
                                                         <div class="ec-vendor-main-img">
+
                                                             <div class="avatar-upload">
                                                                 <div class="avatar-edit">
                                                                     <input
                                                                         type="file"
+                                                                        name="image"
                                                                         id="imageUpload"
                                                                         class="ec-image-upload"
                                                                         accept=".png, .jpg, .jpeg"
@@ -104,354 +111,309 @@
                                                                         <img
                                                                             class="ec-image-preview"
                                                                             src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-preview.jpg"
-                                                                        alt="edit"
-                                                                        />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="thumb-upload-set colo-md-12">
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload01"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
                                                                             alt="edit"
                                                                             />
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload02"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
-                                                                            alt="edit"
+
+                                                            <div class="thumb-upload-set colo-md-12">
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload01"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
                                                                             />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload03"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
-                                                                            alt="edit"
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload02"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
                                                                             />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload04"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
-                                                                            alt="edit"
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload03"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
                                                                             />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload05"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
-                                                                            alt="edit"
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload04"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
                                                                             />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="thumb-upload">
-                                                                <div class="thumb-edit">
-                                                                    <input
-                                                                        type="file"
-                                                                        id="thumbUpload06"
-                                                                        class="ec-image-upload"
-                                                                        accept=".png, .jpg, .jpeg"
-                                                                        />
-                                                                    <label for="imageUpload"
-                                                                           ><img
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
-                                                                            class="svg_img header_svg"
-                                                                            alt="edit"
-                                                                            /></label>
-                                                                </div>
-                                                                <div class="thumb-preview ec-preview">
-                                                                    <div class="image-thumb-preview">
-                                                                        <img
-                                                                            class="image-thumb-preview ec-image-preview"
-                                                                            src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
-                                                                            alt="edit"
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload05"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
                                                                             />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload06"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
+                                                                            />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="ec-vendor-upload-detail">
-                                                    <form class="row g-3">
+                                                <div class="col-lg-8">
+                                                    <div class="ec-vendor-upload-detail">
+
                                                         <div class="col-md-6">
+                                                            <label class="form-label">Select Category</label>
+                                                            <select name="category" id="Categories" class="form-select">
+                                                                <c:forEach items="${sessionScope.categoryAll}" var="category">
+                                                                    <option value="${category.categoryId}">${category.categoryName}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+
+                                                        <div style="margin-top: 30px " class="col-md-6">
+                                                            <label class="form-label">Select Supperlier</label>
+                                                            <select name="supperlier" id="supperlier" class="form-select">
+                                                                <c:forEach items="${sessionScope.supperlierAll}" var="supperlier">
+                                                                    <option value="${supperlier.supperlierId}">${supperlier.company_name}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+
+                                                        <div style="margin-top: 30px " class="col-md-12">
                                                             <label for="inputEmail4" class="form-label"
                                                                    >Product name</label
                                                             >
                                                             <input
                                                                 type="text"
+                                                                name="productName"
                                                                 class="form-control slug-title"
                                                                 id="inputEmail4"
                                                                 />
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <label class="form-label"
-                                                                   >Select Categories</label
-                                                            >
-                                                            <select
-                                                                name="categories"
-                                                                id="Categories"
-                                                                class="form-select"
-                                                                >
-                                                                <optgroup label="Fashion">
-                                                                    <option value="t-shirt">T-shirt</option>
-                                                                    <option value="dress">Dress</option>
-                                                                </optgroup>
-                                                                <optgroup label="Furniture">
-                                                                    <option value="table">Table</option>
-                                                                    <option value="sofa">Sofa</option>
-                                                                </optgroup>
-                                                                <optgroup label="Electronic">
-                                                                    <option value="phone">I Phone</option>
-                                                                    <option value="laptop">Laptop</option>
-                                                                </optgroup>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label for="slug" class="col-12 col-form-label"
-                                                                   >Slug</label
-                                                            >
-                                                            <div class="col-12">
-                                                                <input
-                                                                    id="slug"
-                                                                    name="slug"
-                                                                    class="form-control here set-slug"
-                                                                    type="text"
-                                                                    />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
+
+                                                        <div  style="margin-top: 30px " class="col-md-12">
                                                             <label class="form-label">Sort Description</label>
                                                             <textarea
                                                                 class="form-control"
                                                                 rows="2"
+                                                                name="sortDescription"
                                                                 ></textarea>
                                                         </div>
-                                                        <div class="col-md-4 mb-25">
+
+                                                        <div style="margin-top: 30px " class="col-md-12 mb-25">
                                                             <label class="form-label">Colors</label>
-                                                            <input
-                                                                type="color"
-                                                                class="form-control form-control-color"
-                                                                id="exampleColorInput1"
-                                                                value="#ff6191"
-                                                                title="Choose your color"
-                                                                />
-                                                            <input
-                                                                type="color"
-                                                                class="form-control form-control-color"
-                                                                id="exampleColorInput2"
-                                                                value="#33317d"
-                                                                title="Choose your color"
-                                                                />
-                                                            <input
-                                                                type="color"
-                                                                class="form-control form-control-color"
-                                                                id="exampleColorInput3"
-                                                                value="#56d4b7"
-                                                                title="Choose your color"
-                                                                />
-                                                            <input
-                                                                type="color"
-                                                                class="form-control form-control-color"
-                                                                id="exampleColorInput4"
-                                                                value="#009688"
-                                                                title="Choose your color"
-                                                                />
+                                                            <c:forEach items="${sessionScope.colorAll}" var="color">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input 
+                                                                        type="radio"
+                                                                        name="color"
+                                                                        id="color${color.colorId}"
+                                                                        value="${color.color}"
+                                                                        />
+                                                                    <label for="color${color.colorId}">${color.color}</label>
+                                                                </div>
+
+                                                            </c:forEach>
+
                                                         </div>
-                                                        <div class="col-md-8 mb-25">
-                                                            <label class="form-label">Size</label>
-                                                            <div class="form-checkbox-box">
-                                                                <div class="form-check form-check-inline">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="size1"
-                                                                        value="size"
-                                                                        />
-                                                                    <label>S</label>
-                                                                </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="size1"
-                                                                        value="size"
-                                                                        />
-                                                                    <label>M</label>
-                                                                </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="size1"
-                                                                        value="size"
-                                                                        />
-                                                                    <label>L</label>
-                                                                </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="size1"
-                                                                        value="size"
-                                                                        />
-                                                                    <label>XL</label>
-                                                                </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        name="size1"
-                                                                        value="size"
-                                                                        />
-                                                                    <label>XXL</label>
-                                                                </div>
-                                                            </div>
+                                                        <div style="margin-top: 30px "  class="col-md-12 mb-25">
+                                                            <label style="margin-right: 13.5px " class="form-label">Size</label>
+                                                                <c:forEach items="${sessionScope.sizeAll}" var="size">
+                                                                    <div class="form-check form-check-inline">
+                                                                        <input
+                                                                            type="radio"
+                                                                            name="size"
+                                                                            id="size${size.sizeId}"
+                                                                            value="${size.sizeOption}"
+                                                                            />
+                                                                        <label for="size${size.sizeId}">${size.sizeOption}</label>
+                                                                    </div>
+                                                                </c:forEach>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <label class="form-label"
-                                                                   >Price <span>( In USD )</span></label
-                                                            >
-                                                            <input
-                                                                type="number"
-                                                                class="form-control"
-                                                                id="price1"
-                                                                />
-                                                        </div>
-                                                        <div class="col-md-6">
+
+                                                        <div class="col-md-12">
                                                             <label class="form-label">Quantity</label>
                                                             <input
                                                                 type="number"
                                                                 class="form-control"
-                                                                id="quantity1"
+                                                                name="quantity"
+                                                                id="quantity"
+                                                                value=""
                                                                 />
                                                         </div>
-                                                        <div class="col-md-12">
-                                                            <label class="form-label">Ful Detail</label>
-                                                            <textarea
-                                                                class="form-control"
-                                                                rows="4"
-                                                                ></textarea>
+
+                                                        <div class="col-md-6">
+                                                            <button onclick="optionProduct()" style="margin-top: 30px;" type="button" class="btn btn-primary">
+                                                                Apply
+                                                            </button>
                                                         </div>
-                                                        <div class="col-md-12">
+
+                                                        <div style="margin-top: 30px " class="col-md-12">
                                                             <label class="form-label"
-                                                                   >Product Tags
-                                                                <span
-                                                                    >( Type and make comma to separate tags
-                                                                    )</span
-                                                                ></label
+                                                                   >Price <span>( In VNĐ )</span></label
                                                             >
                                                             <input
-                                                                type="text"
+                                                                type="number"
                                                                 class="form-control"
-                                                                id="group_tag"
-                                                                name="group_tag"
-                                                                value=""
-                                                                placeholder=""
-                                                                data-role="tagsinput"
+                                                                name="price"
+                                                                id="price1"
                                                                 />
                                                         </div>
-                                                        <div class="col-md-12">
+
+
+
+                                                        <div style="margin-top: 30px " class="col-md-12">
+                                                            <label class="form-label">Product Tags</label>
+                                                            <input
+                                                                readonly
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="tongHopOption"
+                                                                name="optionLuaChon"
+                                                                value=""
+                                                                />
+                                                        </div>
+                                                        
+                                                        <div style="margin-top: 30px" class="col-md-12">
                                                             <button type="submit" class="btn btn-primary">
                                                                 Submit
                                                             </button>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <!-- End Content -->
                 </div>
@@ -471,7 +433,7 @@
         <script src="${pageContext.request.contextPath}/js/simplebar.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/jquery.zoom.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
-
+        <script src="${pageContext.request.contextPath}/js/optionaddnewproduct.js"></script>
         <!-- Option Switcher -->
         <script src="${pageContext.request.contextPath}/js/optionswitcher.js"></script>
 

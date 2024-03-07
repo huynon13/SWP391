@@ -53,4 +53,10 @@ public class SupperlierDAO extends MyDAO {
         }
         return null;
     }
+    public static void main(String[] args) {
+        SupperlierDAO sd = new SupperlierDAO();
+        for(Supperlier x : sd.getSupperlierAll()){
+            System.out.println(x);
+        }
+    }
 }

@@ -48,7 +48,8 @@ public class AddCategoryServlet extends HttpServlet {
         } else {
             cd.insertCategory(nameCategory, sortDescription);
             Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
-
+            List<Category> getCategoryAll = cd.getCategoryAll();
+            session.setAttribute("categoryAll", getCategoryAll);
             request.setAttribute("addCategorySucess", "Category name added successfully");
             session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
 

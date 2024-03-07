@@ -48,6 +48,9 @@ public class UpdateCategoryServlet extends HttpServlet {
             cd.updateCategory(categoryId, nameUpdate, descriptionUpdate);
             Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
 
+            List<Category> getCategoryAll = cd.getCategoryAll();
+            session.setAttribute("categoryAll", getCategoryAll);
+            
             request.setAttribute("updateCategorySucess", "Category updated successfully");
             session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
 

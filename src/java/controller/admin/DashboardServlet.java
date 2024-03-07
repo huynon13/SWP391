@@ -5,8 +5,10 @@
 package controller.admin;
 
 import dal.CategoryDAO;
+import dal.ColorDAO;
 import dal.OrderDAO;
 import dal.ProductDAO;
+import dal.SizeDAO;
 import dal.SupperlierDAO;
 import dal.UserDAO;
 import java.io.IOException;
@@ -21,8 +23,10 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import model.Category;
+import model.Color;
 import model.Order;
 import model.Product;
+import model.Size;
 import model.Supperlier;
 import model.User;
 
@@ -45,6 +49,8 @@ public class DashboardServlet extends HttpServlet {
         OrderDAO od = new OrderDAO();
         SupperlierDAO sd = new SupperlierDAO();
         CategoryDAO cd = new CategoryDAO();
+        SizeDAO sizeDAO = new SizeDAO();
+        ColorDAO colorDAO = new ColorDAO();
         
         Map<User, Float> getTopUserByTotalMoney = ud.getTopUserByTotalMoney();
         List<Product> getTop3ProductBestSelling = pd.getTop3Product();
@@ -57,6 +63,8 @@ public class DashboardServlet extends HttpServlet {
         Map<Category, Integer> getTotalProductSoldByCategory = pd.getTotalProductSoldByAllCategory();
         Map<User, Integer> getTotalBuyByUser = ud.getUserAllAndTotalBuy();
         Map<Category, Integer> getTotalProductByCategory = cd.getNumberOfProductbyCategory();
+        List<Size> getSizeAll = sizeDAO.getSizeAll();
+        List<Color> getColorAll = colorDAO.getColorAll();
         
         // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
         Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
@@ -112,6 +120,8 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("totalBuyByUser", getTotalBuyByUser);
         session.setAttribute("totalProductByCategory", getTotalProductByCategory);
         session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
+        session.setAttribute("sizeAll", getSizeAll);
+        session.setAttribute("colorAll", getColorAll);
         
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
