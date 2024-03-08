@@ -67,7 +67,7 @@
                                 </p>
                             </div>
                             <div>
-                                <a href="${pageContext.request.contextPath}/productlist.jsp" class="btn btn-primary">
+                                <a href="${pageContext.request.contextPath}/views/admin/item-page/productlist.jsp" class="btn btn-primary">
                                     View All
                                 </a>
                             </div>
@@ -478,14 +478,18 @@
 
                                                         <div style="margin-top: 30px " class="col-md-12">
                                                             <label class="form-label">Product Tags</label>
-                                                            <input
+
+                                                            <textarea
+                                                                rows="2"
+                                                                style="height: 200px"
                                                                 readonly
                                                                 type="text"
                                                                 class="form-control"
                                                                 id="tongHopOption"
                                                                 name="optionLuaChon"
                                                                 value=""
-                                                                />
+                                                                ></textarea>
+                                                            
                                                         </div>
 
                                                         <div style="margin-top: 30px" class="col-md-12">

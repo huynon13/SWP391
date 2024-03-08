@@ -8,6 +8,11 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import model.Color;
+import model.Product;
+import model.ProductDetail;
+import model.Size;
 
 /**
  *
@@ -28,6 +33,45 @@ public class ProductDetailDAO extends MyDAO {
             } catch (SQLException e) {
                 System.out.println("loi insert  product detail: " + e);
             }
+        }
+    }
+    
+
+    public List<ProductDetail> getProductDetailById(int productId) {
+        List<ProductDetail> list = new ArrayList<>();
+        ProductDAO pd = new ProductDAO();
+        ColorDAO cd = new ColorDAO();
+        SizeDAO sd = new SizeDAO();
+        
+        String sql = "select * from Product_detail\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int colorId = rs.getInt("color_id");
+                int sizeId = rs.getInt("size_id");
+                int quantity = rs.getInt("quantity");
+                
+                Product product = pd.getProductById(productId);
+                Color color = cd.getColorById(colorId);
+                Size size = sd.getSizeById(sizeId);
+                ProductDetail productDetail = new ProductDetail(productId, color, size, quantity);
+                list.add(productDetail);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("loi get product detail by id: " + e);
+            
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+        ProductDetailDAO pdd = new ProductDetailDAO();
+        for(ProductDetail p : pdd.getProductDetailById(18)){
+            System.out.println(p);
         }
     }
 }

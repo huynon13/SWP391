@@ -102,7 +102,7 @@
                                 </p>
                             </div>
                             <div>
-                                <a href="product-list.html" class="btn btn-primary"> Edit </a>
+                                <a href="${pageContext.request.contextPath}/views/admin/item-page/editproduct.jsp?productId=${requestScope.product.productId}" class="btn btn-primary"> Edit </a>
                             </div>
                         </div>
                         <div class="row">

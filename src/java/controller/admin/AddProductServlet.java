@@ -30,11 +30,11 @@ import model.Size;
  */
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/addproduct"})
 public class AddProductServlet extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -43,7 +43,7 @@ public class AddProductServlet extends HttpServlet {
         SizeDAO sd = new SizeDAO();
         GaleryDAO gd = new GaleryDAO();
         ProductDetailDAO pdd = new ProductDetailDAO();
-
+        
         String[] images_raw = request.getParameterValues("image");
         List<String> images = new ArrayList<>();
         for (String x : images_raw) {
@@ -51,12 +51,12 @@ public class AddProductServlet extends HttpServlet {
                 images.add(x);
             }
         }
-
+        
         if (images.size() == 0) {
             String addressPreview = "product-preview.jpg";
             images.add(addressPreview);
         }
-
+        
         String categoryId_raw = request.getParameter("category");
         String supperlierId_raw = request.getParameter("supperlier");
         String productName = request.getParameter("productName");
@@ -64,25 +64,25 @@ public class AddProductServlet extends HttpServlet {
         String price_raw = request.getParameter("price");
         String discount_raw = request.getParameter("discount");
         String optionLuaChon_raw = request.getParameter("optionLuaChon");
-
+        
         int categoryId = Integer.parseInt(categoryId_raw);
         int supperlierId = Integer.parseInt(supperlierId_raw);
         Float price = Float.parseFloat(price_raw);
         int discount = Integer.parseInt(discount_raw);
-
+        
         optionLuaChon_raw = optionLuaChon_raw.substring(0, optionLuaChon_raw.length() - 1);
-        String[] optionLuaChon = optionLuaChon_raw.split("&");
-
+        String[] optionLuaChon = optionLuaChon_raw.split("\\r?\\n");
+        
         List<Integer> listColor = new ArrayList<>();
         List<Integer> listSize = new ArrayList<>();
         List<Integer> listQuantity = new ArrayList<>();
-
+        
         for (String option : optionLuaChon) {
             String[] detailOption = option.split("-");
             String colorName = detailOption[0];
             String sizeName = detailOption[1];
             String quantity_raw = detailOption[2];
-
+            
             Color color = cd.getColorByName(colorName);
             Size size = sd.getSizeByName(sizeName);
             int quantity = Integer.parseInt(quantity_raw);
@@ -120,7 +120,7 @@ public class AddProductServlet extends HttpServlet {
             }
             description = result;
         }
-
+        
         int totalQuantity = 0;
         for (int x : listQuantity) {
             totalQuantity += x;

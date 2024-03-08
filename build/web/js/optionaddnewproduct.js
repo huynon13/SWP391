@@ -26,7 +26,11 @@ function optionProduct() {
     }
     luaChonQuantity = quantity.value;
     if (luaChonColor != '' && luaChonSize != '' && luaChonQuantity != '') {
-        tongHopOption.value += luaChonColor.value + "-" + luaChonSize.value + "-" + luaChonQuantity + "&";
+        if (tongHopOption.value != '') {
+            tongHopOption.value += "\n" + luaChonColor.value + "-" + luaChonSize.value + "-" + '' + luaChonQuantity;
+        } else {
+            tongHopOption.value += luaChonColor.value + "-" + luaChonSize.value + "-" + '' + luaChonQuantity;
+        }
         luaChonColor.checked = false;
         luaChonSize.checked = false;
         quantity.value = '';
@@ -59,5 +63,11 @@ function submitForm() {
             window.alert('Vui lòng nhập phân loại sản phẩm!');
         }
     }
+}
+
+
+function sttEdit(stt) {
+    var anh = document.getElementById('anh' + stt);
+    anh.value = stt;
 }
 

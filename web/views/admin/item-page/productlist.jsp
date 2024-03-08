@@ -151,7 +151,7 @@
 
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}">Detail</a>
-                                                                        <a class="dropdown-item" href="#">Edit</a>
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/editproduct.jsp?productId=${product.productId}">Edit</a>
                                                                         <a class="dropdown-item" href="#">Delete</a>
                                                                     </div>
                                                                 </div>
