@@ -106,6 +106,21 @@ public class AddProductServlet extends HttpServlet {
             }
         }
 
+        // xu li description moi thong tin tren 1 dong
+        if (!description.equals("")) {
+            String[] line = description.split("\\r?\\n");
+            String result = "";
+            for (int i = 0; i < line.length; i++) {
+                if (i != line.length - 1) {
+                    result += line[i];
+                    result += "*";
+                } else {
+                    result += line[i];
+                }
+            }
+            description = result;
+        }
+
         int totalQuantity = 0;
         for (int x : listQuantity) {
             totalQuantity += x;
