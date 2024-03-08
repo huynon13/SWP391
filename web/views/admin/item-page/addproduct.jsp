@@ -67,22 +67,20 @@
                                 </p>
                             </div>
                             <div>
-                                <a href="product-list.html" class="btn btn-primary">
+                                <a href="${pageContext.request.contextPath}/productlist.jsp" class="btn btn-primary">
                                     View All
                                 </a>
                             </div>
                         </div>
-                        <form action="${pageContext.request.contextPath}/addproduct" method="get" class="row g-3">
+                        <form id="f" action="${pageContext.request.contextPath}/addproduct" method="get" class="row g-3">
 
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card card-default">
                                         <div class="card-header card-header-border-bottom">
                                             <h2>Add Product</h2>
+                                            <span style="color: green; margin-left: 20px">${requestScope.addProductSucc}</span>
                                         </div>
-
-
-
 
                                         <div class="card-body">
                                             <div class="row ec-vendor-uploads">
@@ -280,6 +278,84 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload06"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
+                                                                            />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload06"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
+                                                                            />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="thumb-upload">
+                                                                    <div class="thumb-edit">
+                                                                        <input
+                                                                            type="file"
+                                                                            name="image"
+                                                                            id="thumbUpload06"
+                                                                            class="ec-image-upload"
+                                                                            accept=".png, .jpg, .jpeg"
+                                                                            />
+                                                                        <label for="imageUpload"
+                                                                               ><img
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/edit.svg"
+                                                                                class="svg_img header_svg"
+                                                                                alt="edit"
+                                                                                /></label>
+                                                                    </div>
+                                                                    <div class="thumb-preview ec-preview">
+                                                                        <div class="image-thumb-preview">
+                                                                            <img
+                                                                                class="image-thumb-preview ec-image-preview"
+                                                                                src="${pageContext.request.contextPath}/images/upload-preview/vender-upload-thumb-preview.jpg"
+                                                                                alt="edit"
+                                                                                />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -313,7 +389,7 @@
                                                                 type="text"
                                                                 name="productName"
                                                                 class="form-control slug-title"
-                                                                id="inputEmail4"
+                                                                id="productName"
                                                                 />
                                                         </div>
 
@@ -344,17 +420,17 @@
                                                         </div>
                                                         <div style="margin-top: 30px "  class="col-md-12 mb-25">
                                                             <label style="margin-right: 13.5px " class="form-label">Size</label>
-                                                                <c:forEach items="${sessionScope.sizeAll}" var="size">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input
-                                                                            type="radio"
-                                                                            name="size"
-                                                                            id="size${size.sizeId}"
-                                                                            value="${size.sizeOption}"
-                                                                            />
-                                                                        <label for="size${size.sizeId}">${size.sizeOption}</label>
-                                                                    </div>
-                                                                </c:forEach>
+                                                            <c:forEach items="${sessionScope.sizeAll}" var="size">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="size"
+                                                                        id="size${size.sizeId}"
+                                                                        value="${size.sizeOption}"
+                                                                        />
+                                                                    <label for="size${size.sizeId}">${size.sizeOption}</label>
+                                                                </div>
+                                                            </c:forEach>
                                                         </div>
 
                                                         <div class="col-md-12">
@@ -382,10 +458,10 @@
                                                                 type="number"
                                                                 class="form-control"
                                                                 name="price"
-                                                                id="price1"
+                                                                id="price"
                                                                 />
                                                         </div>
-                                                        
+
                                                         <div style="margin-top: 30px " class="col-md-6">
                                                             <label class="form-label"
                                                                    >Discount <span>(0-100)</span></label
@@ -394,7 +470,7 @@
                                                                 type="number"
                                                                 class="form-control"
                                                                 name="discount"
-                                                                id="price2"
+                                                                id="discount"
                                                                 />
                                                         </div>
 
@@ -411,9 +487,9 @@
                                                                 value=""
                                                                 />
                                                         </div>
-                                                        
+
                                                         <div style="margin-top: 30px" class="col-md-12">
-                                                            <button type="submit" class="btn btn-primary">
+                                                            <button onclick="submitForm()" type="button" class="btn btn-primary">
                                                                 Submit
                                                             </button>
                                                         </div>

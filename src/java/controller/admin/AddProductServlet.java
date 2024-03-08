@@ -16,10 +16,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Color;
 import model.Galary;
+import model.Product;
 import model.Size;
 
 /**
@@ -28,19 +30,20 @@ import model.Size;
  */
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/addproduct"})
 public class AddProductServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         ProductDAO pd = new ProductDAO();
         ColorDAO cd = new ColorDAO();
         SizeDAO sd = new SizeDAO();
         GaleryDAO gd = new GaleryDAO();
         ProductDetailDAO pdd = new ProductDetailDAO();
-        
+
         String[] images_raw = request.getParameterValues("image");
         List<String> images = new ArrayList<>();
         for (String x : images_raw) {
@@ -48,7 +51,12 @@ public class AddProductServlet extends HttpServlet {
                 images.add(x);
             }
         }
-        
+
+        if (images.size() == 0) {
+            String addressPreview = "product-preview.jpg";
+            images.add(addressPreview);
+        }
+
         String categoryId_raw = request.getParameter("category");
         String supperlierId_raw = request.getParameter("supperlier");
         String productName = request.getParameter("productName");
@@ -56,25 +64,25 @@ public class AddProductServlet extends HttpServlet {
         String price_raw = request.getParameter("price");
         String discount_raw = request.getParameter("discount");
         String optionLuaChon_raw = request.getParameter("optionLuaChon");
-        
+
         int categoryId = Integer.parseInt(categoryId_raw);
         int supperlierId = Integer.parseInt(supperlierId_raw);
         Float price = Float.parseFloat(price_raw);
         int discount = Integer.parseInt(discount_raw);
-        
+
         optionLuaChon_raw = optionLuaChon_raw.substring(0, optionLuaChon_raw.length() - 1);
         String[] optionLuaChon = optionLuaChon_raw.split("&");
-        
+
         List<Integer> listColor = new ArrayList<>();
         List<Integer> listSize = new ArrayList<>();
         List<Integer> listQuantity = new ArrayList<>();
-        
+
         for (String option : optionLuaChon) {
             String[] detailOption = option.split("-");
             String colorName = detailOption[0];
             String sizeName = detailOption[1];
             String quantity_raw = detailOption[2];
-            
+
             Color color = cd.getColorByName(colorName);
             Size size = sd.getSizeByName(sizeName);
             int quantity = Integer.parseInt(quantity_raw);
@@ -97,17 +105,19 @@ public class AddProductServlet extends HttpServlet {
                 listQuantity.set(index, soLuongCu + quantity);
             }
         }
-        
+
         int totalQuantity = 0;
         for (int x : listQuantity) {
             totalQuantity += x;
         }
 
-
         pd.insertProduct(categoryId, supperlierId, productName, totalQuantity, totalQuantity, 0, price, discount, description);
         int productIdInsert = pd.getProductIdInsertLast();
         pdd.insertProductDetail(productIdInsert, listColor, listSize, listQuantity);
         gd.insertImage(productIdInsert, images);
-        
+        List<Product> getProductAll = pd.getProductAll();
+        session.setAttribute("productAll", getProductAll);
+        request.setAttribute("addProductSucc", "Added new products successfully");
+        request.getRequestDispatcher("views/admin/item-page/addproduct.jsp").forward(request, response);
     }
 }

@@ -35,3 +35,29 @@ function optionProduct() {
     }
 }
 
+function submitForm() {
+    var form = document.getElementById("f");
+    var price = '';
+    var discount = '';
+    var option = '';
+    var productName = '';
+    productName = document.getElementById("productName").value;
+    price = document.getElementById("price").value;
+    discount = document.getElementById("discount").value;
+    option = document.getElementById("tongHopOption").value;
+
+    if (productName != '' && price != '' && discount != '' && option != '') {
+        f.submit();
+    } else {
+        if (productName == '') {
+            window.alert('Vui lòng nhập tên sản phẩm!');
+        } else if (price == '') {
+            window.alert('Vui lòng nhập giá tiền!');
+        } else if (discount == '') {
+            window.alert('Vui lòng nhập khuyến mãi!');
+        } else if (option == '') {
+            window.alert('Vui lòng nhập phân loại sản phẩm!');
+        }
+    }
+}
+

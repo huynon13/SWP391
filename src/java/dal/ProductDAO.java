@@ -49,7 +49,11 @@ public class ProductDAO extends MyDAO {
             ps.setInt(6, quantitySold);
             ps.setFloat(7, price);
             ps.setInt(8, discount);
-            ps.setString(9, description);
+            if (description.equals("")) {
+                ps.setString(9, null);
+            } else {
+                ps.setString(9, description);
+            }
 
             ps.executeUpdate();
         } catch (SQLException e) {
