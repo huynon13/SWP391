@@ -37,22 +37,19 @@ public class AddProductServlet extends HttpServlet {
         SizeDAO sd = new SizeDAO();
 
         String[] image = request.getParameterValues("image");
-        for (String x : image) {
-            if (x.length() != 0) {
-                System.out.println(x);
-            }
-        }
 
         String categoryId_raw = request.getParameter("category");
         String supperlierId_raw = request.getParameter("supperlier");
         String productName = request.getParameter("productName");
         String description = request.getParameter("sortDescription");
         String price_raw = request.getParameter("price");
+        String discount_raw = request.getParameter("discount");
         String optionLuaChon_raw = request.getParameter("optionLuaChon");
 
         int categoryId = Integer.parseInt(categoryId_raw);
         int supperlierId = Integer.parseInt(supperlierId_raw);
         Float price = Float.parseFloat(price_raw);
+        int discount = Integer.parseInt(discount_raw);
 
         optionLuaChon_raw = optionLuaChon_raw.substring(0, optionLuaChon_raw.length() - 1);
         String[] optionLuaChon = optionLuaChon_raw.split("&");
@@ -106,7 +103,8 @@ public class AddProductServlet extends HttpServlet {
         System.out.println("product name: " + productName);
         System.out.println("description: " + description);
         System.out.println("price: " + price);
-
+        System.out.println("discount: " + discount);
+        
         System.out.println("color");
         for (int i = 0; i < listColor.size(); i++) {
             System.out.print(listColor.get(i) + " ");

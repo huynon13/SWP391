@@ -374,7 +374,7 @@
                                                             </button>
                                                         </div>
 
-                                                        <div style="margin-top: 30px " class="col-md-12">
+                                                        <div style="margin-top: 30px " class="col-md-6">
                                                             <label class="form-label"
                                                                    >Price <span>( In VNĐ )</span></label
                                                             >
@@ -383,6 +383,18 @@
                                                                 class="form-control"
                                                                 name="price"
                                                                 id="price1"
+                                                                />
+                                                        </div>
+                                                        
+                                                        <div style="margin-top: 30px " class="col-md-6">
+                                                            <label class="form-label"
+                                                                   >Discount <span>(0-100)</span></label
+                                                            >
+                                                            <input
+                                                                type="number"
+                                                                class="form-control"
+                                                                name="discount"
+                                                                id="price2"
                                                                 />
                                                         </div>
 
