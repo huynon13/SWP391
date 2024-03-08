@@ -64,6 +64,7 @@ public class CategoryDAO extends MyDAO {
     public Map<Category, List<Product>> getTop5ProductByCategory() {
         Map<Category, List<Product>> map = new LinkedHashMap<>();
         List<Category> listCategory = getCategoryAll();
+        SupperlierDAO sd = new SupperlierDAO();
         for (Category x : listCategory) {
             sql = "select top 3 * from Product\n"
                     + "where category_id = ?\n"
@@ -76,7 +77,7 @@ public class CategoryDAO extends MyDAO {
                 while (rs.next()) {
                     Product product = (new Product(rs.getInt("product_id"),
                             getCategoryById(rs.getInt("category_id")),
-                            rs.getInt("supperlier_id"),
+                            sd.getSupperlierById(rs.getInt("supperlier_id")),
                             rs.getString("product_name"),
                             rs.getInt("quantity_per_unit"),
                             rs.getInt("quantity_stock"),

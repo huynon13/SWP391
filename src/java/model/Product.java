@@ -28,7 +28,7 @@ public class Product {
 
     private int productId;
     private Category category;
-    private int supperlierId;
+    private Supperlier supperlier;
     private String productName;
     private int quantityPerUnit;
     private int quantityStock;
@@ -45,10 +45,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productId, Category category, int supperlierId, String productName, int quantityPerUnit, int quantityStock, int quantitySold, double price, int discount, String desciption, Date createdAt, Date updatedAt, int deleted) {
+    public Product(int productId, Category category, Supperlier supperlier, String productName, int quantityPerUnit, int quantityStock, int quantitySold, double price, int discount, String desciption, Date createdAt, Date updatedAt, int deleted) {
         this.productId = productId;
         this.category = category;
-        this.supperlierId = supperlierId;
+        this.supperlier = supperlier;
         this.productName = productName;
         this.quantityPerUnit = quantityPerUnit;
         this.quantityStock = quantityStock;
@@ -61,10 +61,10 @@ public class Product {
         this.deleted = deleted;
     }
 
-    public Product(int productId, Category category, int supperlierId, String productName, int quantityPerUnit, double price, Date createdAt, int deleted) {
+    public Product(int productId, Category category, Supperlier supperlier, String productName, int quantityPerUnit, double price, Date createdAt, int deleted) {
         this.productId = productId;
         this.category = category;
-        this.supperlierId = supperlierId;
+        this.supperlier = supperlier;
         this.productName = productName;
         this.quantityPerUnit = quantityPerUnit;
         this.price = price;
@@ -88,13 +88,15 @@ public class Product {
         this.category = category;
     }
 
-    public int getSupperlierId() {
-        return supperlierId;
+    public Supperlier getSupperlier() {
+        return supperlier;
     }
 
-    public void setSupperlierId(int supperlierId) {
-        this.supperlierId = supperlierId;
+    public void setSupperlier(Supperlier supperlier) {
+        this.supperlier = supperlier;
     }
+
+    
 
     public String getProductName() {
         return productName;
@@ -194,7 +196,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + " Price: " + price + " , supperlierId=" + supperlierId + ", productName=" + productName + ", quantityPerUnit=" + quantityPerUnit + ", discount=" + discount + ", createdAt=" + createdAt + ", deleted=" + deleted + '}';
+        return "Product{" + "productId=" + productId + " Price: " + price + " , supperlierId=" + supperlier + ", productName=" + productName + ", quantityPerUnit=" + quantityPerUnit + ", discount=" + discount + ", createdAt=" + createdAt + ", deleted=" + deleted + '}';
     }
 
     

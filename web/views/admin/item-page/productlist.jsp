@@ -80,35 +80,35 @@
                                 </div>
                                 <div>
                                     <a href="${pageContext.request.contextPath}/views/admin/item-page/addproduct.jsp" class="btn btn-primary">
-                                        Add Porduct</a
-                                    >
-                                </div>
+                                    Add Porduct</a
+                                >
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card card-default">
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table
-                                                    id="responsive-data-table"
-                                                    class="table"
-                                                    style="width: 100%"
-                                                    >
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Product</th>
-                                                            <th>Name</th>
-                                                            <th>Price</th>
-                                                            <th>Offer</th>
-                                                            <th>Purchased</th>
-                                                            <th>Stock</th>
-                                                            <th>Status</th>
-                                                            <th>Date</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-default">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table
+                                                id="responsive-data-table"
+                                                class="table"
+                                                style="width: 100%"
+                                                >
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Name</th>
+                                                        <th>Price</th>
+                                                        <th>Offer</th>
+                                                        <th>Purchased</th>
+                                                        <th>Stock</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody>
+                                                <tbody>
                                                     <c:forEach items="${sessionScope.productAll}" var="product">
                                                         <tr>
                                                             <td>
@@ -126,7 +126,7 @@
                                                             <c:if test="${product.deleted == 0}">
                                                                 <td>ACTIVE</td>
                                                             </c:if>
-                                                                <c:if test="${product.deleted == 1}">
+                                                            <c:if test="${product.deleted == 1}">
                                                                 <td>INACTIVE</td>
                                                             </c:if>
                                                             <td>${product.createdAt}</td>
@@ -150,6 +150,7 @@
                                                                     </button>
 
                                                                     <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}">Detail</a>
                                                                         <a class="dropdown-item" href="#">Edit</a>
                                                                         <a class="dropdown-item" href="#">Delete</a>
                                                                     </div>

@@ -21,6 +21,23 @@ import model.Category;
  */
 public class ProductDAO extends MyDAO {
 
+    public int getPendingByProduct(int productId) {
+        String sql = "select COUNT(od.product_id) as product_pending from Orders as o\n"
+                + "inner join Order_Details as od on o.Order_id = od.order_id\n"
+                + "where o.status = 0 and od.product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("product_pending");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get pending py porduct: " + e);
+        }
+        return 0;
+    }
+
     public int getProductIdInsertLast() {
         String sql = "select top 1 product_id from Product\n"
                 + "order by product_id desc";
@@ -358,6 +375,7 @@ public class ProductDAO extends MyDAO {
 
     public Product getProductById(int id) {
         CategoryDAO cd = new CategoryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         String sql = "select * from Product\n"
                 + "where product_id = ?";
         try {
@@ -367,7 +385,7 @@ public class ProductDAO extends MyDAO {
             if (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
@@ -397,6 +415,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getRelatedProductByCategory(int pid, int cid) {
         CategoryDAO cd = new CategoryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         GaleryDAO gd = new GaleryDAO();
         List<Product> list = new ArrayList<>();
         String sql = "select Top 6 * from Product\n"
@@ -409,7 +428,7 @@ public class ProductDAO extends MyDAO {
             while (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
@@ -437,6 +456,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> getTop5Product() {
         CategoryDAO cd = new CategoryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         List<Product> list = new ArrayList<>();
 
         sql = "select top 5 * from Product";
@@ -447,7 +467,7 @@ public class ProductDAO extends MyDAO {
             while (rs.next()) {
                 list.add(new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
@@ -494,6 +514,7 @@ public class ProductDAO extends MyDAO {
 
     public List<Product> top10Bestseller() {
         CategoryDAO cd = new CategoryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         List<Product> list = new ArrayList<>();
 
         // lay ve top 10 san pham ban chay nhat, sap xep giam dan theo so luong ban ra, danh gia, va tang dan theo id
@@ -506,7 +527,7 @@ public class ProductDAO extends MyDAO {
             while (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
@@ -540,6 +561,7 @@ public class ProductDAO extends MyDAO {
     public List<Product> getProductAll() {
         List<Product> list = new ArrayList<>();
         GaleryDAO gd = new GaleryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         CategoryDAO cd = new CategoryDAO();
         String sql = "select * from Product";
         try {
@@ -548,7 +570,7 @@ public class ProductDAO extends MyDAO {
             while (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
@@ -607,6 +629,7 @@ public class ProductDAO extends MyDAO {
         Map<Category, List<Product>> map = new LinkedHashMap<>();
         CategoryDAO cd = new CategoryDAO();
         GaleryDAO gd = new GaleryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
         List<Category> listCategory = cd.getCategoryAll();
         for (Category category : listCategory) {
             List<Product> list = new ArrayList<>();
@@ -619,7 +642,7 @@ public class ProductDAO extends MyDAO {
                 while (rs.next()) {
                     Product product = (new Product(rs.getInt("product_id"),
                             cd.getCategoryById(rs.getInt("category_id")),
-                            rs.getInt("supperlier_id"),
+                            sd.getSupperlierById(rs.getInt("supperlier_id")),
                             rs.getString("product_name"),
                             rs.getInt("quantity_per_unit"),
                             rs.getInt("quantity_stock"),
@@ -651,6 +674,7 @@ public class ProductDAO extends MyDAO {
     public List<Product> getTop6NewProductAll() {
         List<Product> list = new ArrayList<>();
         CategoryDAO cd = new CategoryDAO();
+        SupperlierDAO sd = new SupperlierDAO();
 
         // lay ve top 10 san pham ban chay nhat, sap xep giam dan theo so luong ban ra, danh gia, va tang dan theo id
         sql = "select top 6 * from Product as p\n"
@@ -662,7 +686,7 @@ public class ProductDAO extends MyDAO {
             while (rs.next()) {
                 Product product = (new Product(rs.getInt("product_id"),
                         cd.getCategoryById(rs.getInt("category_id")),
-                        rs.getInt("supperlier_id"),
+                        sd.getSupperlierById(rs.getInt("supperlier_id")),
                         rs.getString("product_name"),
                         rs.getInt("quantity_per_unit"),
                         rs.getInt("quantity_stock"),
