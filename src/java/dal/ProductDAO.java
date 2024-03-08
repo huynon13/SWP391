@@ -21,6 +21,42 @@ import model.Category;
  */
 public class ProductDAO extends MyDAO {
 
+    public int getProductIdInsertLast() {
+        String sql = "select top 1 product_id from Product\n"
+                + "order by product_id desc";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("product_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get product id last insert: " + e);
+        }
+        return -1;
+    }
+
+    public void insertProduct(int categoryId, int supperlierId, String productName, int quantityPerUnit, int quantityStock, int quantitySold, float price, int discount, String description) {
+        String sql = "insert into Product(category_id, supperlier_id, product_name, quantity_per_unit, quantity_stock, quantity_sold, price, discount, desciption, created_at, deleted)\n"
+                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), 0)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ps.setInt(2, supperlierId);
+            ps.setString(3, productName);
+            ps.setInt(4, quantityPerUnit);
+            ps.setInt(5, quantityStock);
+            ps.setInt(6, quantitySold);
+            ps.setFloat(7, price);
+            ps.setInt(8, discount);
+            ps.setString(9, description);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi insert product: " + e);
+        }
+    }
+
     public Map<Category, Integer> getTotalProductSoldByAllCategory() {
         CategoryDAO cd = new CategoryDAO();
         Map<Category, Integer> map = new LinkedHashMap<>();
@@ -30,7 +66,7 @@ public class ProductDAO extends MyDAO {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int categoryId = rs.getInt("category_id");
                 int totalProductSold = rs.getInt("total_product_sold");
                 Category c = cd.getCategoryById(categoryId);

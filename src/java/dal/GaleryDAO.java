@@ -7,23 +7,24 @@ package dal;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 /**
  *
  * @author PC
  */
-public class GaleryDAO extends MyDAO{
-    
-        public List<String> getImagesById(int id) {
+public class GaleryDAO extends MyDAO {
+
+    public List<String> getImagesById(int id) {
         List<String> list = new ArrayList<>();
         String sql = "select g.thumbnail from Product as p\n"
                 + "inner join Galery as g on p.product_id = g.product_id\n"
                 + "where p.product_id = ?";
 
         try {
-            ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(rs.getString("thumbnail"));
             }
@@ -35,5 +36,20 @@ public class GaleryDAO extends MyDAO{
         }
 
         return list;
+    }
+
+    public void insertImage(int productId, List<String> images) {
+        for (String image : images) {
+            String sql = "insert into Galery(product_id, thumbnail) values(?, ?)";
+            String addessImage = "images/products/newproduct/" + image;
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, productId);
+                ps.setString(2, addessImage);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("loi insert anh");
+            }
+        }
     }
 }
