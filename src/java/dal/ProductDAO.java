@@ -78,6 +78,38 @@ public class ProductDAO extends MyDAO {
         }
     }
 
+    public void updateProduct(int categoryId, int supperlierId, String productName, int quantityPerUnit, int quantityStock, float price, int discount, String description, int productId) {
+        String sql = "update Product\n"
+                + "set\n"
+                + "category_id = ?,\n"
+                + "supperlier_id = ?,\n"
+                + "product_name = ?,\n"
+                + "quantity_per_unit = ?,\n"
+                + "quantity_stock = ?,\n"
+                + "price = ?,\n"
+                + "discount = ?,\n"
+                + "desciption = ?,\n"
+                + "updated_at = GETDATE(),\n"
+                + "deleted = 0\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ps.setInt(2, supperlierId);
+            ps.setString(3, productName);
+            ps.setInt(4, quantityPerUnit);
+            ps.setInt(5, quantityStock);
+            ps.setFloat(6, price);
+            ps.setInt(7, discount);
+            ps.setString(8, description);
+            ps.setInt(9, productId);
+            
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update product: " + e);
+        }
+    }
+
     public Map<Category, Integer> getTotalProductSoldByAllCategory() {
         CategoryDAO cd = new CategoryDAO();
         Map<Category, Integer> map = new LinkedHashMap<>();

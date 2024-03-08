@@ -113,12 +113,6 @@
 
                                             String productTag = "";
                                             List<ProductDetail> listProductDetail = pdd.getProductDetailById(productId);
-                                            for (ProductDetail p : listProductDetail) {
-                                                String color = p.getColor().getColor();
-                                                String sizeOption = p.getSize().getSizeOption();
-                                                int quantity = p.getQuantity();
-                                                productTag += color + "-" + sizeOption + "-" + quantity + "\n";
-                                            }
 
                                             for (int i = 0; i < listProductDetail.size(); i++) {
                                                 String color = listProductDetail.get(i).getColor().getColor();
