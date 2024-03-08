@@ -3,15 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Assginment_PRJ301">
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/admin/AddProductServlet.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/GaleryDAO.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/ProductDetailDAO.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/UserDAO.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/addproduct.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/js/optionaddnewproduct.js</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/ProductDAO.java</file>
             <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/ProductDetail.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/user/HomeServlet.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/SupperlierDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/ProductDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/productlist.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/FeedBackDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Supperlier.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/CommentDAO.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/admin/DashboardServlet.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Product.java</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/productdetail.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/user/item-page/productdetail.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/model/Comment.java</file>
         </group>
     </open-files>
 </project-private>

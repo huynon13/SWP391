@@ -74,7 +74,7 @@
                                 <div>
                                     <h1>Product</h1>
                                     <p class="breadcrumbs">
-                                        <span><a href="index.html">Home</a></span>
+                                        <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
                                         <span><i class="mdi mdi-chevron-right"></i></span>Product
                                     </p>
                                 </div>

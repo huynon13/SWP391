@@ -96,6 +96,8 @@
                                 <h1>Product Detail</h1>
                                 <p class="breadcrumbs">
                                     <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
+                                    <i class="mdi mdi-chevron-right"></i>
+                                    <span><a href="${pageContext.request.contextPath}/views/admin/item-page/productlist.jsp">List Product</a></span>
                                     <span><i class="mdi mdi-chevron-right"></i></span>Product Detail
                                 </p>
                             </div>
