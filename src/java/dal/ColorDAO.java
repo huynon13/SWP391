@@ -57,4 +57,20 @@ public class ColorDAO extends MyDAO {
         ColorDAO cd = new ColorDAO();
         System.out.println(cd.getColorById(6));
     }
+
+    public Color getColorByName(String name) {
+        String sql = "select * from Colors \n"
+                + "where color = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Color(rs.getInt("color_id"), rs.getString("color"));
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get color by name: " + e);
+        }
+        return null;
+    }
 }

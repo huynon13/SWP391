@@ -55,4 +55,20 @@ public class SizeDAO extends MyDAO {
         SizeDAO sd = new SizeDAO();
         System.out.println(sd.getSizeById(1));
     }
+
+    public Size getSizeByName(String name) {
+        String sql = "select * from Size\n"
+                + "where size_option = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Size(rs.getInt("size_id"), rs.getString("size_option"));
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get size by name: " + e);
+        }
+        return null;
+    }
 }
