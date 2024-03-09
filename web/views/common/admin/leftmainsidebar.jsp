@@ -71,6 +71,11 @@
                                     <span class="nav-text">Your Profile</span>
                                 </a>
                             </li>
+                            <li class="">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/wallets.jsp">
+                                        <span class="nav-text">Wallets</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <hr />
@@ -145,6 +150,15 @@
                     <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/review.jsp">
                         <i class="mdi mdi-star-half"></i>
                         <span class="nav-text">Reviews</span>
+                    </a>
+                </li>
+
+                <!--feetback-->
+
+                <li>
+                    <a class="sidenav-item-link" href="#">
+                        <i class="mdi mdi-star-half"></i>
+                        <span class="nav-text">Feedback</span>
                     </a>
                 </li>
 

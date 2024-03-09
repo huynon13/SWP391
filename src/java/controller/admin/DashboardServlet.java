@@ -13,6 +13,7 @@ import dal.ProductDAO;
 import dal.SizeDAO;
 import dal.SupperlierDAO;
 import dal.UserDAO;
+import dal.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -34,6 +35,7 @@ import model.Product;
 import model.Size;
 import model.Supperlier;
 import model.User;
+import model.Wallet;
 
 /**
  *
@@ -58,6 +60,7 @@ public class DashboardServlet extends HttpServlet {
         ColorDAO colorDAO = new ColorDAO();
         OrderDetailDAO odd = new OrderDetailDAO();
         CommentDAO cmd = new CommentDAO();
+        WalletDAO wd = new WalletDAO();
 
         Map<User, Float> getTopUserByTotalMoney = ud.getTopUserByTotalMoney();
         List<Product> getTop3ProductBestSelling = pd.getTop3Product();
@@ -73,7 +76,7 @@ public class DashboardServlet extends HttpServlet {
         List<Size> getSizeAll = sizeDAO.getSizeAll();
         List<Color> getColorAll = colorDAO.getColorAll();
         List<Comment> getCommentAll = cmd.getCommentAll();
-
+        List<Wallet> getWalletAll = wd.getWalletAll();
         // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
         Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
 
@@ -133,7 +136,8 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("colorAll", getColorAll);
         session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
         session.setAttribute("commentAll", getCommentAll);
-
+        session.setAttribute("walletAll", getWalletAll);
+        
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
 

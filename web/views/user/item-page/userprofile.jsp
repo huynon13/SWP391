@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="model.Wallet"%>
+<%@page import="dal.WalletDAO"%>
 <%@page import="model.User"%>
 <%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.Map"%>
@@ -88,6 +90,11 @@
                                     map.put(x.getKey(), x.getValue());
                                 }
                             }
+                            
+                            WalletDAO wd = new WalletDAO();
+                            Wallet wallet = wd.getWalletByUserId(account.getUserId());
+                            
+                            request.setAttribute("wallet", wallet);
                             
                             request.setAttribute("orderAndOrderDetailByUser", map);
                             int soLuongItemDaMua = 0;
@@ -371,6 +378,11 @@
                                                             <label for="userName">User name</label>
                                                             <input type="text" class="form-control" id="userName"
                                                                    value="${sessionScope.account.userName}" readonly>
+                                                        </div>
+                                                        <div class="form-group mb-4">
+                                                            <label for="balance">Balance</label>
+                                                            <input type="text" class="form-control" id="balance"
+                                                                   value="${requestScope.wallet.balance}" readonly>
                                                         </div>
                                                         <span style="color: red">${requestScope.errorPassword}</span>
                                                         <div class="form-group mb-4">

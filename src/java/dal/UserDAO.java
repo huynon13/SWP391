@@ -243,6 +243,22 @@ public class UserDAO extends MyDAO {
         return false;
     }
 
+    public int getUserIdByUserName(String username) {
+        String sql = "select * from Users\n"
+                + "where user_name = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("user_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get user by username: " + e);
+        }
+        return -1;
+    }
+
     public User login(String username, String password) {
         RoleDAO rd = new RoleDAO();
         String sql = "select * from Users\n"
