@@ -5,7 +5,7 @@
 
 
 function deleteCategory(address, name) {
-    if(confirm('Are you sure you want to delete Category: ' + name + '?')){
+    if (confirm('Are you sure you want to delete Category: ' + name + '?')) {
         console.log(window.location.host + address);
         window.location.href = address;
     }
@@ -13,8 +13,8 @@ function deleteCategory(address, name) {
 
 
 
-function deleteComment(address){
-    if(confirm("Bạn có chắc chắn muốn xóa comment này không!")){
+function deleteComment(address) {
+    if (confirm("Bạn có chắc chắn muốn xóa comment này không!")) {
         window.location.href = address;
     }
 }

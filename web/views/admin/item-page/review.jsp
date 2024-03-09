@@ -112,9 +112,9 @@
 
                                                                     <div class="dropdown-menu">
                                                                         <c:if test="${comment.user.userId == sessionScope.account.userId && comment.luotEdit == 1}">
-                                                                            <a class="dropdown-item" href="#">Edit</a>
+                                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/productdetail?pid=${comment.product.productId}">Edit</a>
                                                                         </c:if>
-                                                                        <a class="dropdown-item" href="#">Delete</a>
+                                                                            <a class="dropdown-item" onclick="deleteComment('${pageContext.request.contextPath}/updatecommentforproduct?action=delete&userId=${comment.user.userId}&productId=${comment.product.productId}')" href="javascript:void(0)">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -164,6 +164,7 @@
 
         <!-- Ekka Custom -->
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
     </body>
 
 

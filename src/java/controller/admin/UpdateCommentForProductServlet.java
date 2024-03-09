@@ -12,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Comment;
 
 /**
  *
@@ -41,13 +44,23 @@ public class UpdateCommentForProductServlet extends HttpServlet {
             try {
                 int rating = Integer.parseInt(rating_raw);
                 cmd.updateCommentByUserAndProduct(userId, productId, rating, content);
-                response.sendRedirect("productdetail?pid=" + productId);
             } catch (NumberFormatException e) {
                 System.out.println("loi chuyen doi so: " + e);
             }
         } else {
             cmd.deleteCommentByUserAndProduct(userId, productId);
-            response.sendRedirect("productdetail?pid=" + productId);
+        }
+        HttpSession session = request.getSession();
+        List<Comment> getCommentAll = cmd.getCommentAll();
+        session.setAttribute("commentAll", getCommentAll);
+
+        // lay ve dia chi cua trang truoc do
+        String previousPage = request.getHeader("referer");
+        if (previousPage != null && !previousPage.isEmpty()) {
+            System.out.println(previousPage);
+            response.sendRedirect(previousPage);
+        } else {
+            System.out.println("Không có trang trước đó hoặc không thể xác định.");
         }
     }
 
