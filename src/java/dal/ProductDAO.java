@@ -21,6 +21,24 @@ import model.Category;
  */
 public class ProductDAO extends MyDAO {
 
+    public int getNumberOfProductPurchasesByUserIdAndProductId(int userId, int productId) {
+        String sql = "select COUNT(od.product_id) as so_lan_mua from Orders as o\n"
+                + "inner join Order_Details as od on o.Order_id = od.order_id\n"
+                + "where o.user_id = ? and product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setInt(2, productId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("so_lan_mua");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get number of purchase by user and product: " + e);
+        }
+        return 0;
+    }
+
     public int getPendingByProduct(int productId) {
         String sql = "select COUNT(od.product_id) as product_pending from Orders as o\n"
                 + "inner join Order_Details as od on o.Order_id = od.order_id\n"
@@ -103,7 +121,7 @@ public class ProductDAO extends MyDAO {
             ps.setInt(7, discount);
             ps.setString(8, description);
             ps.setInt(9, productId);
-            
+
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("loi update product: " + e);
@@ -751,8 +769,6 @@ public class ProductDAO extends MyDAO {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
-        for (Product p : pd.getProductAll()) {
-            System.out.println(p);
-        }
+        System.out.println(pd.getNumberOfProductPurchasesByUserIdAndProductId(7, 1));
     }
 }

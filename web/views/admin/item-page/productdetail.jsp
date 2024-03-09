@@ -306,13 +306,22 @@
                                                                                 </c:forEach>
                                                                             </div>
                                                                         </div>
-                                                                            
+
                                                                         <div class="ec-t-review-bottom">
                                                                             <p>
                                                                                 ${com.content}
                                                                             </p>
+                                                                            <p>
+                                                                                <c:if test="${com.user.userId == sessionScope.account.userId && com.luotEdit == 1}">
+                                                                                    <a href="#">Edit</a>
+                                                                                </c:if>
+                                                                                <a  href="#">Delete</a>
+                                                                            </p>
+                                                                            
                                                                         </div>
+
                                                                     </div>
+
                                                                 </div>
                                                             </c:forEach>
 

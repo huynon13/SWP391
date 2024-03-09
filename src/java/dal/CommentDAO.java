@@ -20,6 +20,39 @@ import model.User;
  */
 public class CommentDAO extends MyDAO {
 
+    public void deleteCommentByUserAndProduct(int userId, int productId) {
+        String sql = "delete from Comment\n"
+                + "where user_id = ? and product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi xoa comment by user and product");
+        }
+    }
+
+    public void updateCommentByUserAndProduct(int userId, int productId, int rating, String content) {
+        String sql = "update Comment\n"
+                + "set\n"
+                + "luot_edit = 0,\n"
+                + "rating = ?,\n"
+                + "content = ?,\n"
+                + "comment_date_update = GETDATE()\n"
+                + "where product_id = ? and user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, rating);
+            ps.setString(2, content);
+            ps.setInt(3, productId);
+            ps.setInt(4, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update comment: " + e);
+        }
+    }
+
     public List<Comment> getCommentByProductId(int pid) {
         ProductDAO pd = new ProductDAO();
         UserDAO ud = new UserDAO();
@@ -37,6 +70,8 @@ public class CommentDAO extends MyDAO {
                 Date comment_date = rs.getDate("comment_date");
                 int rating = rs.getInt("rating");
                 Comment newComment = new Comment(p, u, content, comment_date, rating);
+                newComment.setLuotEdit(rs.getInt("luot_edit"));
+                newComment.setCommentDateUpdate(rs.getDate("comment_date_update"));
                 list.add(newComment);
 
             }
@@ -45,6 +80,33 @@ public class CommentDAO extends MyDAO {
             System.out.println("loi get comment");
         }
         return list;
+    }
+
+    public Comment getCommentByProductIdAndUserId(int userId, int productId) {
+        ProductDAO pd = new ProductDAO();
+        UserDAO ud = new UserDAO();
+        String sql = "select * from Comment\n"
+                + "where product_id = ? and user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.setInt(2, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Product p = pd.getProductById(productId);
+                User u = ud.getUserById(userId);
+                String content = rs.getString("content");
+                Date comment_date = rs.getDate("comment_date");
+                int rating = rs.getInt("rating");
+                Comment comment = new Comment(p, u, content, comment_date, rating);
+                comment.setLuotEdit(rs.getInt("luot_edit"));
+                comment.setCommentDateUpdate(rs.getDate("comment_date_update"));
+                return comment;
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get comment by product and user");
+        }
+        return null;
     }
 
     public List<Comment> getCommentAll() {
@@ -63,6 +125,8 @@ public class CommentDAO extends MyDAO {
                 Date comment_date = rs.getDate("comment_date");
                 int rating = rs.getInt("rating");
                 Comment newComment = new Comment(p, u, content, comment_date, rating);
+                newComment.setLuotEdit(rs.getInt("luot_edit"));
+                newComment.setCommentDateUpdate(rs.getDate("comment_date_update"));
                 list.add(newComment);
             }
         } catch (SQLException e) {
@@ -73,8 +137,6 @@ public class CommentDAO extends MyDAO {
 
     public static void main(String[] args) {
         CommentDAO cd = new CommentDAO();
-        for (Comment x : cd.getCommentAll()) {
-            System.out.println(x);
-        }
+        System.out.println(cd.getCommentByProductIdAndUserId(7, 1));
     }
 }

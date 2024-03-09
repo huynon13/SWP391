@@ -111,7 +111,7 @@
                                                                     </button>
 
                                                                     <div class="dropdown-menu">
-                                                                        <c:if test="${comment.user.userId == sessionScope.account.userId}">
+                                                                        <c:if test="${comment.user.userId == sessionScope.account.userId && comment.luotEdit == 1}">
                                                                             <a class="dropdown-item" href="#">Edit</a>
                                                                         </c:if>
                                                                         <a class="dropdown-item" href="#">Delete</a>

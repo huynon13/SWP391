@@ -11,3 +11,10 @@ function deleteCategory(address, name) {
     }
 }
 
+
+
+function deleteComment(address){
+    if(confirm("Bạn có chắc chắn muốn xóa comment này không!")){
+        window.location.href = address;
+    }
+}

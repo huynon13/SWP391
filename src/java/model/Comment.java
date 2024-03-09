@@ -20,7 +20,9 @@ public class Comment {
     private Product product;
     private User user;
     private String content;
+    private int luotEdit;
     private Date commentDate;
+    private Date commentDateUpdate;
     private int rating;
 
     public Comment() {
@@ -32,6 +34,23 @@ public class Comment {
         this.content = content;
         this.commentDate = comment_date;
         this.rating = rating;
+    }
+
+    public Comment(Product product, User user, String content, int luotEdit, Date commentDate, int rating) {
+        this.product = product;
+        this.user = user;
+        this.content = content;
+        this.luotEdit = luotEdit;
+        this.commentDate = commentDate;
+        this.rating = rating;
+    }
+
+    public int getLuotEdit() {
+        return luotEdit;
+    }
+
+    public void setLuotEdit(int luotEdit) {
+        this.luotEdit = luotEdit;
     }
 
     public Product getProduct() {
@@ -74,9 +93,16 @@ public class Comment {
         this.rating = rating;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" + "product=" + product.getProductId() + ", user=" + user.getUserName() + ", content=" + content + ", comment_date=" + commentDate + ", rating=" + rating + '}';
+    public Date getCommentDateUpdate() {
+        return commentDateUpdate;
     }
 
+    public void setCommentDateUpdate(Date commentDateUpdate) {
+        this.commentDateUpdate = commentDateUpdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" + "product=" + product + ", user=" + user + ", content=" + content + ", luotEdit=" + luotEdit + ", commentDate=" + commentDate + ", commentDateUpdate=" + commentDateUpdate + ", rating=" + rating + '}';
+    }
 }

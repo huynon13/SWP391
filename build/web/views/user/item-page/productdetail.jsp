@@ -4,6 +4,10 @@
     Author     : PC
 --%>
 
+<%@page import="model.Comment"%>
+<%@page import="dal.CommentDAO"%>
+<%@page import="model.User"%>
+<%@page import="dal.ProductDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Product"%>
@@ -193,7 +197,7 @@
                         </div>
                     </div>
                 </div>
-                                                
+
                 <div class="product-tabs">
                     <div class="menu-fulter">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -232,6 +236,10 @@
                             </div> 
                         </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+
+
+
                             <div class="review-form">
                                 <div class="ev-comments">
                                     <div class="comment-wrapper">
@@ -239,7 +247,7 @@
                                             <h3>${sessionScope.listComment.size()} Review</h3>
                                         </div>
 
-                                        <c:forEach items="${listComment}" var="comment">
+                                        <c:forEach items="${sessionScope.listComment}" var="comment">
                                             <div class="comment-inner  d-lg-flex d-md-block">
                                                 <div class="comment-img">
                                                     <img class="rounded-circle img-fluid" style="max-width: 80px"  src="${pageContext.request.contextPath}/${comment.user.image}" alt="product">
@@ -248,9 +256,25 @@
                                                     <ul class="comment-top d-flex justify-content-between">
                                                         <li>
                                                             <h6>${comment.user.userName}</h6>
-                                                            <span>${comment.comment_date}</span>
+                                                            <span>${comment.commentDate}</span>
+                                                            <c:if test="${comment.commentDateUpdate != null}">
+                                                                <br/>
+                                                                <span>edit: ${comment.commentDateUpdate}</span>
+                                                            </c:if>
+                                                            <c:forEach begin="${1}" end="${comment.rating}">
+                                                            <li><i class="fa-sharp fa-solid fa-star"></i></li>
+                                                            </c:forEach>
+                                                            <c:forEach begin="${comment.rating + 1}" end="${5}">
+                                                            <li><i class="fa-sharp fa-regular fa-star"></i></li>
+                                                            </c:forEach>
                                                         </li>
-                                                        <li><a href="#" class="reply-btn">reply</a></li>
+                                                        <c:if test="${comment.user.userId == sessionScope.account.userId && comment.luotEdit == 1}">
+                                                            <li><a href="#" class="reply-btn">Edit</a></li>
+                                                            </c:if>
+                                                            <c:if test="${comment.user.userId == sessionScope.account.userId || sessionScope.account.role.roleId == 1}">
+                                                            <li><a onclick="deleteComment('updatecommentforproduct?action=delete&userId=${comment.user.userId}&productId=${comment.product.productId}')" href="javascript:void(0)" class="reply-btn">Delete</a></li>
+                                                            
+                                                            </c:if>
                                                     </ul>
                                                     <p class="preview-text">${comment.content}</p>
                                                 </div>
@@ -259,59 +283,110 @@
 
                                     </div>
                                 </div>
-                                <div class="inner-form">
-                                    <h3>Add Review</h3>
-                                    <form>
-                                        <!-- General Information -->
-                                        <input type="text" name="name" placeholder="Your Name" required>
 
-                                        <input type="email" name="email" placeholder="Your Email" required>
+                                <%
+                                    ProductDAO pd = new ProductDAO();
+                                    CommentDAO cmd = new CommentDAO();
+                                    User account = (User)session.getAttribute("account");
+                                    int userId = account.getUserId();
+                                    String productId_raw = request.getParameter("pid");
+                                    int productId = Integer.parseInt(productId_raw);
+                                    Comment comment = cmd.getCommentByProductIdAndUserId(userId, productId);
+                                    System.out.println(comment);
+                                    request.setAttribute("comment", comment);
+                                    int soLanMua = 0;
+                                         soLanMua = pd.getNumberOfProductPurchasesByUserIdAndProductId(userId, productId);
+                                    System.out.println(soLanMua);
+                                    request.setAttribute("soLanMua", soLanMua);
+                                %>
 
-                                        <input type="text" name="date" placeholder="Date of Purchase" required>
+                                <c:if test="${requestScope.soLanMua >= 1 && requestScope.comment == null}">
+                                    <div class="inner-form">
+                                        <h3>Add Review</h3>
+                                        <form action="addcommentforproduct" method="get">
+                                            <label for="name">UserName:</label>
+                                            <input type="text" id="name" name="name" value="${sessionScope.account.userName}" readonly>
 
-                                        <!-- Overall Rating -->
-                                        <div class="overall-rating">
-                                            <div class="rating-wrapper d-flex align-content-center justify-content-between">
-                                                <select class="inner-rating">
-                                                    <option>Overall experience:</option>
-                                                    <option>1 - Poor</option>
-                                                    <option>2 - Fair</option>
-                                                    <option>3 - Good</option>
-                                                    <option>4 - Very Good</option>
-                                                    <option>5 - Excellent</option>
-                                                </select>
-                                                <span><i class="fa-solid fa-angle-down"></i></span>
+                                            <label for="date">Date of Purchase:</label>
+                                            <input type="text" id="date" name="date"  readonly>
+
+                                            <div class="overall-rating">
+                                                <div class="rating-wrapper d-flex align-content-center justify-content-between">
+                                                    <select class="inner-rating">
+                                                        <option>Overall experience:</option>
+                                                        <option>1 - Poor</option>
+                                                        <option>2 - Fair</option>
+                                                        <option>3 - Good</option>
+                                                        <option>4 - Very Good</option>
+                                                        <option>5 - Excellent</option>
+                                                    </select>
+                                                    <span><i class="fa-solid fa-angle-down"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Specific Feedback -->
-                                        <div class="overall-review d-flex align-items-center">
-                                            <div class="review-comment">
-                                                <label>Overall Review :</label>
+                                            <div class="overall-review d-flex align-items-center">
+                                                <div class="review-comment">
+                                                    <label>Overall Review :</label>
+                                                </div>
+                                                <div class="review-container">
+                                                    <button class="star"><span class="stararea">★</span></button>
+                                                    <button class="star"><span class="stararea">★</span></button>
+                                                    <button class="star"><span class="stararea">★</span></button>
+                                                    <button class="star"><span class="stararea">★</span></button>
+                                                    <button class="star"><span class="stararea">★</span></button>
+                                                </div>
                                             </div>
-                                            <div class="review-container">
-                                                <button class="star"><span class="stararea">★</span></button>
-                                                <button class="star"><span class="stararea">★</span></button>
-                                                <button class="star"><span class="stararea">★</span></button>
-                                                <button class="star"><span class="stararea">★</span></button>
-                                                <button class="star"><span class="stararea">★</span></button>
+
+
+
+                                            <div class="user-comment">
+                                                <textarea id="comments" name="comments" rows="5" placeholder="Write your review here"></textarea>
                                             </div>
-                                        </div>
+
+                                            <button type="submit" class="submit-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                </c:if>
 
 
-                                        <!-- Add other input fields as needed -->
+                                <c:if test="${requestScope.soLanMua >= 1 && requestScope.comment != null && requestScope.comment.luotEdit == 1}">
+                                    <div class="inner-form">
+                                        <h3>Edit Review</h3>
+                                        <form action="updatecommentforproduct" method="get">
+                                            <label for="name">UserName:</label>
+                                            <input type="hidden" name="action" value="update"/>
+                                            <input type="text" id="name" name="name" value="${sessionScope.account.userName}" readonly>
+                                            <input type="hidden" name="userId" value="${sessionScope.account.userId}"/>
+                                            <input type="hidden" name="productId" value="${requestScope.comment.product.productId}"/>
+                                            <label for="date">Date of Purchase:</label>
+                                            <input type="text" id="date" name="date" value="${requestScope.comment.commentDate}"  readonly>
 
-                                        <!-- Comments and Suggestions -->
-                                        <div class="user-comment">
-                                            <textarea id="comments" name="comments" rows="5" placeholder="Write your review here"></textarea>
-                                        </div>
+                                            <label for="rating">Overall Review :</label>
+                                            <div id="rating" class="overall-rating">
+                                                <div class="rating-wrapper d-flex align-content-center justify-content-between">
+                                                    <select name="rating" class="inner-rating">
+                                                        <option value="5">5 - Excellent</option>
+                                                        <option value="4">4 - Very Good</option>
+                                                        <option value="3">3 - Good</option>
+                                                        <option value="2">2 - Fair</option>
+                                                        <option value="1">1 - Poor</option>
+                                                    </select>
+                                                    <span><i class="fa-solid fa-angle-down"></i></span>
+                                                </div>
+                                            </div>
 
-                                        <!-- Add other input fields as needed -->
+                                            <label for="content">Content :</label>
+                                            <div id="content" class="user-comment">
+                                                <textarea id="comments" name="content" rows="5" placeholder="Write your review here">${requestScope.comment.content}</textarea>
+                                            </div>
 
-                                        <!-- Submit Button -->
-                                        <button class="submit-btn">Submit</button>
-                                    </form>
-                                </div>
+                                            <button type="submit" class="submit-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                </c:if>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -476,6 +551,7 @@
         <script src="${pageContext.request.contextPath}/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/js/addtocart.js"></script>
         <script src="${pageContext.request.contextPath}/js/profile.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
         <!-- JS-SCRIPT END  -->
 
 
