@@ -135,6 +135,21 @@ public class CommentDAO extends MyDAO {
         return list;
     }
 
+    public void insertCommentByUserAndProduct(int userId, int productId, String content, int rating) {
+        String sql = "insert into Comment(product_id, user_id, content, luot_edit, comment_date, comment_date_update, rating) \n"
+                + "values(?, ?, ?, 1, GETDATE(), null, ?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.setInt(2, userId);
+            ps.setString(3, content);
+            ps.setInt(4, rating);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi insert comment: " + e);
+        }
+    }
+
     public static void main(String[] args) {
         CommentDAO cd = new CommentDAO();
         System.out.println(cd.getCommentByProductIdAndUserId(7, 1));

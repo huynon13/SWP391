@@ -273,8 +273,8 @@
                                                             </c:if>
                                                             <c:if test="${comment.user.userId == sessionScope.account.userId || sessionScope.account.role.roleId == 1}">
                                                             <li><a onclick="deleteComment('updatecommentforproduct?action=delete&userId=${comment.user.userId}&productId=${comment.product.productId}')" href="javascript:void(0)" class="reply-btn">Delete</a></li>
-                                                            
-                                                            </c:if>
+
+                                                        </c:if>
                                                     </ul>
                                                     <p class="preview-text">${comment.content}</p>
                                                 </div>
@@ -292,11 +292,9 @@
                                     String productId_raw = request.getParameter("pid");
                                     int productId = Integer.parseInt(productId_raw);
                                     Comment comment = cmd.getCommentByProductIdAndUserId(userId, productId);
-                                    System.out.println(comment);
                                     request.setAttribute("comment", comment);
                                     int soLanMua = 0;
                                          soLanMua = pd.getNumberOfProductPurchasesByUserIdAndProductId(userId, productId);
-                                    System.out.println(soLanMua);
                                     request.setAttribute("soLanMua", soLanMua);
                                 %>
 
@@ -306,41 +304,26 @@
                                         <form action="addcommentforproduct" method="get">
                                             <label for="name">UserName:</label>
                                             <input type="text" id="name" name="name" value="${sessionScope.account.userName}" readonly>
+                                            <input type="hidden" name="userId" value="${sessionScope.account.userId}"/>
+                                            <input type="hidden" name="productId" value="${param.pid}"/>
 
-                                            <label for="date">Date of Purchase:</label>
-                                            <input type="text" id="date" name="date"  readonly>
-
-                                            <div class="overall-rating">
+                                            <label for="rating">Overall Review :</label>
+                                            <div id="rating" class="overall-rating">
                                                 <div class="rating-wrapper d-flex align-content-center justify-content-between">
-                                                    <select class="inner-rating">
-                                                        <option>Overall experience:</option>
-                                                        <option>1 - Poor</option>
-                                                        <option>2 - Fair</option>
-                                                        <option>3 - Good</option>
-                                                        <option>4 - Very Good</option>
-                                                        <option>5 - Excellent</option>
+                                                    <select name="rating" class="inner-rating">
+                                                        <option value="5">5 - Excellent</option>
+                                                        <option value="4">4 - Very Good</option>
+                                                        <option value="3">3 - Good</option>
+                                                        <option value="2">2 - Fair</option>
+                                                        <option value="1">1 - Poor</option>
                                                     </select>
                                                     <span><i class="fa-solid fa-angle-down"></i></span>
                                                 </div>
                                             </div>
 
-                                            <div class="overall-review d-flex align-items-center">
-                                                <div class="review-comment">
-                                                    <label>Overall Review :</label>
-                                                </div>
-                                                <div class="review-container">
-                                                    <button class="star"><span class="stararea">★</span></button>
-                                                    <button class="star"><span class="stararea">★</span></button>
-                                                    <button class="star"><span class="stararea">★</span></button>
-                                                    <button class="star"><span class="stararea">★</span></button>
-                                                    <button class="star"><span class="stararea">★</span></button>
-                                                </div>
-                                            </div>
-
-
-
+                                            <label for="content">Content :</label>
                                             <div class="user-comment">
-                                                <textarea id="comments" name="comments" rows="5" placeholder="Write your review here"></textarea>
+                                                <textarea id="content" name="content" rows="5" placeholder="Write your review here"></textarea>
                                             </div>
 
                                             <button type="submit" class="submit-btn">Submit</button>
