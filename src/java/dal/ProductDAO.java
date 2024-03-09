@@ -24,7 +24,7 @@ public class ProductDAO extends MyDAO {
     public int getNumberOfProductPurchasesByUserIdAndProductId(int userId, int productId) {
         String sql = "select COUNT(od.product_id) as so_lan_mua from Orders as o\n"
                 + "inner join Order_Details as od on o.Order_id = od.order_id\n"
-                + "where o.user_id = ? and product_id = ?";
+                + "where o.user_id = ? and product_id = ? and o.status = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userId);
