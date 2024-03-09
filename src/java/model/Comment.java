@@ -58,11 +58,11 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getComment_date() {
+    public Date getCommentDate() {
         return commentDate;
     }
 
-    public void setComment_date(Date comment_date) {
+    public void setCommentDate(Date comment_date) {
         this.commentDate = comment_date;
     }
 
