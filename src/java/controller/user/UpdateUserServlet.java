@@ -19,7 +19,7 @@ import model.User;
  *
  * @author PC
  */
-@WebServlet(name = "UpdateServlet", urlPatterns = {"/updateuser"})
+@WebServlet(name = "UpdateUserServlet", urlPatterns = {"/updateuser"})
 public class UpdateUserServlet extends HttpServlet {
 
     @Override
