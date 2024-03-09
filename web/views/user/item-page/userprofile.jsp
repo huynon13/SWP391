@@ -21,7 +21,6 @@
 <html lang="en" dir="ltr">
 
 
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:34 GMT -->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -467,10 +466,10 @@
         <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/changepassword.js"></script>
         <!-- Option Switcher -->
-        <script src="assets/plugins/options-sidebar/optionswitcher.js"></script>
+        <script src="${pageContext.request.contextPath}/js/optionswitcher.js"></script>
 
         <!-- Ekka Custom -->
-        <script src="assets/js/ekka.js"></script>
+        <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
 
     </body>
 

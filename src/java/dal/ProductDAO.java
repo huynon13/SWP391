@@ -769,6 +769,8 @@ public class ProductDAO extends MyDAO {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
-        System.out.println(pd.getNumberOfProductPurchasesByUserIdAndProductId(7, 1));
+        for(String x : pd.getProductById(10).getThumbnails()){
+            System.out.println(x);
+        }
     }
 }

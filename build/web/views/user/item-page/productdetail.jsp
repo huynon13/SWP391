@@ -287,14 +287,19 @@
                                 <%
                                     ProductDAO pd = new ProductDAO();
                                     CommentDAO cmd = new CommentDAO();
-                                    User account = (User)session.getAttribute("account");
+                                    User account = (User) session.getAttribute("account");
                                     int userId = account.getUserId();
                                     String productId_raw = request.getParameter("pid");
+
+                                    if (productId_raw == null) {
+                                        productId_raw = request.getParameter("productid");
+                                    }
                                     int productId = Integer.parseInt(productId_raw);
+
                                     Comment comment = cmd.getCommentByProductIdAndUserId(userId, productId);
                                     request.setAttribute("comment", comment);
                                     int soLanMua = 0;
-                                         soLanMua = pd.getNumberOfProductPurchasesByUserIdAndProductId(userId, productId);
+                                    soLanMua = pd.getNumberOfProductPurchasesByUserIdAndProductId(userId, productId);
                                     request.setAttribute("soLanMua", soLanMua);
                                 %>
 
