@@ -72,9 +72,6 @@
                                         Profile
                                 </p>
                             </div>
-                            <div>
-                                <a href="user-list.html" class="btn btn-primary">Edit</a>
-                            </div>
                         </div>
 
 
@@ -345,7 +342,8 @@
                                             <div class="tab-pane fade show active" id="settings" role="tabpanel"
                                                  aria-labelledby="settings-tab">
                                                 <div class="tab-pane-content mt-5">
-                                                    <form action="${pageContext.request.contextPath}/updateuser" method="post">
+                                                    <form action="${pageContext.request.contextPath}/updateuserforadmin" method="post">
+                                                        <input type="hidden" name="userId" value="${requestScope.account.userId}"/>
                                                         <div class="form-group row mb-6">
                                                             <label for="coverImage"
                                                                    class="col-sm-4 col-lg-2 col-form-label">User Image</label>
@@ -364,7 +362,7 @@
                                                                 <div class="form-group">
                                                                     <label for="firstName">Full Name</label>
                                                                     <input type="text" name="fullName" class="form-control" id="firstName"
-                                                                           value="${param.fullName != null ? param.fullName : sessionScope.account.fullName}">
+                                                                           value="${param.fullName != null ? param.fullName : requestScope.account.fullName}">
                                                                 </div>
                                                             </div>
 
@@ -374,50 +372,50 @@
                                                         <div class="form-group mb-4">
                                                             <label for="userName">User name</label>
                                                             <input type="text" class="form-control" id="userName"
-                                                                   value="${sessionScope.account.userName}" readonly>
+                                                                   value="${requestScope.account.userName}" readonly>
                                                         </div>
                                                         <span style="color: red">${requestScope.errorPassword}</span>
                                                         <div class="form-group mb-4">
-                                                            <label for="oldPassword">Old password</label>
-                                                            <input value="${param.oldPassword}" name="oldPassword" type="password" class="form-control" id="oldPassword">
+                                                            <label for="oldPassword">Password Admin</label>
+                                                            <input value="${param.passwordAdmin}" name="passwordAdmin" type="password" class="form-control" id="oldPassword">
                                                         </div>
                                                         <span style="color: red">${requestScope.errorOldPass}</span>
 
 
                                                         <div class="form-group mb-4">
-                                                            <label for="newPassword">New password</label>
+                                                            <label for="newPassword">New password user</label>
                                                             <input value="${param.newPassword}" type="password" name="newPassword" class="form-control" id="newPassword">
                                                         </div>
                                                         <span style="color: red">${requestScope.errorNewPass}</span>
 
                                                         <div class="form-group mb-4">
-                                                            <label for="conPassword">Confirm password</label>
+                                                            <label for="conPassword">Confirm password user</label>
                                                             <input value="${param.confirmPassword}" onchange="xacNhanPassword()" type="password" name="confirmPassword" class="form-control" id="conPassword">
                                                         </div>
 
                                                         <div class="form-group mb-4">
                                                             <label for="email">Email</label>
                                                             <input type="email" class="form-control" id="email" name="email"
-                                                                   value="${param.email != null ? param.email : sessionScope.account.email}">
+                                                                   value="${param.email != null ? param.email : requestScope.account.email}">
                                                         </div>
 
                                                         <div class="form-group mb-4">
                                                             <label for="birthday">BirthDay</label>
                                                             <input type="date" class="form-control" id="birthday" name="birthDay"
-                                                                   value="${param.birthDay != null ? param.birthDay : sessionScope.account.birthDay}">
+                                                                   value="${param.birthDay != null ? param.birthDay : requestScope.account.birthDay}">
                                                         </div>
 
 
                                                         <div class="form-group mb-4">
                                                             <label for="address">Address</label>
                                                             <input type="text" class="form-control" id="address" name="address"
-                                                                   value="${param.address != null ? param.address : sessionScope.account.address}">
+                                                                   value="${param.address != null ? param.address : requestScope.account.address}">
                                                         </div>
 
                                                         <div class="form-group mb-4">
                                                             <label for="phoneNumber">Phone Number</label>
                                                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-                                                                   value="${param.phoneNumber != null ? param.phoneNumber : sessionScope.account.phoneNumber}">
+                                                                   value="${param.phoneNumber != null ? param.phoneNumber : requestScope.account.phoneNumber}">
                                                         </div>
                                                         <div class="d-flex justify-content-end mt-5">
                                                             <button type="submit"

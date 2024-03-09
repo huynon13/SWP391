@@ -20,16 +20,16 @@
                 <div
                     class="col-lg-3 col-md-3 col-2 media-image align-self-center rounded"
                     >
-                    <a href="#"
-                       ><img
-                            src="${pageContext.request.contextPath}/${product.thumbnails.get(0)}"
-                            alt="customer image"
-                            /></a>
+                    <a href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}"/>
+                    ><img
+                        src="${pageContext.request.contextPath}/${product.thumbnails.get(0)}"
+                        alt="customer image"
+                        /></a>
                 </div>
                 <div
                     class="col-lg-9 col-md-9 col-10 media-body align-self-center ec-pos"
                     >
-                    <a href="#">
+                    <a href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}">
                         <h6 class="mb-10px text-dark font-weight-medium">
                             ${product.productName}
                         </h6>

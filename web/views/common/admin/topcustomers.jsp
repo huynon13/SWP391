@@ -24,7 +24,7 @@
                         <td>
                             <div class="media">
                                 <div class="media-image mr-3 rounded-circle">
-                                    <a href="profile.html"
+                                    <a href="${pageContext.request.contextPath}/views/admin/item-page/userprofile.jsp?userId=${customer.key.userId}"
                                        ><img
                                             class="profile-img rounded-circle w-45"
                                             src="${pageContext.request.contextPath}/${customer.key.image}"
@@ -32,7 +32,7 @@
                                             /></a>
                                 </div>
                                 <div class="media-body align-self-center">
-                                    <a href="profile.html">
+                                    <a href="${pageContext.request.contextPath}/views/admin/item-page/userprofile.jsp?userId=${customer.key.userId}">
                                         <h6 class="mt-0 text-dark font-weight-medium">
                                             ${customer.key.userName}
                                         </h6>

@@ -145,7 +145,7 @@
                                                                     </button>
 
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">Edit</a>
+                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/userprofile.jsp?userId=${user.key.userId}">Edit</a>
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/deleteuser?userId=${user.key.userId}">Delete</a>
                                                                     </div>
                                                                 </div>

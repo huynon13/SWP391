@@ -20,7 +20,7 @@ import model.User;
  *
  * @author PC
  */
-@WebServlet(name = "UpdateUserServlet", urlPatterns = {"/updateuser"})
+@WebServlet(name = "UpdateUserServlet", urlPatterns = {"/updateuserforadmin"})
 public class UpdateUserForAdminServlet extends HttpServlet {
 
     @Override
@@ -33,7 +33,7 @@ public class UpdateUserForAdminServlet extends HttpServlet {
 
         String fullName = request.getParameter("fullName");
 
-        String oldPasswordByForm = request.getParameter("oldPassword");
+        String oldPasswordByForm = request.getParameter("passwordAdmin");
 
         String newPassword = request.getParameter("newPassword");
 
@@ -48,7 +48,9 @@ public class UpdateUserForAdminServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber");
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("account");
+        String userUpdateId_raw = request.getParameter("userId");
+        int userUpdateId = Integer.parseInt(userUpdateId_raw);
+        User user = ud.getUserById(userUpdateId);
         String oldPassByUser = user.getPassWord();
 
         if (oldPasswordByForm.equals("") && newPassword.equals("") && confirmPassword.equals("")) {
@@ -68,7 +70,7 @@ public class UpdateUserForAdminServlet extends HttpServlet {
                     }
                 } else {
                     request.setAttribute("errorNewPass", "New Password different Confirm Password");
-                    request.getRequestDispatcher("views/user/item-page/userprofile.jsp").forward(request, response);
+                    request.getRequestDispatcher("views/admin/item-page/userprofile.jsp").forward(request, response);
                     return;
                 }
             } else {
@@ -93,10 +95,8 @@ public class UpdateUserForAdminServlet extends HttpServlet {
         }
 
         ud.updateUser(newPassword, fullName, birthDay_raw, image, phoneNumber, address, email, user.getUserId());
-        user = ud.getUserById(user.getUserId());
-        session.setAttribute("account", user);
-        request.setAttribute("updateSucc", "Updated profile successfully");
-        request.getRequestDispatcher("views/user/item-page/userprofile.jsp").forward(request, response);
+        request.setAttribute("updateSucc", "Updated profile for user successfully");
+        request.getRequestDispatcher("views/admin/item-page/userprofile.jsp").forward(request, response);
     }
 
     @Override

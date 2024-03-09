@@ -37,7 +37,7 @@
                     <tr>
                         <td>${order.key.orderId}</td>
                         <td>
-                            <a class="text-dark" href="#">${order.key.user.userName}</a>
+                            <a class="text-dark" href="${pageContext.request.contextPath}/views/admin/item-page/userprofile.jsp?userId=${order.key.user.userId}">${order.key.user.userName}</a>
                         </td>
                         <td class="d-none d-lg-table-cell">${order.value} item</td>
                         <td class="d-none d-lg-table-cell">${order.key.orderDate}</td>
