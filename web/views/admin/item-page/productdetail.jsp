@@ -313,11 +313,11 @@
                                                                             </p>
                                                                             <p>
                                                                                 <c:if test="${com.user.userId == sessionScope.account.userId && com.luotEdit == 1}">
-                                                                                    <a href="#">Edit</a>
+                                                                                    <a href="${pageContext.request.contextPath}/productdetail?pid=${param.productId}">Edit</a>
                                                                                 </c:if>
-                                                                                <a  href="#">Delete</a>
+                                                                                <a onclick="deleteComment('${pageContext.request.contextPath}/updatecommentforproduct?action=delete&userId=${sessionScope.account.userId}&productId=${param.productId}')"  href="javascript:void(0)">Delete</a>
                                                                             </p>
-                                                                            
+
                                                                         </div>
 
                                                                     </div>
@@ -361,6 +361,7 @@
 
         <!-- Ekka Custom -->
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
     </body>
 
 </html>
