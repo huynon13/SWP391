@@ -87,7 +87,7 @@
                                     <span><span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
                                         <span><i class="mdi mdi-chevron-right"></i></span>
                                         </c:if>
-                                    <span><a href="${pageContext.request.contextPath}/views/user/item-page/userprofile.jsp">User Profile</a></span>
+                                    <span><a href="${pageContext.request.contextPath}/views/admin/item-page/orderhistory.jsp">Orders List</a></span>
                                     <span><i class="mdi mdi-chevron-right"></i></span>Order Detail
                             </p>
                         </div>

@@ -7,6 +7,7 @@ package controller.admin;
 import dal.CategoryDAO;
 import dal.ColorDAO;
 import dal.OrderDAO;
+import dal.OrderDetailDAO;
 import dal.ProductDAO;
 import dal.SizeDAO;
 import dal.SupperlierDAO;
@@ -20,11 +21,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import model.Category;
 import model.Color;
 import model.Order;
+import model.OrderDetail;
 import model.Product;
 import model.Size;
 import model.Supperlier;
@@ -36,11 +39,11 @@ import model.User;
  */
 @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
 public class DashboardServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -51,7 +54,8 @@ public class DashboardServlet extends HttpServlet {
         CategoryDAO cd = new CategoryDAO();
         SizeDAO sizeDAO = new SizeDAO();
         ColorDAO colorDAO = new ColorDAO();
-        
+        OrderDetailDAO odd = new OrderDetailDAO();
+
         Map<User, Float> getTopUserByTotalMoney = ud.getTopUserByTotalMoney();
         List<Product> getTop3ProductBestSelling = pd.getTop3Product();
         Map<Order, Integer> getTop5OrderRecent = od.getTop5OrderByRecent();
@@ -65,19 +69,20 @@ public class DashboardServlet extends HttpServlet {
         Map<Category, Integer> getTotalProductByCategory = cd.getNumberOfProductbyCategory();
         List<Size> getSizeAll = sizeDAO.getSizeAll();
         List<Color> getColorAll = colorDAO.getColorAll();
-        
+
         // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
         Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
-        
-        
+
+        Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = new LinkedHashMap<>();
+        ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
+
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
         int totalUser = 0;
-        
+
         // lay ve tong user voi role la user
-        
-        for(User user : getUserAll){
-            if(user.getRole().getName().equalsIgnoreCase("user")){
+        for (User user : getUserAll) {
+            if (user.getRole().getName().equalsIgnoreCase("user")) {
                 totalUser++;
             }
         }
@@ -103,7 +108,7 @@ public class DashboardServlet extends HttpServlet {
                 totalUserActivity = userIdActivity.length;
             }
         }
-        
+
         session.setAttribute("topUserByTotalMoney", getTopUserByTotalMoney);
         session.setAttribute("top3ProductBestSelling", getTop3ProductBestSelling);
         session.setAttribute("top5OrderRecent", getTop5OrderRecent);
@@ -122,8 +127,9 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
         session.setAttribute("sizeAll", getSizeAll);
         session.setAttribute("colorAll", getColorAll);
-        
+        session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
+
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
-    
+
 }

@@ -105,7 +105,7 @@
                                                 <address class="info-grid">
                                                     <div class="info-title"><strong>Customer:</strong></div><br>
                                                     <div class="info-content">
-                                                        Name: ${order.user.fullName}.<br>
+                                                        Name: ${order.user.userName}<br>
                                                         Email: ${order.user.email}<br>
                                                         Address: ${order.user.address}<br>
                                                         <abbr title="Phone">Phone:</abbr> ${order.user.phoneNumber}

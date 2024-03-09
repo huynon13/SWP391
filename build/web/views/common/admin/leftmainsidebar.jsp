@@ -132,23 +132,8 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                             <li class="">
-                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/neworder.jsp">
-                                    <span class="nav-text">New Order</span>
-                                </a>
-                            </li>
-                            <li class="">
                                 <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/orderhistory.jsp">
                                     <span class="nav-text">Order History</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="order-detail.html">
-                                    <span class="nav-text">Order Detail</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/invoice.jsp">
-                                    <span class="nav-text">Invoice</span>
                                 </a>
                             </li>
                         </ul>
