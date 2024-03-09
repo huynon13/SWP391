@@ -17,8 +17,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import model.Cart;
 import model.Color;
+import model.Order;
+import model.OrderDetail;
 import model.Product;
 import model.Size;
 import model.User;
@@ -78,6 +81,10 @@ public class CheckOutServlet extends HttpServlet {
 
                     odd.insertOrderDetailByOrderId(orderId, listProduct, listColor, listSize, listQuantity);
                     clearAll(request, response);
+
+                    Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
+                    session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
+
                     response.sendRedirect("views/user/item-page/ordersuccess.jsp");
                 } else {
                     request.setAttribute("errorPayment", "Số dư tài khoản không đủ, vui lòng chọn phương thức thanh toán khác!");
@@ -88,6 +95,10 @@ public class CheckOutServlet extends HttpServlet {
                 int orderId = od.getOrderIdLastInsert();
                 odd.insertOrderDetailByOrderId(orderId, listProduct, listColor, listSize, listQuantity);
                 clearAll(request, response);
+
+                Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
+                session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
+
                 response.sendRedirect("views/user/item-page/ordersuccess.jsp");
             }
 
