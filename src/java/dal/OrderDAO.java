@@ -22,6 +22,21 @@ import model.User;
  */
 public class OrderDAO extends MyDAO {
 
+    public void updateOrder(int status, int orderId) {
+        String sql = "update Orders \n"
+                + "set\n"
+                + "status = ?\n"
+                + "where Order_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, status);
+            ps.setInt(2, orderId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update order: " + e);
+        }
+    }
+
     public List<Order> getOrderAll() {
         List<Order> list = new ArrayList<>();
         String sql = "select * from Orders";
@@ -165,7 +180,7 @@ public class OrderDAO extends MyDAO {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("order_id");
             }
         } catch (SQLException e) {

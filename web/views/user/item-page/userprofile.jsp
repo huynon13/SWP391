@@ -327,7 +327,7 @@
 
                                                                                                 <c:if test="${i.key.status == 0}">
                                                                                                     <li class="dropdown-item">
-                                                                                                        <a href="#">cancel order</a>
+                                                                                                        <a href="${pageContext.request.contextPath}/updateorder?orderId=${i.key.orderId}&status=${2}">cancel order</a>
                                                                                                     </li>
                                                                                                 </c:if>
                                                                                             </ul>

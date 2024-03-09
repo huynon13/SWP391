@@ -69,15 +69,16 @@
                                     data-display="static"
                                     ></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
+
                                     <li class="dropdown-item">
-                                        <a href="${pageContext.request.contextPath}/views/user/item-page/orderdetail.jsp?orderid=${order.key.orderId}">View</a>
-                                    </li>
-                                    <li class="dropdown-item">
+                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/views/user/item-page/orderdetail.jsp?orderid=${order.key.orderId}">View</a>
+
                                         <c:if test="${order.key.status == 0}">
-                                        <li class="dropdown-item">
-                                            <a href="#">cancel order</a>
-                                        </li>
-                                    </c:if>
+                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/updateorder?orderId=${order.key.orderId}&status=${2}">Cancel</a>
+                                        </c:if>
+                                        <c:if test="${order.key.status == 0}">
+                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/updateorder?orderId=${order.key.orderId}&status=${1}">Completed</a>
+                                        </c:if>
                                     </li>
                                 </ul>
                             </div>

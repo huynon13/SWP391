@@ -70,35 +70,35 @@
                                 <h1>Orders History</h1>
                                 <p class="breadcrumbs">
                                     <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
-                                    <span><i class="mdi mdi-chevron-right"></i></span>History
-                                </p>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card card-default">
-                                        <div class="card-body">
+                                <span><i class="mdi mdi-chevron-right"></i></span>History
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-default">
+                                    <div class="card-body">
 
-                                            <div class="table-responsive">
-                                                <table
-                                                    id="responsive-data-table"
-                                                    class="table"
-                                                    style="width: 100%"
-                                                    >
-                                                    <thead>
-                                                        <tr>
-                                                            <th>ID</th>
-                                                            <th>Customer</th>
-                                                            <th>Email</th>
-                                                            <th>Items</th>
-                                                            <th>Price</th>
-                                                            <th>Payment</th>
-                                                            <th>Status</th>
-                                                            <th>Date</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
+                                        <div class="table-responsive">
+                                            <table
+                                                id="responsive-data-table"
+                                                class="table"
+                                                style="width: 100%"
+                                                >
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Customer</th>
+                                                        <th>Email</th>
+                                                        <th>Items</th>
+                                                        <th>Price</th>
+                                                        <th>Payment</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody>
+                                                <tbody>
                                                     <c:forEach items="${ListAllOrderAndOrderDetail}" var="order">
 
                                                         <tr>
@@ -152,7 +152,10 @@
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/orderdetail.jsp?orderid=${order.key.orderId}">Detail</a>
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/invoice.jsp?orderid=${order.key.orderId}">Invoice</a>
                                                                         <c:if test="${order.key.status == 0}">
-                                                                            <a class="dropdown-item" href="#">Cancel</a>
+                                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/updateorder?orderId=${order.key.orderId}&status=${2}">Cancel</a>
+                                                                        </c:if>
+                                                                        <c:if test="${order.key.status == 0}">
+                                                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/updateorder?orderId=${order.key.orderId}&status=${1}">Completed</a>
                                                                         </c:if>
                                                                     </div>
                                                                 </div>
