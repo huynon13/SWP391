@@ -59,18 +59,39 @@ public class OrderDetailDAO extends MyDAO {
         return map;
     }
 
+    public void insertOrderDetailByOrderId(int orderId, List<Product> listProduct, List<Color> listColor, List<Size> listSize, List<Integer> listQuantity) {
+
+        for (int i = 0; i < listProduct.size(); i++) {
+            String sql = "insert into Order_Details(order_id, product_id, color_id, size_id, price, discount, quantity)\n"
+                    + "values(?, ?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, orderId);
+                ps.setInt(2, listProduct.get(i).getProductId());
+                ps.setInt(3, listColor.get(i).getColorId());
+                ps.setInt(4, listSize.get(i).getSizeId());
+                ps.setFloat(5, (float) listProduct.get(i).getPrice());
+                ps.setInt(6, listProduct.get(i).getDiscount());
+                ps.setInt(7, listQuantity.get(i));
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("loi insert order detail: " + e);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         OrderDetailDAO odd = new OrderDetailDAO();
-        for (Map.Entry<Order, List<OrderDetail>> x : odd.getAllOrderAndOrderDetail().entrySet()) {
-            System.out.println(x.getKey());
-            System.out.println("---------");
-            for (OrderDetail y : x.getValue()) {
-                System.out.println(y);
-            }
-            System.out.println("-----------");
-            System.out.println("");
-        }
+//        for (Map.Entry<Order, List<OrderDetail>> x : odd.getAllOrderAndOrderDetail().entrySet()) {
+//            System.out.println(x.getKey());
+//            System.out.println("---------");
+//            for (OrderDetail y : x.getValue()) {
+//                System.out.println(y);
+//            }
+//            System.out.println("-----------");
+//            System.out.println("");
+//        }
 
-//        System.out.println(odd.getAllOrderAndOrderDetail().size());
+        System.out.println(odd);
     }
 }

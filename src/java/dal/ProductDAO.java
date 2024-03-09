@@ -386,32 +386,14 @@ public class ProductDAO extends MyDAO {
     }
 
     public int getQuantityStockProductByColorAndSize(int cid, int sid, int pid) {
-        String sql = "declare @tong_so_luong_san_pham_theo_color_size int\n"
-                + "declare @so_luong_san_pham_dang_chuan_bi_hang int\n"
-                + "\n"
-                + "set @tong_so_luong_san_pham_theo_color_size = (select SUM(quantity) from Product_detail\n"
-                + "where color_id = ? and size_id = ? and product_id = ?)\n"
-                + "\n"
-                + "set @so_luong_san_pham_dang_chuan_bi_hang = (select SUM(od.quantity) from Orders as o\n"
-                + "inner join Order_Details as od on o.Order_id = od.order_id\n"
-                + "where (o.status = 0) and od.color_id = ? and od.size_id = ? and od.product_id = ?)\n"
-                + "\n"
-                + "if(@so_luong_san_pham_dang_chuan_bi_hang is null)\n"
-                + "begin\n"
-                + "set @so_luong_san_pham_dang_chuan_bi_hang = 0\n"
-                + "end\n"
-                + "\n"
-                + "select (@tong_so_luong_san_pham_theo_color_size - @so_luong_san_pham_dang_chuan_bi_hang) as quantity";
+        String sql = "select * from Product_detail\n"
+                + "where product_id = ? and color_id = ? and size_id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, cid);
-            ps.setInt(2, sid);
-            ps.setInt(3, pid);
-            ps.setInt(4, cid);
-            ps.setInt(5, sid);
-
-            ps.setInt(6, pid);
-            rs = ps.executeQuery();
+            ps.setInt(1, pid);
+            ps.setInt(2, cid);
+            ps.setInt(3, sid);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt("quantity");
             }
@@ -769,8 +751,6 @@ public class ProductDAO extends MyDAO {
 
     public static void main(String[] args) {
         ProductDAO pd = new ProductDAO();
-        for(String x : pd.getProductById(10).getThumbnails()){
-            System.out.println(x);
-        }
+        System.out.println(pd.getQuantityStockProductByColorAndSize(1, 3, 68));
     }
 }

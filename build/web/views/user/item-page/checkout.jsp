@@ -132,6 +132,7 @@
 
                                     <div class="ev-order-review" style="margin-top: 0px;">
                                         <h4 class="order-title">Your Order</h4>
+                                        <span style="color: red; font-size: 16px">${requestScope.errorPayment}</span>
                                         <div class="ev-shop-table">
                                             <ul class="order-price d-flex align-items-center justify-content-between">
                                                 <li><h6>Item</h6></li>

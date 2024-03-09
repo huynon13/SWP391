@@ -112,7 +112,7 @@ public class OrderDAO extends MyDAO {
     }
 
     public List<Order> getOrderByUser(int userId) {
-        
+
         List<Order> list = new ArrayList<>();
         String sql = "select * from Orders\n"
                 + "where user_id = ?";
@@ -132,9 +132,51 @@ public class OrderDAO extends MyDAO {
         return list;
     }
 
+    public void insertOrder(int userId, String fullName, String phoneNumber, String email, String address, int paymentId, String note, int status) {
+        String sql = "insert into Orders(user_id, order_date, full_name, phone_number, email, address, payment_id, note, status)\n"
+                + "values (?, GETDATE(), ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setString(2, fullName);
+            ps.setString(3, phoneNumber);
+            if (email.equals("")) {
+                ps.setString(4, null);
+            } else {
+                ps.setString(4, email);
+            }
+            ps.setString(5, address);
+            ps.setInt(6, paymentId);
+            if (note.equals("")) {
+                ps.setString(7, null);
+            } else {
+                ps.setString(7, note);
+            }
+            ps.setInt(8, status);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi insert order: " + e);
+        }
+    }
+
+    public int getOrderIdLastInsert() {
+        String sql = "select top 1  order_id from Orders\n"
+                + "order by Order_id desc";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("order_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get order by insert last: " + e);
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         OrderDAO od = new OrderDAO();
-        System.out.println(od.getOrderById(1));
+        System.out.println(od.getOrderIdLastInsert());
 
     }
 }
