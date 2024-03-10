@@ -202,7 +202,32 @@ public class CategoryDAO extends MyDAO {
         return null;
     }
 
+    public List<Product> getProductByCategory(int categoryId) {
+        ProductDAO pd = new ProductDAO();
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from Product\n"
+                + "where category_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = pd.getProductById(rs.getInt("product_id"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get product by categoryId: " + e);
+        }
+        return list;
+    }
+
     public void deleteCategory(int categoryId) {
+        ProductDAO pd = new ProductDAO();
+        List<Product> listProduct = getProductByCategory(categoryId);
+        for(Product p : listProduct){
+            pd.deleteProductByProductId(p.getProductId());
+        }
+
         String sql = "delete from Category\n"
                 + "where category_id = ?";
         try {

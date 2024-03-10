@@ -5,6 +5,7 @@
 package controller.admin;
 
 import dal.CategoryDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -62,6 +64,7 @@ public class UpdateCategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoryDAO cd = new CategoryDAO();
         HttpSession session = request.getSession();
+        ProductDAO pd = new ProductDAO();
 
         String action = request.getParameter("action");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -75,6 +78,10 @@ public class UpdateCategoryServlet extends HttpServlet {
             request.setAttribute("deleteCategorySucc", "Category name: \"" + category.getCategoryName() + "\" deleted successfully");
             cd.deleteCategory(categoryId);
             Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
+            
+            List<Product> getProductAll = pd.getProductAll();
+            session.setAttribute("productAll", getProductAll);
+            
             session.setAttribute("mainCategory", getNumbeOfProductAndNumberOfProductSoldByCategory);
             request.getRequestDispatcher("views/admin/item-page/maincategory.jsp").forward(request, response);
 
