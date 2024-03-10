@@ -346,6 +346,8 @@ public class ProductDAO extends MyDAO {
         sql += " and price between " + minPrice + " and " + maxPrice;
 
         sqlTotalFilter += sql;
+        
+        System.out.println(sqlTotalFilter);
 
         try {
 
@@ -402,7 +404,7 @@ public class ProductDAO extends MyDAO {
             System.err.println("Loi get quantity by product");
         }
 
-        return -1;
+        return 0;
     }
 
     public Product getProductById(int id) {
