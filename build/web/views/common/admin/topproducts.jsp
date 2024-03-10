@@ -21,7 +21,7 @@
                     class="col-lg-3 col-md-3 col-2 media-image align-self-center rounded"
                     >
                     <a href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}"/>
-                    ><img
+                    <img
                         src="${pageContext.request.contextPath}/${product.thumbnails.get(0)}"
                         alt="customer image"
                         /></a>

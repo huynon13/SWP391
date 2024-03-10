@@ -185,7 +185,7 @@ public class UserDAO extends MyDAO {
         Map<User, Integer> map = new LinkedHashMap<>();
         String sql = "select u.user_id, COUNT(od.product_id) as total_buy from Users as u\n"
                 + "left join Orders as o on u.user_id = o.user_id\n"
-                + "left join Order_Details as od on o.Order_id = od.order_id\n"
+                + "left join Order_Details as od on o.Order_id = od.order_id where o.status = 1 \n"
                 + "group by u.user_id";
         try {
             PreparedStatement ps = con.prepareStatement(sql);

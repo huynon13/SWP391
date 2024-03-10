@@ -111,7 +111,7 @@ public class OrderDAO extends MyDAO {
         String sql = "select top 5 o.order_id, SUM(od.quantity) as total_product from Orders as o\n"
                 + "inner join Order_Details as od on o.Order_id = od.order_id\n"
                 + "group by o.order_id, o.order_date\n"
-                + "order by o.order_date desc, o.Order_id";
+                + "order by o.order_date desc, o.Order_id desc";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
