@@ -128,10 +128,13 @@ public class HomeServlet extends HttpServlet {
                         String sizeP = IdsizeColorSoLuong[1];
                         String colorP = IdsizeColorSoLuong[2];
                         String soLuongP = IdsizeColorSoLuong[3];
-                        productInCart.add(pd.getProductById(Integer.parseInt(IdProduct)));
-                        sizeProduct.add(sd.getSizeById(Integer.parseInt(sizeP)));
-                        colorProduct.add(colorD.getColorById(Integer.parseInt(colorP)));
-                        soLuongProduct.add(Integer.parseInt(soLuongP));
+                        Product p = pd.getProductById(Integer.parseInt(IdProduct));
+                        if (p != null) {
+                            productInCart.add(p);
+                            sizeProduct.add(sd.getSizeById(Integer.parseInt(sizeP)));
+                            colorProduct.add(colorD.getColorById(Integer.parseInt(colorP)));
+                            soLuongProduct.add(Integer.parseInt(soLuongP));
+                        }
                     }
                 }
             }

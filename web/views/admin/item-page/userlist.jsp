@@ -146,7 +146,7 @@
 
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/userprofile.jsp?userId=${user.key.userId}">Edit</a>
-                                                                        <a class="dropdown-item" href="${pageContext.request.contextPath}/deleteuser?userId=${user.key.userId}">Delete</a>
+                                                                        <a class="dropdown-item" onclick="deleteUser('${pageContext.request.contextPath}/deleteuser?userId=${user.key.userId}', '${user.key.userName}')" href="javascript:void(0)">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -383,7 +383,7 @@
 
         <!-- Ekka Custom -->
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
     </body>
 
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/user-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:34 GMT -->
 </html>

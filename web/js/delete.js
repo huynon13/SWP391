@@ -24,3 +24,9 @@ function deleteProduct(address, name) {
         window.location.href = address;
     }
 }
+
+function deleteUser(address, name) {
+    if (confirm("Bạn có chắc chắn muốn xóa User: " + name + "  không!")) {
+        window.location.href = address;
+    }
+}

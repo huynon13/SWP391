@@ -84,7 +84,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
                     if (cartId == null) {
                         String option = productId + "-" + sizeId + "-" + colorId + "-" + quantity;
-
+                        
                         listProduct.add(pd.getProductById(productId));
                         listSize.add(sd.getSizeById(sizeId));
                         listColor.add(cd.getColorById(colorId));
