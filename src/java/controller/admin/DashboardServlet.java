@@ -7,6 +7,7 @@ package controller.admin;
 import dal.CategoryDAO;
 import dal.ColorDAO;
 import dal.CommentDAO;
+import dal.FeedBackDAO;
 import dal.OrderDAO;
 import dal.OrderDetailDAO;
 import dal.ProductDAO;
@@ -29,6 +30,7 @@ import java.util.Map;
 import model.Category;
 import model.Color;
 import model.Comment;
+import model.FeedBack;
 import model.Order;
 import model.OrderDetail;
 import model.Product;
@@ -61,6 +63,7 @@ public class DashboardServlet extends HttpServlet {
         OrderDetailDAO odd = new OrderDetailDAO();
         CommentDAO cmd = new CommentDAO();
         WalletDAO wd = new WalletDAO();
+        FeedBackDAO fd = new FeedBackDAO();
 
         Map<User, Float> getTopUserByTotalMoney = ud.getTopUserByTotalMoney();
         List<Product> getTop3ProductBestSelling = pd.getTop3Product();
@@ -79,6 +82,7 @@ public class DashboardServlet extends HttpServlet {
         List<Wallet> getWalletAll = wd.getWalletAll();
         // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
         Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
+        List<FeedBack> getFeedBackAll = fd.getFeedBackAll();
 
         Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = new LinkedHashMap<>();
         ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
@@ -137,6 +141,7 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("ListAllOrderAndOrderDetail", ListAllOrderAndOrderDetail);
         session.setAttribute("commentAll", getCommentAll);
         session.setAttribute("walletAll", getWalletAll);
+        session.setAttribute("feedbackAll", getFeedBackAll);
         
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }

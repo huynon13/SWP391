@@ -54,10 +54,59 @@ public class FeedBackDAO extends MyDAO {
         }
     }
 
+    public void deleteFeedbackById(int feedbackId) {
+        String sql = "delete from FeedBack\n"
+                + "where feedback_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, feedbackId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete feedback by id: " + e);
+        }
+    }
+
+    public FeedBack getFeedBackByUserId(int userId) {
+        UserDAO ud = new UserDAO();
+        String sql = "select * from FeedBack\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                FeedBack fb = new FeedBack(rs.getInt("feedback_id"),
+                        ud.getUserById(rs.getInt("user_id")),
+                        rs.getString("subject_name"),
+                        rs.getString("note"));
+                fb.setFeedbackDate(rs.getDate("feedback_date"));
+                return fb;
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get feedback by user: " + e);
+        }
+        return null;
+    }
+
+    public void updateFeedbackById(String subject, String note, int feedbackId) {
+        String sql = "update FeedBack\n"
+                + "set\n"
+                + "subject_name = ?,\n"
+                + "note = ?\n"
+                + "where feedback_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, subject);
+            ps.setString(2, note);
+            ps.setInt(3, feedbackId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi update feedback by id: " + e);
+        }
+    }
+
     public static void main(String[] args) {
         FeedBackDAO fd = new FeedBackDAO();
-        for (FeedBack x : fd.getFeedBackAll()) {
-            System.out.println(x);
-        }
+        System.out.println(fd.getFeedBackByUserId(12));
     }
 }

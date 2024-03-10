@@ -156,7 +156,7 @@
                 <!--feetback-->
 
                 <li>
-                    <a class="sidenav-item-link" href="#">
+                    <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/feedback.jsp">
                         <i class="mdi mdi-star-half"></i>
                         <span class="nav-text">Feedback</span>
                     </a>

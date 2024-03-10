@@ -4,7 +4,11 @@
     Author     : PC
 --%>
 
+<%@page import="model.FeedBack"%>
+<%@page import="model.User"%>
+<%@page import="dal.FeedBackDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -108,87 +112,185 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <%
+                        FeedBackDAO fd = new FeedBackDAO();
+                        User account = (User)session.getAttribute("account");
+                        FeedBack fb = fd.getFeedBackByUserId(account.getUserId());
+                        request.setAttribute("feedback", fb);
+                    %>
+
+
                     <div class="col-xl-6 col-md-6 col-12">
                         <div class="contact-right">
                             <div class="form-message">
                                 <p></p>
                             </div>
 
-                            <form class="contuct-form" action="${pageContext.request.contextPath}/addcontactus" method="get">
-                                <div style="font-size: 16px" class="row form-group">
-                                    <div class="col-12">
-                                        <label for="inputName" class="form-label"
-                                               >Name:</label
-                                        >
-                                        <input type="hidden" name="userId" value="${sessionScope.account.userId}"/>
-                                        <input
-                                            type="text"
-                                            value="${sessionScope.account.userName}"
-                                            name="name"
-                                            id="inputName"
-                                            readonly
-                                            />
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputEmail" class="form-label"
-                                               >Email:</label
-                                        >
-                                        <input
-                                            type="email"
-                                            value="${sessionScope.account.email}"
-                                            name="email"
-                                            id="inputEmail"
-                                            />
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputPhone" class="form-label"
-                                               >Phone:</label
-                                        >
-                                        <input
-                                            type="number"
-                                            value="${sessionScope.account.phoneNumber}"
-                                            name="phone"
-                                            id="inputPhone"
-                                            />
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="subject" class="form-label"
-                                               >Subject:</label
-                                        >
-                                        <input
-                                            type="text"
-                                            placeholder="Your Subject"
-                                            name="subject"
-                                            id="subject"
-                                            required
-                                            />
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="inputMessage" class="form-label"
-                                               >Message:</label
-                                        >
-                                        <textarea
-                                            class="input-textarea"
-                                            name="message"
-                                            rows="5"
-                                            cols="30"
-                                            id="inputMessage"
-                                            placeholder="Write your message here"
-                                            required
-                                            ></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="common-btn submit-btn">
-                                            <button
-                                                type="submit"
-                                                name="submit"
-                                                >
-                                                Submit Now
-                                            </button>
+
+
+                            <c:if test="${requestScope.feedback == null}">
+                                <form class="contuct-form" action="${pageContext.request.contextPath}/addcontactus" method="get">
+                                    <div style="font-size: 16px" class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputName" class="form-label"
+                                                   >Name:</label
+                                            >
+                                            <input type="hidden" name="userId" value="${sessionScope.account.userId}"/>
+                                            <input
+                                                type="text"
+                                                value="${sessionScope.account.userName}"
+                                                name="name"
+                                                id="inputName"
+                                                readonly
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputEmail" class="form-label"
+                                                   >Email:</label
+                                            >
+                                            <input
+                                                type="email"
+                                                value="${sessionScope.account.email}"
+                                                name="email"
+                                                id="inputEmail"
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputPhone" class="form-label"
+                                                   >Phone:</label
+                                            >
+                                            <input
+                                                type="number"
+                                                value="${sessionScope.account.phoneNumber}"
+                                                name="phone"
+                                                id="inputPhone"
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="subject" class="form-label"
+                                                   >Subject:</label
+                                            >
+                                            <input
+                                                type="text"
+                                                placeholder="Your Subject"
+                                                name="subject"
+                                                id="subject"
+                                                required
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputMessage" class="form-label"
+                                                   >Message:</label
+                                            >
+                                            <textarea
+                                                class="input-textarea"
+                                                name="message"
+                                                rows="5"
+                                                cols="30"
+                                                id="inputMessage"
+                                                placeholder="Write your message here"
+                                                required
+                                                ></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="common-btn submit-btn">
+                                                <button
+                                                    type="submit"
+                                                    name="submit"
+                                                    >
+                                                    Submit Now
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </c:if>
+
+
+                            <c:if test="${requestScope.feedback != null}">
+                                <form class="contuct-form" action="${pageContext.request.contextPath}/updatecontactus" method="get">
+                                    <div style="font-size: 16px" class="row form-group">
+                                        <span style="color: green">${requestScope.updateFeedBackSuccess}</span>
+                                        <div class="col-12">
+                                            <label for="inputName" class="form-label"
+                                                   >Name:</label
+                                            >
+                                            <input type="hidden" name="action" value="update"/>
+                                            <input type="hidden" name="feedbackId" value="${requestScope.feedback.feedbackId}"/>
+                                            <input
+                                                type="text"
+                                                value="${sessionScope.account.userName}"
+                                                name="name"
+                                                id="inputName"
+                                                readonly
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputEmail" class="form-label"
+                                                   >Email:</label
+                                            >
+                                            <input
+                                                type="email"
+                                                value="${sessionScope.account.email}"
+                                                name="email"
+                                                id="inputEmail"
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputPhone" class="form-label"
+                                                   >Phone:</label
+                                            >
+                                            <input
+                                                type="number"
+                                                value="${sessionScope.account.phoneNumber}"
+                                                name="phone"
+                                                id="inputPhone"
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="subject" class="form-label"
+                                                   >Subject:</label
+                                            >
+                                            <input
+                                                type="text"
+                                                placeholder="Your Subject"
+                                                name="subject"
+                                                id="subject"
+                                                value="${requestScope.feedback.subjectName}"
+                                                required
+                                                />
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="inputMessage" class="form-label"
+                                                   >Message:</label
+                                            >
+                                            <textarea
+                                                class="input-textarea"
+                                                name="message"
+                                                rows="5"
+                                                cols="30"
+                                                id="inputMessage"
+                                                placeholder="Write your message here"
+                                                required
+                                                >${requestScope.feedback.note}</textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="common-btn submit-btn">
+                                                <button
+                                                    type="submit"
+                                                    name="submit"
+                                                    >
+                                                    Edit Submit Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </c:if>
+
+
                         </div>
                     </div>
                 </div>
