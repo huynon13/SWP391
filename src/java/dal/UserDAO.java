@@ -22,8 +22,18 @@ import model.Order;
  * @author PC
  */
 public class UserDAO extends MyDAO {
-
+    
     public void deleteUser(int userId) {
+        OrderDAO od = new OrderDAO();
+        FeedBackDAO fd = new FeedBackDAO();
+        CommentDAO cmd = new CommentDAO();
+        WalletDAO wd = new WalletDAO();
+        
+        od.deleteOrderByUserId(userId);
+        fd.deleteFeedBackByUser(userId);
+        cmd.deleteCommentByUser(userId);
+        wd.deleteWalletByUser(userId);
+        
         String sql = "delete from Users\n"
                 + "where user_id = ?";
         try {
@@ -34,25 +44,25 @@ public class UserDAO extends MyDAO {
             System.err.println("loi delete user: " + e);
         }
     }
-
+    
     public void insertUser(int roleId, String userName, String password, String fullName, String birthDay, String image, String phoneNumber, String address, String email, String createAt, int deleted) {
         String sql = "insert into Users(role_id, user_name, pass_word, full_name, birth_day, image, phone_number, address, email, created_at, deleted)\n"
                 + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE(), 0)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            
             ps.setInt(1, roleId);
-
+            
             ps.setString(2, userName);
-
+            
             ps.setString(3, password);
-
+            
             if (fullName.equals("")) {
                 ps.setString(4, null);
             } else {
                 ps.setString(4, fullName);
             }
-
+            
             if (birthDay.equals("")) {
                 ps.setDate(5, null);
             } else {
@@ -65,31 +75,31 @@ public class UserDAO extends MyDAO {
                 image = "images/users/" + image;
                 ps.setString(6, image);
             }
-
+            
             if (phoneNumber.equals("")) {
                 ps.setString(7, null);
             } else {
                 ps.setString(7, phoneNumber);
             }
-
+            
             if (address.equals("")) {
                 ps.setString(8, null);
             } else {
                 ps.setString(8, address);
             }
-
+            
             if (email.equals("")) {
                 ps.setString(9, null);
             } else {
                 ps.setString(9, email);
             }
-
+            
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("loi insert user: " + e);
         }
     }
-
+    
     public void updateUser(String password, String fullName, String birthDay, String image, String phoneNumber, String address, String email, int userId) {
         String sql = "update Users\n"
                 + "set\n"
@@ -104,53 +114,53 @@ public class UserDAO extends MyDAO {
                 + "where user_id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            
             ps.setString(1, password);
-
+            
             if (fullName.equals("")) {
                 ps.setString(2, null);
             } else {
                 ps.setString(2, fullName);
             }
-
+            
             if (birthDay.equals("")) {
                 ps.setDate(3, null);
             } else {
                 java.sql.Date date = java.sql.Date.valueOf(birthDay);
                 ps.setDate(3, date);
             }
-
+            
             if (image.equals("")) {
                 ps.setString(4, null);
             } else {
                 ps.setString(4, image);
             }
-
+            
             if (phoneNumber.equals("")) {
                 ps.setString(5, null);
             } else {
                 ps.setString(5, phoneNumber);
             }
-
+            
             if (address.equals("")) {
                 ps.setString(6, null);
             } else {
                 ps.setString(6, address);
             }
-
+            
             if (email.equals("")) {
                 ps.setString(7, null);
             } else {
                 ps.setString(7, email);
             }
-
+            
             ps.setInt(8, userId);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("loi update user: " + e);
         }
     }
-
+    
     public List<User> getUserAll() {
         List<User> list = new ArrayList<>();
         String sql = "select * from Users as u\n"
@@ -167,10 +177,10 @@ public class UserDAO extends MyDAO {
         } catch (SQLException e) {
             System.err.println("loi get all user: " + e);
         }
-
+        
         return list;
     }
-
+    
     public Map<User, Integer> getUserAllAndTotalBuy() {
         Map<User, Integer> map = new LinkedHashMap<>();
         String sql = "select u.user_id, COUNT(od.product_id) as total_buy from Users as u\n"
@@ -190,10 +200,10 @@ public class UserDAO extends MyDAO {
         } catch (SQLException e) {
             System.out.println("loi get user all and total buy: " + e);
         }
-
+        
         return map;
     }
-
+    
     public User getUserById(int id) {
         String sql = "select * from Users\n"
                 + "where user_id = ?";
@@ -226,7 +236,7 @@ public class UserDAO extends MyDAO {
         }
         return null;
     }
-
+    
     public boolean getUserByUserName(String username) {
         String sql = "select * from Users\n"
                 + "where user_name = ?";
@@ -242,7 +252,7 @@ public class UserDAO extends MyDAO {
         }
         return false;
     }
-
+    
     public int getUserIdByUserName(String username) {
         String sql = "select * from Users\n"
                 + "where user_name = ?";
@@ -258,7 +268,7 @@ public class UserDAO extends MyDAO {
         }
         return -1;
     }
-
+    
     public User login(String username, String password) {
         RoleDAO rd = new RoleDAO();
         String sql = "select * from Users\n"
@@ -284,7 +294,7 @@ public class UserDAO extends MyDAO {
         }
         return null;
     }
-
+    
     public boolean registerUser(String username, String password, String roleName) {
         RoleDAO rd = new RoleDAO();
         boolean checkUser = getUserByUserName(username);
@@ -305,7 +315,7 @@ public class UserDAO extends MyDAO {
         }
         return false;
     }
-
+    
     public Map<User, Float> getTopUserByTotalMoney() {
         Map<User, Float> map = new LinkedHashMap<>();
         List<User> list = new ArrayList<>();
@@ -328,7 +338,7 @@ public class UserDAO extends MyDAO {
         }
         return map;
     }
-
+    
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
 //        for(Map.Entry<User, Integer> x : ud.getUserAllAndTotalBuy().entrySet()){

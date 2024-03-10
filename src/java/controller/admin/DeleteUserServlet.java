@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import model.User;
 
 /**
@@ -35,13 +36,19 @@ public class DeleteUserServlet extends HttpServlet {
         try {
             int userId = Integer.parseInt(userId_raw);
             User user = ud.getUserById(userId);
+            String userName = user.getUserName();
             request.setAttribute("deleteSucc", "Delete user name: '" + user.getUserName() + "' successfully!!!");
             ud.deleteUser(userId);
+
             HttpSession session = request.getSession();
             List<User> getUserAll = ud.getUserAll();
             session.setAttribute("userAll", getUserAll);
+            Map<User, Integer> getTotalBuyByUser = ud.getUserAllAndTotalBuy();
+            session.setAttribute("totalBuyByUser", getTotalBuyByUser);
+            request.setAttribute("deleteUserSuccess", "Delte UserName:" + userName + " thành công!");
             request.getRequestDispatcher("views/admin/item-page/userlist.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (ServletException | IOException | NumberFormatException e) {
+            System.out.println("loi o class delete user servlet: " + e);
         }
     }
 

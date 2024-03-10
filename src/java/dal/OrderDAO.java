@@ -22,6 +22,24 @@ import model.User;
  */
 public class OrderDAO extends MyDAO {
 
+    public void deleteOrderByUserId(int userId) {
+        List<Order> listOrder = getOrderByUser(userId);
+        OrderDetailDAO odd = new OrderDetailDAO();
+        for (Order o : listOrder) {
+            odd.deleteOrderDetailByOrderId(o.getOrderId());
+        }
+
+        String sql = "delete from Orders\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete order by user: " + e);
+        }
+    }
+
     public void updateOrder(int status, int orderId) {
         String sql = "update Orders \n"
                 + "set\n"

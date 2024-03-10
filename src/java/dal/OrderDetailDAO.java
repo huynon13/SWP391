@@ -35,6 +35,18 @@ public class OrderDetailDAO extends MyDAO {
         }
     }
 
+    public void deleteOrderDetailByOrderId(int orderId) {
+        String sql = "delete from Order_Details\n"
+                + "where order_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete order detail by id: " + e);
+        }
+    }
+
     public Map<Order, List<OrderDetail>> getAllOrderAndOrderDetail() {
         Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
         OrderDAO od = new OrderDAO();

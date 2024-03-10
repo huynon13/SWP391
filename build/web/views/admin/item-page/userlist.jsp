@@ -80,6 +80,7 @@
                                 <div>
                                     <span style="color: red">${requestScope.insertUserError}</span>
                                 <span style="color: green">${requestScope.insertUserSucc}</span>
+                                <span style="color: green">${requestScope.deleteUserSuccess}</span>
                                 <button
                                     type="button"
                                     class="btn btn-primary"

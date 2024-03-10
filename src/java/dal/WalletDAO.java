@@ -18,6 +18,18 @@ import model.User;
  */
 public class WalletDAO extends MyDAO {
 
+    public void deleteWalletByUser(int userId) {
+        String sql = "delete from Wallets\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete wallet by user: " + e);
+        }
+    }
+
     public List<Wallet> getWalletAll() {
         UserDAO ud = new UserDAO();
         List<Wallet> list = new ArrayList();
@@ -72,7 +84,7 @@ public class WalletDAO extends MyDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int walletId = rs.getInt("wallet_id");
                 User user = ud.getUserById(userId);
                 float balance = rs.getFloat("balance");

@@ -17,6 +17,18 @@ import model.FeedBack;
  */
 public class FeedBackDAO extends MyDAO {
 
+    public void deleteFeedBackByUser(int userId) {
+        String sql = "delete from FeedBack\n"
+                + "where user_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete feedback by user: " + e);
+        }
+    }
+
     public List<FeedBack> getFeedBackAll() {
         List<FeedBack> list = new ArrayList<>();
         String sql = "select * from FeedBack\n"
