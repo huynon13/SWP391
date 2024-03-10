@@ -18,3 +18,9 @@ function deleteComment(address) {
         window.location.href = address;
     }
 }
+
+function deleteProduct(address, name) {
+    if (confirm("Bạn có chắc chắn muốn xóa Product: " + name + "  không!")) {
+        window.location.href = address;
+    }
+}

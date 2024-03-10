@@ -16,13 +16,25 @@ import java.util.Map;
  * @author PC
  */
 public class GaleryDAO extends MyDAO {
-    
+
+    public void deleteGaleryByProductId(int productId) {
+        String sql = "delete from Galery\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete galery by productId: " + e);
+        }
+    }
+
     public List<String> getImagesById(int id) {
         List<String> list = new ArrayList<>();
         String sql = "select g.thumbnail from Product as p\n"
                 + "inner join Galery as g on p.product_id = g.product_id\n"
                 + "where p.product_id = ?";
-        
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -36,10 +48,10 @@ public class GaleryDAO extends MyDAO {
         } catch (SQLException e) {
             System.err.println("Loi get linh anh sql");
         }
-        
+
         return list;
     }
-    
+
     public void insertImage(int productId, List<String> images) {
         for (String image : images) {
             String sql = "insert into Galery(product_id, thumbnail) values(?, ?)";
@@ -54,7 +66,7 @@ public class GaleryDAO extends MyDAO {
             }
         }
     }
-    
+
     public void updateImage(int productId, Map<String, String> listEditAnh) {
         for (Map.Entry<String, String> edit : listEditAnh.entrySet()) {
             String sql = "update Galery\n"
@@ -73,7 +85,7 @@ public class GaleryDAO extends MyDAO {
             }
         }
     }
-    
+
     public void insertImageByUpdateProduct(int productId, List<String> images) {
         for (String image : images) {
             String sql = "insert into Galery(product_id, thumbnail) values(?, ?)";
@@ -88,5 +100,5 @@ public class GaleryDAO extends MyDAO {
             }
         }
     }
-    
+
 }

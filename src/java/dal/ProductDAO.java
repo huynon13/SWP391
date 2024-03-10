@@ -346,7 +346,7 @@ public class ProductDAO extends MyDAO {
         sql += " and price between " + minPrice + " and " + maxPrice;
 
         sqlTotalFilter += sql;
-        
+
         System.out.println(sqlTotalFilter);
 
         try {
@@ -749,6 +749,18 @@ public class ProductDAO extends MyDAO {
             System.err.println("Loi get top 10 best selling All");
         }
         return list;
+    }
+
+    public void deleteProductByProductId(int productId) {
+        String sql = "delete from Product\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete product by product id: " + e);
+        }
     }
 
     public static void main(String[] args) {

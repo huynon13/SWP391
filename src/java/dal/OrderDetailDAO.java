@@ -23,6 +23,18 @@ import model.Size;
  */
 public class OrderDetailDAO extends MyDAO {
 
+    public void deleteOrderDetailByProductId(int productId) {
+        String sql = "delete from Order_Details\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete order detail by id: " + e);
+        }
+    }
+
     public Map<Order, List<OrderDetail>> getAllOrderAndOrderDetail() {
         Map<Order, List<OrderDetail>> map = new LinkedHashMap<>();
         OrderDAO od = new OrderDAO();

@@ -20,6 +20,18 @@ import model.User;
  */
 public class CommentDAO extends MyDAO {
 
+    public void deleteCommentByProductId(int productId) {
+        String sql = "delete from Comment\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete comment by productId: " + e);
+        }
+    }
+
     public void deleteCommentByUserAndProduct(int userId, int productId) {
         String sql = "delete from Comment\n"
                 + "where user_id = ? and product_id = ?";

@@ -75,11 +75,12 @@
                                     <h1>Product</h1>
                                     <p class="breadcrumbs">
                                         <span><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span>Product
-                                    </p>
-                                </div>
-                                <div>
-                                    <a href="${pageContext.request.contextPath}/views/admin/item-page/addproduct.jsp" class="btn btn-primary">
+                                    <span><i class="mdi mdi-chevron-right"></i></span>Product
+                                </p>
+                            </div>
+                            <div>
+                                <span style="color: green">${requestScope.deleteSuccess}</span>
+                                <a href="${pageContext.request.contextPath}/views/admin/item-page/addproduct.jsp" class="btn btn-primary">
                                     Add Porduct</a
                                 >
                             </div>
@@ -152,7 +153,7 @@
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/productdetail.jsp?productId=${product.productId}">Detail</a>
                                                                         <a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/item-page/editproduct.jsp?productId=${product.productId}">Edit</a>
-                                                                        <a class="dropdown-item" href="#">Delete</a>
+                                                                        <a class="dropdown-item" onclick="deleteProduct('${pageContext.request.contextPath}/deleteproduct?productId=${product.productId}', '${product.productName}')" href="javascript:void(0)">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -194,6 +195,7 @@
 
         <!-- Option Switcher -->
         <script src="${pageContext.request.contextPath}/js/optionswitcher.js"></script>
+        <script src="${pageContext.request.contextPath}/js/delete.js"></script>
 
         <!-- Ekka Custom -->
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>

@@ -20,6 +20,18 @@ import model.Size;
  */
 public class ProductDetailDAO extends MyDAO {
 
+    public void deleteProductDetailByProductId(int productId) {
+        String sql = "delete from Product_detail\n"
+                + "where product_id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, productId);;
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("loi delete product detail by id: " + e);
+        }
+    }
+
     public void insertProductDetail(int productId, List<Integer> color, List<Integer> size, List<Integer> quantity) {
         for (int i = 0; i < color.size(); i++) {
             String sql = "insert into Product_detail(product_id, color_id, size_id, quantity) values (?, ?, ?, ?)";
