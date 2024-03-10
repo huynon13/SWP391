@@ -28,6 +28,7 @@
                                 <div class="author-text">
                                     <h6>${feedback.user.userName}</h6>
                                     <span>Subject: ${feedback.subjectName}</span>
+                                    <span>Date: ${feedback.feedbackDate}</span>
                                 </div>
                             </div>
                             <div class="quote-icon">

@@ -318,7 +318,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <a href="contact-us.html">Contact</a>
+                                    <a href="${pageContext.request.contextPath}/views/user/item-page/contactus.jsp">FeedBack</a>
                                 </li>
                             </ul>
                         </nav>

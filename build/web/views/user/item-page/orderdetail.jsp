@@ -18,7 +18,6 @@
 <html lang="en" dir="ltr">
 
 
-    <!-- Mirrored from maraviyainfotech.com/projects/ekka/ekka-v37/ekka-admin/order-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Mar 2024 22:07:42 GMT -->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author PC
@@ -13,10 +15,12 @@ public class FeedBack {
 //	[user_id] [int] NOT NULL,
 //	[subject_name] [nvarchar](50) NOT NULL,
 //	[note] [nvarchar](max) NULL,
+
     private int feedbackId;
     private User user;
     private String subjectName;
     private String note;
+    private Date feedbackDate;
 
     public FeedBack() {
     }
@@ -26,6 +30,14 @@ public class FeedBack {
         this.user = user;
         this.subjectName = subjectName;
         this.note = note;
+    }
+
+    public FeedBack(int feedbackId, User user, String subjectName, String note, Date feedbackDate) {
+        this.feedbackId = feedbackId;
+        this.user = user;
+        this.subjectName = subjectName;
+        this.note = note;
+        this.feedbackDate = feedbackDate;
     }
 
     public int getFeedbackId() {
@@ -60,10 +72,17 @@ public class FeedBack {
         this.note = note;
     }
 
+    public Date getFeedbackDate() {
+        return feedbackDate;
+    }
+
+    public void setFeedbackDate(Date feedbackDate) {
+        this.feedbackDate = feedbackDate;
+    }
+
     @Override
     public String toString() {
-        return "FeedBack{" + "feedbackId=" + feedbackId + ", user=" + user + ", subjectName=" + subjectName + ", note=" + note + '}';
+        return "FeedBack{" + "feedbackId=" + feedbackId + ", user=" + user + ", subjectName=" + subjectName + ", note=" + note + ", feedbackDate=" + feedbackDate + '}';
     }
-    
-    
+
 }
