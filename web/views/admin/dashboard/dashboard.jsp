@@ -149,6 +149,10 @@
         <script src="${pageContext.request.contextPath}/js/Chart.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/chart.js"></script>
 
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
+
         <!--Google map chart--> 
         <script src="${pageContext.request.contextPath}/js/google-map-loader.js"></script>
         <script src="${pageContext.request.contextPath}/js/google-map.js"></script>
@@ -163,6 +167,39 @@
 
         <!-- Ekka Custom -->
         <script src="${pageContext.request.contextPath}/js/ekka.js"></script>
+
+        <script type="text/javascript">
+
+                var orderOverview = document.getElementById("orderOverview").getContext('2d');
+
+                if (orderOverview != null) {
+                    var xValuesOrderOverview = ["Complated", "Pending", "Cancel"];
+                    var yValuesOrderOverview = [${sessionScope.totalComplated}, ${sessionScope.totalPending}, ${sessionScope.totalCancel}];
+                    var barColorsOrderOverview = [
+                        "#29CC97",
+                        "#FEC400",
+                        "#FE5461"
+                    ];
+
+                    var myChartOrderOverview = new Chart(orderOverview, {
+                        type: "pie",
+                        data: {
+                            labels: xValuesOrderOverview,
+                            datasets: [{
+                                    backgroundColor: barColorsOrderOverview,
+                                    data: yValuesOrderOverview
+                                }]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                }
+                
+                
+                
+
+        </script>
     </body>
 
 </html>

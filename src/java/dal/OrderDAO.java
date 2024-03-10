@@ -22,6 +22,22 @@ import model.User;
  */
 public class OrderDAO extends MyDAO {
 
+    public int getTotalOrderByStatus(int status) {
+        String sql = "select COUNT(Order_id) as total_order from Orders\n"
+                + "where status = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, status);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total_order");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get total order by status: " + e);
+        }
+        return 0;
+    }
+
     public void deleteOrderByUserId(int userId) {
         List<Order> listOrder = getOrderByUser(userId);
         OrderDetailDAO odd = new OrderDetailDAO();
