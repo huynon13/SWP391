@@ -752,6 +752,16 @@ public class ProductDAO extends MyDAO {
     }
 
     public void deleteProductByProductId(int productId) {
+        ProductDetailDAO pdd = new ProductDetailDAO();
+        OrderDetailDAO odd = new OrderDetailDAO();
+        CommentDAO cmd = new CommentDAO();
+        GaleryDAO gd = new GaleryDAO();
+
+        pdd.deleteProductDetailByProductId(productId);
+        odd.deleteOrderDetailByProductId(productId);
+        cmd.deleteCommentByProductId(productId);
+        gd.deleteGaleryByProductId(productId);
+
         String sql = "delete from Product\n"
                 + "where product_id = ?";
         try {

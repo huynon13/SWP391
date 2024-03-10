@@ -37,21 +37,13 @@ public class DeleteProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         ProductDAO pd = new ProductDAO();
-        ProductDetailDAO pdd = new ProductDetailDAO();
-        OrderDetailDAO odd = new OrderDetailDAO();
-        CommentDAO cmd = new CommentDAO();
-        GaleryDAO gd = new GaleryDAO();
+        
 
         String productId_raw = request.getParameter("productId");
         try {
             int productId = Integer.parseInt(productId_raw);
-
-            pdd.deleteProductDetailByProductId(productId);
-            odd.deleteOrderDetailByProductId(productId);
-            cmd.deleteCommentByProductId(productId);
-            gd.deleteGaleryByProductId(productId);
+           
             pd.deleteProductByProductId(productId);
-            
             
             request.setAttribute("deleteSuccess", "Đã xóa product thành công!!!");
 
