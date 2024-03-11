@@ -36,7 +36,7 @@
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
 
-        <title>Evani E-commerce Template</title>
+        <title>Wish List</title>
 
         <link rel="icon" href="${pageContext.request.contextPath}/images/head/logo/shape-1.png">
     </head>

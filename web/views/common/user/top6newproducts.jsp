@@ -136,6 +136,6 @@
             </c:forEach>
         </div>
 
-        <a href="shop-with-sidebar.html" class="view-all">View All</a>
+        <a href="${pageContext.request.contextPath}/filterproductservlet?category=0&minPrice=${sessionScope.minPrice}&maxPrice=${sessionScope.maxPrice}&orderBy=0" class="view-all">View All</a>
     </div>
 </section>

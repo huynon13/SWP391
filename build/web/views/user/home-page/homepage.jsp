@@ -67,7 +67,7 @@
 
             <!-- COLLECTION-SECTION START  -->
 
-        <jsp:include page="../../common/user/collections.jsp"></jsp:include>  
+        <%--<jsp:include page="../../common/user/collections.jsp"></jsp:include>--%>  
 
             <!-- COLLECTION-SECTION END  -->
 

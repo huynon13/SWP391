@@ -245,35 +245,7 @@
 
                                     </div>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#" class="nav-link">Collections <i class="fa fa-angle-down"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
-                                        <div class="list-item text-center">
-                                            <a href="collections.html">
-                                                <img src="${pageContext.request.contextPath}/images/header/collection/shape-1.png" alt="header">
-                                                <h4 class="title">Men's T-Shirt</h4>
-                                            </a>
-                                        </div>
-                                        <div class="list-item text-center">
-                                            <a href="collections.html">
-                                                <img src="${pageContext.request.contextPath}/images/header/collection/shape-2.png" alt="header">
-                                                <h4 class="title">Women's Bag</h4>
-                                            </a>
-                                        </div>
-                                        <div class="list-item text-center">
-                                            <a href="collections.html">
-                                                <img src="${pageContext.request.contextPath}/images/header/collection/shape-3.png" alt="header">
-                                                <h4 class="title">Ball Gown</h4>
-                                            </a>
-                                        </div>
-                                        <div class="list-item text-center">
-                                            <a href="collections.html">
-                                                <img src="${pageContext.request.contextPath}/images/header/collection/shape-4.png" alt="header">
-                                                <h4 class="title">Night Gown</h4>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
+                                
                                 <li class="menu-item-has-children">
                                     <a href="#" class="nav-link">News <i class="fas fa-angle-down"></i></a>
                                     <div class="sub-menu mega-menu mega-menu-column-4">

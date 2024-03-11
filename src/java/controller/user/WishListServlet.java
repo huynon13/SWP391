@@ -75,7 +75,13 @@ public class WishListServlet extends HttpServlet {
             if (action.equalsIgnoreCase("delete")) {
                 response.sendRedirect("views/user/item-page/wishlist.jsp");
             } else {
-                response.sendRedirect("home");
+                String previousPage = request.getHeader("referer");
+                if (previousPage != null && !previousPage.isEmpty()) {
+                    System.out.println(previousPage);
+                    response.sendRedirect(previousPage);
+                } else {
+                    System.out.println("Không có trang trước đó hoặc không thể xác định.");
+                }
             }
         } catch (IOException | NumberFormatException e) {
             System.out.println("loi chuyen doi so class wishlist servlet");
