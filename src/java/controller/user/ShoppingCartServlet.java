@@ -60,7 +60,10 @@ public class ShoppingCartServlet extends HttpServlet {
                 int sizeId = Integer.parseInt(sizeId_raw);
                 int quantity = Integer.parseInt(quantity_raw);
                 int quantityStock = pd.getQuantityStockProductByColorAndSize(colorId, sizeId, productId);
+                int quantitySoldByColorAndSize = pd.getQuantitySoldProductByColorAndSize(productId, colorId, sizeId);
                 if (quantity > quantityStock) {
+                    request.setAttribute("quantityStockByColorAndSize", quantityStock);
+                    request.setAttribute("quantitySoldByColorAndSize", quantitySoldByColorAndSize);
                     request.setAttribute("errorAddToCart", "Số lượng sản phẩm có sẵn không đủ, vui lòng chọn lại");
                     request.getRequestDispatcher("views/user/item-page/productdetail.jsp").forward(request, response);
                 } else if (quantity == 0) {
@@ -84,7 +87,7 @@ public class ShoppingCartServlet extends HttpServlet {
 
                     if (cartId == null) {
                         String option = productId + "-" + sizeId + "-" + colorId + "-" + quantity;
-                        
+
                         listProduct.add(pd.getProductById(productId));
                         listSize.add(sd.getSizeById(sizeId));
                         listColor.add(cd.getColorById(colorId));
