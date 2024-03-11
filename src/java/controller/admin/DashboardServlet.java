@@ -153,19 +153,6 @@ public class DashboardServlet extends HttpServlet {
         session.setAttribute("totalPending", totalPending);
         session.setAttribute("totalCancel", totalCancel);
 
-        // lay ve du lieu cho bieu do so luong hang ton kho
-//        Map<List<Category>, List<Integer>> getCategoryAndHangtonKho = cd.getHangTonKhoMoiCategory();
-//        List<Category> listCategoryChart = new ArrayList<>();
-//        List<Integer> listSoHangTonKhoChart = new ArrayList<>();
-//
-//        for (Map.Entry<List<Category>, List<Integer>> x : getCategoryAndHangtonKho.entrySet()) {
-//            listCategoryChart = x.getKey();
-//            listSoHangTonKhoChart = x.getValue();
-//        }
-//        
-//        session.setAttribute("listCategoryChart", listCategoryChart);
-//        session.setAttribute("listTonKho", listSoHangTonKhoChart);
-        
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
 

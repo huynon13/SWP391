@@ -303,10 +303,10 @@
 
         <div class="map-section">
             <div class="container">
-                <div class="map-heading">
-                    <h2>Evani theme</h2>
+
+                <div id="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.9059051077606!2d105.96965017532919!3d20.673406799888827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c7fec983b6a3%3A0x6a54c6f01fa0c114!2zTmjDoCBWxINuIEjDs2EgS2ltIFF1eQ!5e0!3m2!1sen!2s!4v1710163516722!5m2!1sen!2s" width="1185" height="430" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div id="map"></div>
             </div>
         </div>
 
