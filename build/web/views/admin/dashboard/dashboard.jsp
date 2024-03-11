@@ -4,6 +4,11 @@
     Author     : PC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="model.Category"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -76,41 +81,23 @@
 
                             <div class="row">
                                 <div class="col-xl-8 col-md-12 p-b-15">
-                                    <!-- Sales Graph -->
-                                <jsp:include page="../../common/admin/salesgraph.jsp"></jsp:include> 
+                                     <!--Sales Graph--> 
+                                    <!--bieu do doanh thu theo tung thang trong nam, tinh 5 nam gan nhat-->
+                                <jsp:include page="../../common/admin/recentorders.jsp"></jsp:include> 
                                 </div>
 
-                                <div class="col-xl-4 col-md-12 p-b-15">
+                                <div class="col-xl-4 col-md-12 p-b-15 ">
                                     <!-- Doughnut Chart -->
                                 <jsp:include page="../../common/admin/ordersoverview.jsp"></jsp:include> 
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-xl-8 col-md-12 p-b-15">
-                                    <!-- User activity statistics -->
-                                <jsp:include page="../../common/admin/useractivity.jsp"></jsp:include> 
-                                </div>
-                                <div class="col-xl-4 col-md-12 p-b-15">
-                                <jsp:include page="../../common/admin/currentusers.jsp"></jsp:include> 
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-8 col-12 p-b-15">
-                                    <!-- World Chart -->
-                                <jsp:include page="../../common/admin/purchasedbycountry.jsp"></jsp:include> 
-                                </div>
-                                <div class="col-xl-4 col-12 p-b-15">
-                                    <!-- Top Sell Table -->
-                                <jsp:include page="../../common/admin/soldbycategory.jsp"></jsp:include> 
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-12 p-b-15">
                                     <!-- Recent Order Table -->
-                                <jsp:include page="../../common/admin/recentorders.jsp"></jsp:include> 
+                                <%--<jsp:include page="../../common/admin/recentorders.jsp"></jsp:include>--%> 
+
                                 </div>
                             </div>
 
@@ -195,9 +182,7 @@
                         }
                     });
                 }
-                
-                
-                
+
 
         </script>
     </body>

@@ -10,7 +10,7 @@
         <h2>Current Users</h2>
     </div>
     <div class="card-body">
-        <canvas id="currentUser" class="chartjs"></canvas>
+        <canvas id="hangTonKho" class="chartjs"></canvas>
     </div>
     <div class="card-footer d-flex flex-wrap bg-white border-top">
     </div>

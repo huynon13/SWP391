@@ -73,7 +73,7 @@
                             </li>
                             <li class="">
                                 <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/wallets.jsp">
-                                        <span class="nav-text">Wallets</span>
+                                    <span class="nav-text">Wallets</span>
                                 </a>
                             </li>
                         </ul>
@@ -145,6 +145,29 @@
                     </div>
                 </li>
 
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-chart-arc"></i>
+                        <span class="nav-text">Chart</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/salesreportchart">
+                                    <span class="nav-text">Sales Report</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+                            <li class="">
+                                <a class="sidenav-item-link" href="${pageContext.request.contextPath}/reviewreportchart">
+                                    <span class="nav-text">Review Report</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <!-- Reviews -->
                 <li>
                     <a class="sidenav-item-link" href="${pageContext.request.contextPath}/views/admin/item-page/review.jsp">
@@ -161,36 +184,6 @@
                         <span class="nav-text">Feedback</span>
                     </a>
                 </li>
-
-
-                <!-- Authentication -->
-                <li class="has-sub">
-                    <a class="sidenav-item-link" href="javascript:void(0)">
-                        <i class="mdi mdi-login"></i>
-                        <span class="nav-text">Authentication</span>
-                        <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul
-                            class="sub-menu"
-                            id="authentication"
-                            data-parent="#sidebar-menu"
-                            >
-                            <li class="">
-                                <a href="sign-in.html">
-                                    <span class="nav-text">Sign In</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="sign-up.html">
-                                    <span class="nav-text">Sign Up</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <!-- Icons -->
 
             </ul>
         </div>

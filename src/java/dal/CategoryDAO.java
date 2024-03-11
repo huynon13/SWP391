@@ -22,6 +22,33 @@ import java.sql.ResultSet;
  */
 public class CategoryDAO extends MyDAO {
 
+    public Map<List<Category>, List<Integer>> getHangTonKhoMoiCategory() {
+        CategoryDAO cd = new CategoryDAO();
+
+        Map<List<Category>, List<Integer>> map = new LinkedHashMap<>();
+        List<Integer> listSoHangTonKho = new ArrayList<>();
+        List<Category> listCategory = new ArrayList<>();
+        
+        String sql = "select c.category_id, c.category_name, count(pd.product_id) as total_ton_kho from Category as c\n"
+                + "inner join Product as p on c.category_id = p.category_id\n"
+                + "inner join Product_detail as pd on p.product_id = pd.product_id\n"
+                + "group by c.category_id, c.category_name order by c.category_id";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category category = cd.getCategoryById(rs.getInt("category_id"));
+                int soHangTonKho = rs.getInt("total_ton_kho");
+                listCategory.add(category);
+                listSoHangTonKho.add(soHangTonKho);
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get so luong hang ton kho: " + e);
+        }
+        map.put(listCategory, listSoHangTonKho);
+        return map;
+    }
+
     public Category getCategoryById(int id) {
         String sql = "select * from Category\n"
                 + "where category_id = ?";
@@ -224,7 +251,7 @@ public class CategoryDAO extends MyDAO {
     public void deleteCategory(int categoryId) {
         ProductDAO pd = new ProductDAO();
         List<Product> listProduct = getProductByCategory(categoryId);
-        for(Product p : listProduct){
+        for (Product p : listProduct) {
             pd.deleteProductByProductId(p.getProductId());
         }
 

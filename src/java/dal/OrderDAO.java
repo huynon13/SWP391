@@ -22,6 +22,37 @@ import model.User;
  */
 public class OrderDAO extends MyDAO {
 
+    public int getYear() {
+        String sql = "select YEAR(GETDATE()) as year";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt("year");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get year: " + e);
+        }
+        return 0;
+    }
+
+    public float getRevennueByMonth(int month, int year) {
+        String sql = "select sum(total_money) as revennueByMonth  from Orders\n"
+                + "where (MONTH(order_date) = ?) and (YEAR(order_date) = ?) and status = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, month);
+            ps.setInt(2, year);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("revennueByMonth");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get revennue by month: " + e);
+        }
+        return 0;
+    }
+
     public int getTotalOrderByStatus(int status) {
         String sql = "select COUNT(Order_id) as total_order from Orders\n"
                 + "where status = ?";

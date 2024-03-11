@@ -24,6 +24,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +46,11 @@ import model.Wallet;
  */
 @WebServlet(name = "DashboardServlet", urlPatterns = {"/dashboard"})
 public class DashboardServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -64,7 +65,7 @@ public class DashboardServlet extends HttpServlet {
         CommentDAO cmd = new CommentDAO();
         WalletDAO wd = new WalletDAO();
         FeedBackDAO fd = new FeedBackDAO();
-        
+
         Map<User, Float> getTopUserByTotalMoney = ud.getTopUserByTotalMoney();
         List<Product> getTop3ProductBestSelling = pd.getTop3Product();
         Map<Order, Integer> getTop5OrderRecent = od.getTop5OrderByRecent();
@@ -83,10 +84,10 @@ public class DashboardServlet extends HttpServlet {
         // so dau tien trong list dai dien cho so san pham cua moi category, so thu 2 dai dien cho so san pham ban duoc cua moi category
         Map<Category, List<Integer>> getNumbeOfProductAndNumberOfProductSoldByCategory = cd.getNumberOfProductAndNumberOfProductSoldByCategory();
         List<FeedBack> getFeedBackAll = fd.getFeedBackAll();
-        
+
         Map<Order, List<OrderDetail>> ListAllOrderAndOrderDetail = new LinkedHashMap<>();
         ListAllOrderAndOrderDetail = odd.getAllOrderAndOrderDetail();
-        
+
         int totalProductSold = 0;
         int totalProductSoldByCategory = 0;
         int totalUser = 0;
@@ -119,7 +120,7 @@ public class DashboardServlet extends HttpServlet {
                 totalUserActivity = userIdActivity.length;
             }
         }
-        
+
         session.setAttribute("topUserByTotalMoney", getTopUserByTotalMoney);
         session.setAttribute("top3ProductBestSelling", getTop3ProductBestSelling);
         session.setAttribute("top5OrderRecent", getTop5OrderRecent);
@@ -147,12 +148,25 @@ public class DashboardServlet extends HttpServlet {
         int totalComplated = od.getTotalOrderByStatus(1);
         int totalPending = od.getTotalOrderByStatus(0);
         int totalCancel = od.getTotalOrderByStatus(2);
-        
+
         session.setAttribute("totalComplated", totalComplated);
         session.setAttribute("totalPending", totalPending);
         session.setAttribute("totalCancel", totalCancel);
+
+        // lay ve du lieu cho bieu do so luong hang ton kho
+//        Map<List<Category>, List<Integer>> getCategoryAndHangtonKho = cd.getHangTonKhoMoiCategory();
+//        List<Category> listCategoryChart = new ArrayList<>();
+//        List<Integer> listSoHangTonKhoChart = new ArrayList<>();
+//
+//        for (Map.Entry<List<Category>, List<Integer>> x : getCategoryAndHangtonKho.entrySet()) {
+//            listCategoryChart = x.getKey();
+//            listSoHangTonKhoChart = x.getValue();
+//        }
+//        
+//        session.setAttribute("listCategoryChart", listCategoryChart);
+//        session.setAttribute("listTonKho", listSoHangTonKhoChart);
         
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
-    
+
 }

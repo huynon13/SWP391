@@ -20,6 +20,24 @@ import model.User;
  */
 public class CommentDAO extends MyDAO {
 
+    public int getNumberStartByMonth(int month, int year, int start) {
+        String sql = "select count(product_id) as total_start from Comment\n"
+                + "where MONTH(comment_date) = ? and YEAR(comment_date) = ? and rating = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, month);
+            ps.setInt(2, year);
+            ps.setInt(3, start);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total_start");
+            }
+        } catch (SQLException e) {
+            System.out.println("loi get number start by month: " + e);
+        }
+        return 0;
+    }
+
     public void deleteCommentByUser(int userId) {
         String sql = "delete from Comment\n"
                 + "where user_id = ?";
@@ -176,6 +194,6 @@ public class CommentDAO extends MyDAO {
 
     public static void main(String[] args) {
         CommentDAO cd = new CommentDAO();
-        System.out.println(cd.getCommentByProductIdAndUserId(7, 1));
+        System.out.println(cd.getNumberStartByMonth(3, 2024, 4));
     }
 }
