@@ -3,17 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Assginment_PRJ301">
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/OrderDAO.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/salesreportchart.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/admin/leftmainsidebar.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/addproduct.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/admin/ReviewReportChartServlet.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/admin/currentusers.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/controller/admin/SalesReportChartServlet.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/src/java/dal/CategoryDAO.java</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/item-page/reviewreportchart.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/register.jsp</file>
-            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/admin/dashboard/dashboard.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/footer.jsp</file>
+            <file>file:/D:/Workspace/KI_4/Assignment_PRJ301/360-Fashion-Men-VN/web/views/common/user/header.jsp</file>
         </group>
     </open-files>
 </project-private>

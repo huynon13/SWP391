@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <footer style="background-color: #F7F4EF;" class="footer-section">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex justify-content-between">
+        <div class="row justify-content-center">
+            <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex ">
                 <div class="widgets-item">
                     <div class="footer-logo">
                         <a href="${pageContext.request.contextPath}/home">
@@ -29,7 +29,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+                        
+<!--            </div>
                         
             <div class="col-xl-3 col-md-6 col-sm-6 col-12 d-flex justify-content-between">
                 <div class="widgets-item widgets-p-top d-sm-flex d-block justify-content-around ">
@@ -94,7 +95,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="footer-bottom">
             <div class="row bottom-footer">
