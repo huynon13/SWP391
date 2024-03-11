@@ -50,8 +50,17 @@ function userOptionSize(element, id, pid) {
 var currentURL = window.location.href;
 var url = new URL(currentURL);
 colorId = url.searchParams.get("colorid");
+if (colorId == null) {
+    colorId = url.searchParams.get("cid");
+}
 sizeId = url.searchParams.get("sizeid");
+if (sizeId == null) {
+    sizeId = url.searchParams.get("sid");
+}
 var productId = url.searchParams.get("productid");
+if(productId == null){
+    var productId = url.searchParams.get("pid");
+}
 
 if (colorId != null && sizeId != null) {
     var colors = document.getElementsByClassName("colors");
