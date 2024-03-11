@@ -52,7 +52,7 @@
             <div class="container d-flex align-items-center justify-content-between">
                 <div class="evani-brand">
                     <a href="${pageContext.request.contextPath}/home">
-                        <img src="${pageContext.request.contextPath}/images/header/logo/logo.png" alt="header">
+                        <img style="width: 225px;" src="${pageContext.request.contextPath}/images/header/logo/logo.png" alt="header">
                     </a>
                 </div>
                 <div class="evani-search-form">

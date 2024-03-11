@@ -12,7 +12,7 @@
                 <div class="widgets-item">
                     <div class="footer-logo">
                         <a href="${pageContext.request.contextPath}/home">
-                            <img src="${pageContext.request.contextPath}/images/footer/logo/shape-1.png" alt="footer">
+                            <img style="width: 225px;" src="${pageContext.request.contextPath}/images/footer/logo/shape-1.png" alt="footer">
                         </a>
                     </div>
                     <div class="widgets-contacts">
