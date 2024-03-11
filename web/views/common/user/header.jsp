@@ -247,8 +247,8 @@
                                 </li>
                                 
                                 <li class="menu-item-has-children">
-                                    <a href="#" class="nav-link">News <i class="fas fa-angle-down"></i></a>
-                                    <div class="sub-menu mega-menu mega-menu-column-4">
+                                    <a href="#" class="nav-link">News <i class=""></i></a>
+<!--                                    <div class="sub-menu mega-menu mega-menu-column-4">
                                         <div class="list-item">
                                             <h4 class="title">Home Page</h4>
                                             <ul>
@@ -287,7 +287,7 @@
                                         <div class="list-item">
                                             <img src="${pageContext.request.contextPath}/images/header/product/shape-1.png" alt="header">
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </li>
                                 <li>
                                     <a href="${pageContext.request.contextPath}/views/user/item-page/contactus.jsp">FeedBack</a>

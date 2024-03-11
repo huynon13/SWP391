@@ -16,7 +16,7 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide single-post">
                                 <div class="news-img">
-                                    <a href="single-blog.html">
+                                    <a href="#">
                                         <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-1.png" alt="news">
                                 </a>
                             </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="swiper-slide single-post">
                             <div class="news-img">
-                                <a href="single-blog.html">
+                                <a href="#">
                                     <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-2.png" alt="news">
                                 </a>
                             </div>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="swiper-slide single-post">
                             <div class="news-img">
-                                <a href="single-blog.html">
+                                <a href="#">
                                     <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-3.png" alt="news">
                                 </a>
                             </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="swiper-slide single-post">
                             <div class="news-img">
-                                <a href="single-blog.html">
+                                <a href="#">
                                     <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-4.png" alt="news">
                                 </a>
                             </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="swiper-slide single-post">
                             <div class="news-img">
-                                <a href="single-blog.html">
+                                <a href="#">
                                     <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-5.png" alt="news">
                                 </a>
                             </div>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="swiper-slide single-post">
                             <div class="news-img">
-                                <a href="single-blog.html">
+                                <a href="#">
                                     <img src="${pageContext.request.contextPath}/images/index-1/blog/shape-6.png" alt="news">
                                 </a>
                             </div>

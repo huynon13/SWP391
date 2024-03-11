@@ -162,8 +162,8 @@
                                                             <c:forEach items="${requestScope.listOrderDetail}" var="p">
                                                                 <tr class="line">
                                                                     <td>${stt}</td>
-                                                                    <td class="text-center"><img class="product-img" src="${pageContext.request.contextPath}/${p.product.thumbnails.get(0)}" alt="" /></td>
-                                                                    <td class="text-center"><strong>${p.product.productName}</strong>
+                                                                    <td class="text-center"><a style="color: inherit;" href="${pageContext.request.contextPath}/productdetail?pid=${p.product.productId}"><img class="product-img" src="${pageContext.request.contextPath}/${p.product.thumbnails.get(0)}" alt="" /></a></td>
+                                                                    <td class="text-center"><strong><a style="color: inherit;" href="${pageContext.request.contextPath}/productdetail?pid=${p.product.productId}">${p.product.productName}</a></strong>
                                                                     <td class="text-center"><strong>${p.color.color}</strong>
                                                                     <td class="text-center"><strong>${p.size.sizeOption}</strong>
                                                                     <td class="text-center"><strong>${p.product.price}</strong>

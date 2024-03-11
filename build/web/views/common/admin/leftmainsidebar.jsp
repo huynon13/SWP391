@@ -31,7 +31,7 @@
                     <hr />
                 </li>
 
-                <!-- Vendors -->
+<!--                 Vendors 
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)">
                         <i class="mdi mdi-account-group-outline"></i>
@@ -51,7 +51,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li>-->
 
                 <!-- Users -->
                 <li class="has-sub">
