@@ -53,7 +53,7 @@ public class WalletDAO extends MyDAO {
     public void updateWallet(int walletId, float balance) {
         String sql = "update Wallets\n"
                 + "set\n"
-                + "balance = ?\n"
+                + "balance += ?\n"
                 + "where wallet_id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
