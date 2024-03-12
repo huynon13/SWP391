@@ -6,6 +6,7 @@ package controller.admin;
 
 import dal.RoleDAO;
 import dal.UserDAO;
+import dal.WalletDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import model.User;
 import java.sql.Date;
 import java.util.List;
+import model.Wallet;
 
 /**
  *
@@ -27,6 +29,7 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String image = request.getParameter("addressImage");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -70,6 +73,14 @@ public class AddUserServlet extends HttpServlet {
 
         } else {
             ud.insertUser(role, userName, password, fullName, birthDate_raw, image, phoneNumber_raw, address, email, null, 0);
+            WalletDAO wd = new WalletDAO();
+            int userId = ud.getUserIdByUserName(userName);
+            
+            wd.insertWallet(userId);
+            
+            List<Wallet> getWalletAll = wd.getWalletAll();
+            session.setAttribute("walletAll", getWalletAll);
+            
             response.sendRedirect("adduser");
         }
 
