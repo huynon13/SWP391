@@ -20,7 +20,7 @@ public class RoleDAO extends MyDAO {
         String sql = "select * from Roles\n"
                 + "where role_id = ?";
         try {
-            PreparedStatement ps = con.prepareCall(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
