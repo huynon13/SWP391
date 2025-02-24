@@ -19,8 +19,8 @@
         <div class="container d-flex align-items-center justify-content-between">
             <div class="top-bar-contact d-flex align-items-center">
                 <ul class="d-flex align-items-center">
-                    <li><a href="#"><i class="fa-solid fa-phone"></i>+84 3377 83926</a></li>
-                    <li><a href="mailto: nghiemxuanloc02@gmail.com" target="_blank"><i class="fa-regular fa-envelope"></i>nghiemxuanloc02@gmail.com</a></li>
+                    <li><a href="#"><i class="fa-solid fa-phone"></i>+84 123456789</a></li>
+                    <li><a href="mailto: group1@fpt.edu" target="_blank"><i class="fa-regular fa-envelope"></i>group1@fpt.edu</a></li>
                     <li><a href="https://maps.app.goo.gl/nMrbFBr1PjhMFCdX8" target="_blank"><i class="fa-sharp fa-solid fa-location-dot"></i>Locate Our Shop</a></li>
                 </ul>
             </div>

@@ -17,9 +17,9 @@
                     </div>
                     <div class="widgets-contacts">
                         <ul>
-                            <li><a href="#" class="d-flex"><i class="fa-solid fa-location-dot"></i><span>Đường 452 Linh Sơn, Thạch Thất, Hà Nội</span></a></li>
-                            <li><a href="#" class="d-flex"><i class="fa-solid fa-envelope"></i> nghiemxuanloc02@gmail.com</a></li>
-                            <li><a href="#" class="d-flex"><i class="fa-solid fa-phone"></i> +84 3377 83926</a></li>
+                            <li><a href="#" class="d-flex"><i class="fa-solid fa-location-dot"></i><span>Thạch Hoà, Thạch Thất, Hà Nội</span></a></li>
+                            <li><a href="#" class="d-flex"><i class="fa-solid fa-envelope"></i> group1@fpt.edu</a></li>
+                            <li><a href="#" class="d-flex"><i class="fa-solid fa-phone"></i> +84 123456789</a></li>
                         </ul>
                     </div>
                     <div class="widgets-social">

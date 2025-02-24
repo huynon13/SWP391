@@ -180,7 +180,7 @@
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                         data-bs-target="#profile" type="button" role="tab"
-                                                        aria-controls="profile" aria-selected="true">Profile</button>
+                                                        aria-controls="profile" aria-selected="true">History Order</button>
                                             </li>
 
                                         </ul>

@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Ekka - Admin Dashboard HTML Template." />
 
-        <title>Login In</title>
+        <title>Login</title>
 
         <!-- GOOGLE FONTS -->
         <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="card-body p-5">
-                            <h4 class="text-dark mb-5">Login In</h4>
+                            <h4 class="text-dark mb-5">Login</h4>
                             <span style="color: red">${requestScope.errorLogin}</span>
                             <form action="${pageContext.request.contextPath}/login" method="post">
                                 <div class="row">
@@ -75,6 +75,7 @@
                                                 <input name="rememberme" id="remember" type="checkbox"/>
                                                 <label for="remember"> Remember me</label>
                                             </div>
+                                            
                                         </div>
 
                                         <button
@@ -86,7 +87,8 @@
 
                                         <p class="sign-upp">
                                             Don't have an account yet ?
-                                            <a class="text-blue" href="${pageContext.request.contextPath}/views/common/user/register.jsp">Sign Up</a>
+                                            <a class="text-blue" href="${pageContext.request.contextPath}/views/common/user/register.jsp">Sign Up</a><br>
+                                            <a class="text-blue" href="${pageContext.request.contextPath}/fogetPassword">Forget password</a>
                                         </p>
                                     </div>
                                 </div>

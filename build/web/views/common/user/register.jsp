@@ -71,7 +71,15 @@
                                     <div class="form-group col-md-12">
                                         <input placeholder="Password" class="form-control" type="password" name="password" value="${param.password}" required/>
                                     </div>
-
+                                     <div class="form-group col-md-12">
+                                        <input placeholder="Email" class="form-control" type="text" name="email" value="${param.email}" required/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input placeholder="Name" class="form-control" type="text" name="name" value="${param.name}" required/>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input placeholder="Phone" class="form-control" type="text" name="phone" value="${param.phone}" required/>
+                                    </div>
 
                                     <div class="col-md-12">
 

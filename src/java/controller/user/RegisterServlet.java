@@ -26,9 +26,13 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String passoword = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phoneNum = request.getParameter("phone");
+        String name = request.getParameter("name");
+        
         UserDAO ud = new UserDAO();
         WalletDAO wd = new WalletDAO();
-        boolean checkRegister = ud.registerUser(username, passoword, "user");
+        boolean checkRegister = ud.registerUser(username, passoword, "user",email,phoneNum,name);
         if (checkRegister) {
             int userId = ud.getUserIdByUserName(username);
             wd.insertWallet(userId);

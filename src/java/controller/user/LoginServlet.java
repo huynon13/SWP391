@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String passoword = request.getParameter("password");
+       
         String rememberMe = request.getParameter("rememberme");
         System.out.println(rememberMe);
         UserDAO ud = new UserDAO();
